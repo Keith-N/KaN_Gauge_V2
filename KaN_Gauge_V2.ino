@@ -1,6 +1,7 @@
 /*
-  KaN Gauge
-  v0.x
+  KaN Gauge V2
+  04-28-2024
+  v0.34
 
   Build target ESP32 S3
 
