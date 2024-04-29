@@ -28,9 +28,6 @@
 #include "pages.h"
 
 // WiFi OTA
-// const char *host = "kan";
-
-// char host[16] = "kan";
 
 WebServer server(80);
 
@@ -52,11 +49,7 @@ bool opened = false;
 
 void disableWifi()
 {
-  //WiFi.disconnect(true);
-  //WiFi.enableAP(false);
-  //WiFi.softAPdisconnect(true);
- // MDNS.end();
- // server.stop();
+
   WiFi.mode(WIFI_OFF);
   wifiEnabled = false;
 }
@@ -86,8 +79,14 @@ void onJavaScript(void)
 void otaSetup(void)
 {
 
-  IPAddress myIP = WiFi.softAPIP();
+  WiFi.mode(WIFI_AP);
+  IPAddress ip(192,168,4,1);
+  IPAddress gateway(192,168,4,1);
+  IPAddress subnet(255,255,255,0);
+
+  WiFi.softAPConfig(ip, ip, subnet);
   WiFi.softAP(ssid, password);
+
 
   if (!MDNS.begin(host))
   {
