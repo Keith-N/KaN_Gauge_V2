@@ -468,14 +468,23 @@ void restoreSensorMinMax()
   fuelConsumption.minimum = preferences.getInt("fuelFlowMIN", fuelConsumption.minimum);
   fuelConsumption.maximum = preferences.getInt("fuelFlowMAX", fuelConsumption.maximum);
 
-  afr.minimum = preferences.getInt("afrMIN", afr.minimum*100);
-  afr.maximum = preferences.getInt("afrMAX", afr.maximum*100);
+  afr.minimum = preferences.getInt("afrMIN", afr.minimum);
+  afr.maximum = preferences.getInt("afrMAX", afr.maximum);
 
-  lambda1.minimum = preferences.getInt("lambda1MIN", lambda1.minimum*100)/100;
-  lambda1.maximum = preferences.getInt("lambda1MAX", lambda1.maximum*100)/100;
+  lambda1.minimum = preferences.getInt("lambda1MIN", lambda1.minimum);
+  lambda1.maximum = preferences.getInt("lambda1MAX", lambda1.maximum);
 
-  lambda2.minimum = preferences.getInt("lambda2MIN", lambda1.minimum*100)/100;
-  lambda2.maximum = preferences.getInt("lambda2MAX", lambda1.maximum*100)/100;
+  lambda2.minimum = preferences.getInt("lambda2MIN", lambda1.minimum);
+  lambda2.maximum = preferences.getInt("lambda2MAX", lambda1.maximum);
+
+  afr.minimum=afr.minimum/100;
+  afr.maximum=afr.maximum/100;
+
+  lambda1.minimum=lambda1.minimum/100;
+  lambda1.maximum=lambda1.maximum/100;
+
+  lambda2.minimum=lambda2.minimum/100;
+  lambda2.maximum=lambda2.maximum/100;
 
   coolantTemperature.minimum = preferences.getInt("cltCMIN", coolantTemperature.minimum);
   coolantTemperature.maximum = preferences.getInt("cltCMAX", coolantTemperature.maximum);
@@ -608,14 +617,23 @@ void restoreSensorAlerts()
   fuelConsumption.alertLow = preferences.getInt("fuelFlowLOW", fuelConsumption.alertLow);
   fuelConsumption.alertHigh = preferences.getInt("fuelFlowHI", fuelConsumption.alertHigh);
 
-  afr.alertLow = preferences.getInt("afrLOW", afr.alertLow*100)/100;
-  afr.alertHigh = preferences.getInt("afrHI", afr.alertHigh*100)/100;
+  afr.alertLow = preferences.getInt("afrLOW", afr.alertLow);
+  afr.alertHigh = preferences.getInt("afrHI", afr.alertHigh);
 
-  lambda1.alertLow = preferences.getInt("lambda1LOW", lambda1.alertLow*100)/100;
-  lambda1.alertHigh = preferences.getInt("lambda1HI", lambda1.alertHigh*100)/100;
+  lambda1.alertLow = preferences.getInt("lambda1LOW", lambda1.alertLow);
+  lambda1.alertHigh = preferences.getInt("lambda1HI", lambda1.alertHigh);
 
-  lambda2.alertLow = preferences.getInt("lambda2LOW", lambda1.alertLow*100)/100;
-  lambda2.alertHigh = preferences.getInt("lambda2HI", lambda1.alertHigh*100)/100;
+  lambda2.alertLow = preferences.getInt("lambda2LOW", lambda1.alertLow);
+  lambda2.alertHigh = preferences.getInt("lambda2HI", lambda1.alertHigh);
+
+  afr.alertLow=afr.alertLow/100;
+  afr.alertHigh=afr.alertHigh/100;
+
+  lambda1.alertLow=lambda1.alertLow/100;
+  lambda1.alertHigh=lambda1.alertHigh/100;
+
+  lambda2.alertLow=lambda2.alertLow/100;
+  lambda2.alertHigh=lambda2.alertHigh/100;
 
   coolantTemperature.alertLow = preferences.getInt("cltCLOW", coolantTemperature.alertLow);
   coolantTemperature.alertHigh = preferences.getInt("cltCHI", coolantTemperature.alertHigh);
@@ -804,20 +822,38 @@ void saveSensorMinMax()
   preferences.putInt("fuelFlowMIN", fuelConsumption.minimum);
   preferences.putInt("fuelFlowMAX", fuelConsumption.maximum);
 
-  preferences.putInt("afrMIN", afr.minimum*100);
-  preferences.putInt("afrMAX", afr.maximum*100);
+  afr.minimum=afr.minimum*100;
+  afr.maximum=afr.maximum*100;
 
-  preferences.putInt("lambda1MIN", lambda1.minimum*100);
-  preferences.putInt("lambda1MAX", lambda1.maximum*100);
+  lambda1.minimum=lambda1.minimum*100;
+  lambda1.maximum=lambda1.maximum*100;
 
-  preferences.putInt("lambda2MIN", lambda2.minimum*100);
-  preferences.putInt("lambda2MAX", lambda2.maximum*100);
+  lambda2.minimum=lambda2.minimum*100;
+  lambda2.maximum=lambda2.maximum*100;
+
+  preferences.putInt("afrMIN", afr.minimum);
+  preferences.putInt("afrMAX", afr.maximum);
+
+  preferences.putInt("lambda1MIN", lambda1.minimum);
+  preferences.putInt("lambda1MAX", lambda1.maximum);
+
+  preferences.putInt("lambda2MIN", lambda2.minimum);
+  preferences.putInt("lambda2MAX", lambda2.maximum);
 
   preferences.putInt("cltCMIN", coolantTemperature.minimum);
   preferences.putInt("cltCMAX", coolantTemperature.maximum);
 
   preferences.putInt("iatCMIN", intakeTemperature.minimum);
   preferences.putInt("iatCMAX", intakeTemperature.maximum);
+
+  afr.minimum=afr.minimum/100;
+  afr.maximum=afr.maximum/100;
+
+  lambda1.minimum=lambda1.minimum/100;
+  lambda1.maximum=lambda1.maximum/100;
+
+  lambda2.minimum=lambda2.minimum/100;
+  lambda2.maximum=lambda2.maximum/100;
 
   preferences.putInt("aux1CMIN", auxTemp1.minimum);
   preferences.putInt("aux1CMAX", auxTemp1.maximum);
@@ -945,14 +981,32 @@ void saveSensorAlerts()
   preferences.putInt("fuelFlowLOW", fuelConsumption.alertLow);
   preferences.putInt("fuelFlowHI", fuelConsumption.alertHigh);
 
-  preferences.putInt("afrLOW", afr.alertLow*100);
-  preferences.putInt("afrHI", afr.alertHigh*100);
+  afr.alertLow=afr.alertLow*100;
+  afr.alertHigh=afr.alertHigh*100;
 
-  preferences.putInt("lambda1LOW", lambda1.alertLow*100);
-  preferences.putInt("lambda1HI", lambda1.alertHigh*100);
+  lambda1.alertLow=lambda1.alertLow*100;
+  lambda1.alertHigh=lambda1.alertHigh*100;
 
-  preferences.putInt("lambda2LOW", lambda2.alertLow*100);
-  preferences.putInt("lambda2HI", lambda2.alertHigh*100);
+  lambda2.alertLow=lambda2.alertLow*100;
+  lambda2.alertHigh=lambda2.alertHigh*100;
+
+  preferences.putInt("afrLOW", afr.alertLow);
+  preferences.putInt("afrHI", afr.alertHigh);
+
+  preferences.putInt("lambda1LOW", lambda1.alertLow);
+  preferences.putInt("lambda1HI", lambda1.alertHigh);
+
+  preferences.putInt("lambda2LOW", lambda2.alertLow);
+  preferences.putInt("lambda2HI", lambda2.alertHigh);
+
+  afr.alertLow=afr.alertLow/100;
+  afr.alertHigh=afr.alertHigh/100;
+
+  lambda1.alertLow=lambda1.alertLow/100;
+  lambda1.alertHigh=lambda1.alertHigh/100;
+
+  lambda2.alertLow=lambda2.alertLow/100;
+  lambda2.alertHigh=lambda2.alertHigh/100;
 
   preferences.putInt("cltCLOW", coolantTemperature.alertLow);
   preferences.putInt("cltCHI", coolantTemperature.alertHigh);

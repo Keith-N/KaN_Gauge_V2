@@ -58,69 +58,72 @@
 #define FUEL_PRESS_DELTA 46
 
 // Data structure for each sensor value
-struct sensorData
-{
-    const char *dataName;  // Name shown for data
-    const char *units;     // Units shown for data
-    float scaleMultiplier; // Used to scale the recieved value
-    float offset;          // The offset applied to the recieved value
-    float scaledValue;     // Stored value for the sensor data, after scale and offset
-    float minimum;         // Minimum value used for LEDs or graphing
-    float maximum;         // Maxumum value used for LEDs or graphing
-    float alertLow;        // Minimum value before alerting
-    float alertHigh;       // Maximum value before alerting
-    int precision;         // Number of values after the decimal that are used
-    bool alert;            // Set when the value is outside of the alert window defined by Min -> Max
+struct sensorData {
+  const char *dataName;   // Name shown for data
+  const char *units;      // Units shown for data
+  float scaleMultiplier;  // Used to scale the recieved value
+  float offset;           // The offset applied to the recieved value
+  float scaledValue;      // Stored value for the sensor data, after scale and offset
+  float minimum;          // Minimum value used for LEDs or graphing
+  float maximum;          // Maxumum value used for LEDs or graphing
+  float alertLow;         // Minimum value before alerting
+  float alertHigh;        // Maximum value before alerting
+  int precision;          // Number of values after the decimal that are used
+  bool alert;             // Set when the value is outside of the alert window defined by Min -> Max
 };
 
 sensorData testData = {
-    "Test",
-    "%@#",
-    1,
-    0,
-    0,
-    -100  ,
-    100  ,
-    -50  ,
-    50  ,
-    0};
+  "Test",
+  "%@#",
+  1,
+  0,
+  0,
+  -100,
+  100,
+  -50,
+  50,
+  0
+};
 
 sensorData noData = {
-    "None",
-    "",
-    0,
-    0,
-    0,
-    0,
-    100,
-    100,
-    -100,
-    0};
+  "None",
+  "",
+  0,
+  0,
+  0,
+  0,
+  100,
+  100,
+  -100,
+  0
+};
 
 // -- ID 512 --
 sensorData warningStatus = {
-    "Warn",
-    "",
-    1,
-    0,
-    0,
-    0,
-    100,
-    100,
-    0,
-    0};
+  "Warn",
+  "",
+  1,
+  0,
+  0,
+  0,
+  100,
+  100,
+  0,
+  0
+};
 
 sensorData gear = {
-    "Gear",
-    "",
-    1,
-    0,
-    0,
-    0,
-    6,
-    100,
-    0,
-    0};
+  "Gear",
+  "",
+  1,
+  0,
+  0,
+  0,
+  6,
+  100,
+  0,
+  0
+};
 
 int warningCounter = 0;
 int lastError;
@@ -133,578 +136,625 @@ int egoHeater;
 // -- ID 513 --
 
 sensorData rpm = {
-    "RPM",
-    "",
-    1,
-    0,
-    0,
-    0,
-    7000,
-    6800,
-    -100,
-    0};
+  "RPM",
+  "",
+  1,
+  0,
+  0,
+  0,
+  7000,
+  6800,
+  -100,
+  0
+};
 
 sensorData ignitionTiming = {
-    "Ign",
-    "o",
-    0.02,
-    0,
-    0,
-    -35,
-    35,
-    50,
-    -50,
-    2};
+  "Ign",
+  "o",
+  0.02,
+  0,
+  0,
+  -35,
+  35,
+  50,
+  -50,
+  2
+};
 
 sensorData injectorDuty = {
-    "Inj",
-    "%",
-    0.5,
-    0,
-    0,
-    0,
-    100,
-    90,
-    -100,
-    0};
+  "Inj",
+  "%",
+  0.5,
+  0,
+  0,
+  0,
+  100,
+  90,
+  -100,
+  0
+};
 
 sensorData vss_mph = {
-    "Speed",
-    "mph",
-    0.6213711922,
-    0,
-    0,
-    0,
-    120,
-    255,
-    -255,
-    0};
+  "Speed",
+  "mph",
+  0.6213711922,
+  0,
+  0,
+  0,
+  120,
+  255,
+  -255,
+  0
+};
 
 sensorData vss = {
-    "Speed",
-    "km/h",
-    1,
-    0,
-    0,
-    0,
-    255,
-    255,
-    -255,
-    0};
+  "Speed",
+  "km/h",
+  1,
+  0,
+  0,
+  0,
+  255,
+  255,
+  -255,
+  0
+};
 
 // -- ID 514 --
 
 sensorData accelerator = {
-    "Accel",
-    "%",
-    0.01,
-    0,
-    0,
-    0,
-    100,
-    200,
-    -100,
-    0};
+  "Accel",
+  "%",
+  0.01,
+  0,
+  0,
+  0,
+  100,
+  200,
+  -100,
+  0
+};
 
 sensorData throttle1 = {
-    "Tps1",
-    "%",
-    0.01,
-    0,
-    0,
-    0,
-    100,
-    200,
-    -200,
-    0};
+  "Tps1",
+  "%",
+  0.01,
+  0,
+  0,
+  0,
+  100,
+  200,
+  -200,
+  0
+};
 
 sensorData throttle2 = {
-    "Tps2",
-    "%",
-    0.01,
-    0,
-    0,
-    0,
-    100,
-    200,
-    -200,
-    0};
+  "Tps2",
+  "%",
+  0.01,
+  0,
+  0,
+  0,
+  100,
+  200,
+  -200,
+  0
+};
 
 sensorData wastegate = {
-    "WG",
-    "%",
-    0.01,
-    0,
-    0,
-    0,
-    100,
-    200,
-    -200,
-    0};
+  "WG",
+  "%",
+  0.01,
+  0,
+  0,
+  0,
+  100,
+  200,
+  -200,
+  0
+};
 
 // -- ID 515 --
 
 sensorData manifoldPressure_psi = {
-    "MAP",
-    "psi",
-    ((0.033333) * 0.1450377377),
-    0,
-    0,
-    0,
-    25,
-    999,
-    -999,
-    2};
+  "MAP",
+  "psi",
+  ((0.033333) * 0.1450377377),
+  0,
+  0,
+  0,
+  25,
+  999,
+  -999,
+  2
+};
 
 sensorData boost_psi = {
-    "Boost",
-    "psi",
-    1,
-    -14.69595,
-    -14.69595,
-    0,
-    25,
-    999,
-    -999,
-    2};
+  "Boost",
+  "psi",
+  1,
+  -14.69595,
+  -14.69595,
+  0,
+  25,
+  999,
+  -999,
+  2
+};
 
 sensorData manifoldPressure = {
-    "MAP",
-    "kPa",
-    (0.033333),
-    0,
-    0,
-    0,
-    250,
-    999,
-    -999,
-    2};
+  "MAP",
+  "kPa",
+  (0.033333),
+  0,
+  0,
+  0,
+  250,
+  999,
+  -999,
+  2
+};
 
 sensorData boost_kpa = {
-    "boost",
-    "kPa",
-    1,
-    -101.325,
-    -101.325,
-    0,
-    250,
-    999,
-    -999,
-    2};
+  "boost",
+  "kPa",
+  1,
+  -101.325,
+  -101.325,
+  0,
+  250,
+  999,
+  -999,
+  2
+};
 
 // Convert from C to F
 sensorData coolantTemperature_f = {
-    "CLT",
-    "F",
-    1.8,
-    (32),
-    0,
-    120,
-    260,
-    250,
-    50,
-    0};
+  "CLT",
+  "F",
+  1.8,
+  (32),
+  0,
+  120,
+  260,
+  250,
+  50,
+  0
+};
 
 // Convert from C to F
 sensorData intakeTemperature_f = {
-    "IAT",
-    "F",
-    1.8,
-    (32),
-    0,
-    0,
-    55,
-    120,
-    50,
-    0};
+  "IAT",
+  "F",
+  1.8,
+  (32),
+  0,
+  0,
+  55,
+  120,
+  50,
+  0
+};
 
 sensorData coolantTemperature = {
-    "CLT",
-    "C",
-    1,
-    -40,
-    0,
-    0,
-    120,
-    120,
-    10,
-    0};
+  "CLT",
+  "C",
+  1,
+  -40,
+  0,
+  0,
+  120,
+  120,
+  10,
+  0
+};
 
 sensorData intakeTemperature = {
-    "IAT",
-    "C",
-    1,
-    -40,
-    0,
-    0,
-    55,
-    100,
-    10,
-    0};
+  "IAT",
+  "C",
+  1,
+  -40,
+  0,
+  0,
+  55,
+  100,
+  10,
+  0
+};
 
 sensorData auxTemp1 = {
-    "Aux1",
-    "C",
-    1,
-    -40,
-    0,
-    0,
-    200,
-    100,
-    10,
-    0};
+  "Aux1",
+  "C",
+  1,
+  -40,
+  0,
+  0,
+  200,
+  100,
+  10,
+  0
+};
 
 sensorData auxTemp1_f = {
-    "Aux1",
-    "F",
-    1.8,
-    32,
-    0,
-    0,
-    200,
-    100,
-    10,
-    0};
+  "Aux1",
+  "F",
+  1.8,
+  32,
+  0,
+  0,
+  200,
+  100,
+  10,
+  0
+};
 
 sensorData auxTemp2 = {
-    "Aux2",
-    "C",
-    1,
-    -40,
-    0,
-    0,
-    200,
-    100,
-    10,
-    0};
+  "Aux2",
+  "C",
+  1,
+  -40,
+  0,
+  0,
+  200,
+  100,
+  10,
+  0
+};
 
 sensorData auxTemp2_f = {
-    "Aux2",
-    "F",
-    1.8,
-    32,
-    0,
-    0,
-    200,
-    100,
-    10,
-    0};
+  "Aux2",
+  "F",
+  1.8,
+  32,
+  0,
+  0,
+  200,
+  100,
+  10,
+  0
+};
 
 sensorData mcuTemp = {
-    "MCU",
-    "C",
-    1,
-    -40,
-    0,
-    0,
-    200,
-    80,
-    -10,
-    0};
+  "MCU",
+  "C",
+  1,
+  -40,
+  0,
+  0,
+  200,
+  80,
+  -10,
+  0
+};
 
 sensorData fuel = {
-    "Fuel",
-    "%",
-    0.5,
-    0,
-    0,
-    0,
-    100,
-    200,
-    15,
-    0};
+  "Fuel",
+  "%",
+  0.5,
+  0,
+  0,
+  0,
+  100,
+  200,
+  15,
+  0
+};
 
 // -- ID 516 --
 sensorData afr = {
-    "AFR",
-    "",
-    0.001,
-    0,
-    0,
-    10  ,
-    20  ,
-    28  ,
-    -10  ,
-    2};
+  "AFR",
+  "",
+  0.001,
+  0,
+  0,
+  10,
+  20,
+  28,
+  -10,
+  2
+};
 
 sensorData oilPressure_psi = {
-    "Oil",
-    "psi",
-    (0.033333) * 0.1450377377,
-    0,
-    0,
-    0,
-    100,
-    999,
-    -999,
-    0};
+  "Oil",
+  "psi",
+  (0.033333) * 0.1450377377,
+  0,
+  0,
+  0,
+  100,
+  999,
+  -999,
+  0
+};
 
 sensorData oilPressure = {
-    "Oil",
-    "kPa",
-    (0.033333),
-    0,
-    0,
-    0,
-    100,
-    999,
-    -999,
-    0};
+  "Oil",
+  "kPa",
+  (0.033333),
+  0,
+  0,
+  0,
+  100,
+  999,
+  -999,
+  0
+};
 
 sensorData vvtPosition = {
-    "VVT",
-    "o",
-    0.02,
-    0,
-    0,
-    -50,
-    50,
-    100,
-    -100,
-    2};
+  "VVT",
+  "o",
+  0.02,
+  0,
+  0,
+  -50,
+  50,
+  100,
+  -100,
+  2
+};
 
 sensorData batteryVoltage = {
-    "Bat",
-    "V",
-    0.001,
-    0,
-    0,
-    8,
-    16,
-    15,
-    11,
-    2};
+  "Bat",
+  "V",
+  0.001,
+  0,
+  0,
+  8,
+  16,
+  15,
+  11,
+  2
+};
 
 // -- ID 517 --
 
 sensorData airMass = {
-    "Air",
-    "mg",
-    1,
-    0,
-    0,
-    0,
-    1000,
-    9999,
-    -9999,
-    0};
+  "Air",
+  "mg",
+  1,
+  0,
+  0,
+  0,
+  1000,
+  9999,
+  -9999,
+  0
+};
 
 sensorData estimatedAirflow = {
-    "Air",
-    "kg/h",
-    0.01,
-    0,
-    0,
-    0,
-    100,
-    999,
-    -999,
-    0};
+  "Air",
+  "kg/h",
+  0.01,
+  0,
+  0,
+  0,
+  100,
+  999,
+  -999,
+  0
+};
 
 sensorData injectorPulse = {
-    "Injector",
-    "ms",
-    0.003,
-    0,
-    0,
-    0,
-    100,
-    999,
-    -999,
-    2};
+  "Injector",
+  "ms",
+  0.003,
+  0,
+  0,
+  0,
+  100,
+  999,
+  -999,
+  2
+};
 
 // NEW - Fueling 3
 sensorData lambda1 = {
-    "Lambda",
-    "",
-    (0.0001),
-    0,
-    0,
-    0.7 ,
-    1.3 ,
-    10 ,
-    -10 ,
-    2};
+  "Lambda",
+  "",
+  (0.0001),
+  0,
+  0,
+  0.5 * 100,
+  1.5 * 100,
+  10,
+  -10,
+  2
+};
 
 sensorData lambda2 = {
-    "Lambda2",
-    "",
-    (0.0001),
-    0,
-    0,
-    0.7 ,
-    1.3 ,
-    100 ,
-    -100 ,
-    2};
+  "Lambda2",
+  "",
+  (0.0001),
+  0,
+  0,
+  0.5 * 100,
+  1.5 * 100,
+  100,
+  -100,
+  2
+};
 
 sensorData fuelPressureLow = {
-    "Fuel",
-    "kPa",
-    (0.033333),
-    0,
-    0,
-    0,
-    0,
-    999,
-    -999,
-    2};
+  "Fuel",
+  "kPa",
+  (0.033333),
+  0,
+  0,
+  0,
+  0,
+  999,
+  -999,
+  2
+};
 
-    sensorData fuelPressureLow_psi = {
-    "Fuel",
-    "psi",
-    (0.033333),
-    0,
-    0,
-    0,
-    0,
-    999,
-    -999,
-    2};
+sensorData fuelPressureLow_psi = {
+  "Fuel",
+  "psi",
+  (0.033333),
+  0,
+  0,
+  0,
+  0,
+  999,
+  -999,
+  2
+};
 
 sensorData fuelPressureHigh = {
-    "Fuel",
-    "bar",
-    0.1,
-    0,
-    0,
-    0,
-    0,
-    999,
-    -999,
-    1};
+  "Fuel",
+  "bar",
+  0.1,
+  0,
+  0,
+  0,
+  0,
+  999,
+  -999,
+  1
+};
 
-    sensorData fuelPressureHigh_psi = {
-    "Fuel",
-    "psi",
-    0.1,
-    0,
-    0,
-    0,
-    0,
-    999,
-    -999,
-    1};
+sensorData fuelPressureHigh_psi = {
+  "Fuel",
+  "psi",
+  0.1,
+  0,
+  0,
+  0,
+  0,
+  999,
+  -999,
+  1
+};
 
 
 sensorData vvtIntake1 = {
-    "InVVT 1",
-    "o",
-    0.02,
-    0,
-    0,
-    0,
-    0,
-    999,
-    -999,
-    2};
+  "InVVT 1",
+  "o",
+  0.02,
+  0,
+  0,
+  0,
+  0,
+  999,
+  -999,
+  2
+};
 
 sensorData vvtIntake2 = {
-    "InVVT 2",
-    "o",
-    0.02,
-    0,
-    0,
-    0,
-    0,
-    999,
-    -999,
-    2};
+  "InVVT 2",
+  "o",
+  0.02,
+  0,
+  0,
+  0,
+  0,
+  999,
+  -999,
+  2
+};
 
 sensorData vvtExhaust1 = {
-    "ExVVT 1",
-    "o",
-    0.02,
-    0,
-    0,
-    0,
-    0,
-    999,
-    -999,
-    2};
+  "ExVVT 1",
+  "o",
+  0.02,
+  0,
+  0,
+  0,
+  0,
+  999,
+  -999,
+  2
+};
 
 sensorData vvtExhaust2 = {
-    "ExVVT 2",
-    "o",
-    0.02,
-    0,
-    0,
-    0,
-    0,
-    999,
-    -999,
-    2};
+  "ExVVT 2",
+  "o",
+  0.02,
+  0,
+  0,
+  0,
+  0,
+  999,
+  -999,
+  2
+};
 
 // NEW fueling 2
 
 sensorData fuelConsumed = {
-    "Fuel",
-    "g",
-    1,
-    0,
-    0,
-    0,
-    0,
-    999,
-    -999,
-    0};
+  "Fuel",
+  "g",
+  1,
+  0,
+  0,
+  0,
+  0,
+  999,
+  -999,
+  0
+};
 
 sensorData fuelConsumption = {
-    "Fuel",
-    "g/s",
-    0.005,
-    0,
-    0,
-    0,
-    0,
-    999,
-    -999,
-    2};
+  "Fuel",
+  "g/s",
+  0.005,
+  0,
+  0,
+  0,
+  0,
+  999,
+  -999,
+  2
+};
 
 sensorData fuelTrim = {
-    "FuelTrim",
-    "%",
-    0.01,
-    0,
-    0,
-    0,
-    0,
-    999,
-    -999,
-    2};
+  "FuelTrim",
+  "%",
+  0.01,
+  0,
+  0,
+  0,
+  0,
+  999,
+  -999,
+  2
+};
 
 sensorData ethanol = {
-    "Ethanol",
-    "%",
-    1,
-    0,
-    0,
-    0,
-    100,
-    999,
-    -999,
-    0};
+  "Ethanol",
+  "%",
+  1,
+  0,
+  0,
+  0,
+  100,
+  999,
+  -999,
+  0
+};
 
 sensorData fuelPressDelta_kpa = {
-    "F Delta",
-    "kpa",
-    1,
-    0,
-    0,
-    0,
-    100,
-    999,
-    -999,
-    0};
+  "F Delta",
+  "kpa",
+  1,
+  0,
+  0,
+  0,
+  100,
+  999,
+  -999,
+  0
+};
 
 sensorData fuelPressDelta_psi = {
-    "FDelta",
-    "psi",
-    1,
-    0,
-    0,
-    0,
-    100,
-    999,
-    -999,
-    0};
+  "FDelta",
+  "psi",
+  1,
+  0,
+  0,
+  0,
+  100,
+  999,
+  -999,
+  0
+};
