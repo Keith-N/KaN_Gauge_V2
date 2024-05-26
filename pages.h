@@ -312,6 +312,21 @@ text-decoration: none;border: none;letter-spacing:1.25px;cursor: pointer;text-tr
 
   <h1 style="color:white;">Gauge Configuration</h1>
 
+<form action="/setConfig">
+  <p>Select Configuration</p>
+  
+  <label for="B"></label>
+  <select id="B" name="B"> 
+    <option value="0">1</option>
+    <option value="1">2</option>
+    <option value="2">3</option>
+    </select>
+  <br>
+
+  <br>
+  <input type="submit" value = "Set new configuration" onClick="notify('New Configuration Sent')">
+  <br>
+</form> 
 
  <form action="/setGaugeType">
   <p>Select Gauge Type</p>
@@ -467,7 +482,6 @@ text-decoration: none;border: none;letter-spacing:1.25px;cursor: pointer;text-tr
     <option value="2">Maximum</option>
     <option value="3">Alert Low</option>
     <option value="4">Alert High</option>
-    <option value="5">Decimals</option>
     </select>
   <br>
   

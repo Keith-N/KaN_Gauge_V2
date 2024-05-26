@@ -35,6 +35,9 @@ Command cmdBootOpt;
 Command cmdBoardConfig;
 Command cmdDisplayRate;
 Command cmdTestData;
+Command cmdUserConfig;
+Command cmdIncUserConfig;
+Command cmdSetUserConfig;
 
 bool canEnabled = false;
 bool printCan = false;
@@ -122,7 +125,7 @@ void setupCLI()
   cmdTestData.addArg("r");
   cmdLedCustomColor.setDescription(" Set test data increment and rate");
 
-  cmdSaveSensor = cli.addCommand("config_save");
+  cmdSaveSensor = cli.addCommand("save_config");
   cmdSaveSensor.setDescription(" Save new config");
 
   cmdDefaults = cli.addCommand("restore_defaults");
@@ -141,12 +144,19 @@ void setupCLI()
   cmdBoardConfig = cli.addCmd("pcbrev");
   cmdBoardConfig.addArg("r");
 
-  cmdDisplayRate = cli.addCmd("displayRate");
+  cmdDisplayRate = cli.addCmd("display_rate");
   cmdDisplayRate.setDescription(" Set display refresh rate in ms");
   cmdDisplayRate.addArg("r");
 
   cmdHelp = cli.addCommand("help");
   cmdHelp.setDescription(" Prints commands");
+
+  cmdUserConfig = cli.addCommand("current_config");
+  cmdHelp.setDescription(" Prints config");
+
+  cmdIncUserConfig = cli.addCommand("next_config");
+  cmdHelp.setDescription(" Go to next config");
+
 }
 
 void CLItask()
@@ -445,7 +455,7 @@ void CLItask()
 
       LEDcolor = simVal;
       LEDstyle = simSensor;
-      saveLedConfig();
+      //saveLedConfig();
     }
 
     else if (c == cmdBootOpt)
@@ -654,10 +664,41 @@ void CLItask()
       Serial.println("Saving new config... ");
       readyToUpdate = true;
       readyToUpdateGaugeConfig = true;
-      // saveGaugeType();
-      // saveSensorSetting();
-      // saveTextConfig();
+
       Serial.println("Done! ");
+    }
+
+    else if (c == cmdUserConfig)
+    {
+      Serial.println();
+
+      // Print Config
+      Serial.print("Config : ");
+      Serial.println(config_selectedConfig[0]);
+
+      // Print Gauge Style
+      Serial.print("Gauge Style : ");
+      Serial.println(config_gaugeStyle[config_selectedConfig[0]]);
+
+      // Print Selected Data
+      Serial.print("Data Selected : ");
+
+      for (int inc1 = 0;  inc1 <9; inc1++){
+         Serial.print(config_sensorData[config_selectedConfig[0]][inc1]);
+        Serial.print(",");
+      }
+        Serial.println(config_sensorData[config_selectedConfig[0]][9]);
+
+    }
+
+     else if (c == cmdIncUserConfig)
+    {
+      Serial.println();
+      Serial.println("Going to next config... ");
+      config_selectedConfig[0]++;
+      setupUserConfig();
+      resetDisplay = true;
+
     }
 
     else if (c == cmdDefaults)

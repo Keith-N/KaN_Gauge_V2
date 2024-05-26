@@ -43,27 +43,28 @@ int otaUpdateStatus = 0;
 bool opened = false;
 // bool updateWifiConfig = false;
 
+
+
+
+
 /*
     Service any client connections to the gauge
 */
 
-void disableWifi()
-{
+void disableWifi() {
 
   WiFi.mode(WIFI_OFF);
   wifiEnabled = false;
 }
 
-void ota(void)
-{
+void ota(void) {
   server.handleClient();
 }
 
 /*
     When JS is required send the GZ JQuery 3.2.1
 */
-void onJavaScript(void)
-{
+void onJavaScript(void) {
 
   //Serial.println("onJavaScript(void)");
 
@@ -76,23 +77,20 @@ void onJavaScript(void)
     Setup the WiFi connection and prepare
 */
 
-void otaSetup(void)
-{
+void otaSetup(void) {
 
   WiFi.mode(WIFI_AP);
-  IPAddress ip(192,168,4,1);
-  IPAddress gateway(192,168,4,1);
-  IPAddress subnet(255,255,255,0);
+  IPAddress ip(192, 168, 4, 1);
+  IPAddress gateway(192, 168, 4, 1);
+  IPAddress subnet(255, 255, 255, 0);
 
   WiFi.softAPConfig(ip, ip, subnet);
   WiFi.softAP(ssid, password);
 
 
-  if (!MDNS.begin(host))
-  {
+  if (!MDNS.begin(host)) {
     //Serial.println("Error setting up MDNS responder!");
-    while (1)
-    {
+    while (1) {
       delay(100);
     }
   }
@@ -100,7 +98,7 @@ void otaSetup(void)
 
   // Start TCP (HTTP) server
   server.begin();
-  
+
   //Serial.println("TCP server started");
 
   // Add service to MDNS-SD
@@ -108,85 +106,103 @@ void otaSetup(void)
 
   server.on("/jquery.min.js", HTTP_GET, onJavaScript);
 
-  server.on("/reset", HTTP_GET, []
-            { ESP.restart(); });
+  server.on("/reset", HTTP_GET, [] {
+    ESP.restart();
+  });
 
-  server.on("/resetDefaults", HTTP_GET, []
-            { 
-              setToDefaults = true;
-              checkNvsVer();
-              
-              ESP.restart(); });
+  server.on("/resetDefaults", HTTP_GET, [] {
+    setToDefaults = true;
+    checkNvsVer();
+
+    ESP.restart();
+  });
 
 
-  server.on("/", HTTP_GET, []
-            { server.send(200, "text/html", startPage); });
+  server.on("/", HTTP_GET, [] {
+    server.send(200, "text/html", startPage);
+  });
 
-  server.on("/updateStart", HTTP_GET, []
-            { server.send(200, "text/html", update1); });
+  server.on("/updateStart", HTTP_GET, [] {
+    server.send(200, "text/html", update1);
+  });
 
-  server.on("/wifiConfig", HTTP_GET, []
-            { server.send(200, "text/html", wifiConfigPage); });
+  server.on("/wifiConfig", HTTP_GET, [] {
+    server.send(200, "text/html", wifiConfigPage);
+  });
 
-  server.on("/gaugeConfig", HTTP_GET, []
-            { server.send(200, "text/html", gaugeConfigPage); });
+  server.on("/gaugeConfig", HTTP_GET, [] {
+    server.send(200, "text/html", gaugeConfigPage);
+  });
 
-  server.on("/setLimitConfig", HTTP_GET, []
-            {
+  server.on("/setLimitConfig", HTTP_GET, [] {
     String a, b, c;
     a = server.arg(0);
     b = server.arg(1);
     c = server.arg(2);
 
-    selectedSensor = (int) (a.toFloat());
-    selectedLimit = (int) (b.toFloat());
+    selectedSensor = (int)(a.toFloat());
+    selectedLimit = (int)(b.toFloat());
     inputNewValue = c.toFloat();
 
     readyToUpdateLimits = true;
-    server.send(200, "text/html", gaugeConfigPage); 
-    });
+    server.send(200, "text/html", gaugeConfigPage);
+  });
 
-server.on("/setGaugeType", HTTP_GET, []
-            {
+  server.on("/setConfig", HTTP_GET, [] {
     String a;
     a = server.arg(0);
 
-    gaugeDisplayType = (int) (a.toFloat());
-    resetDisplay= true;
-    updateGaugeType = true;
-    server.send(200, "text/html", gaugeConfigPage); 
-    });
+    config_selectedConfig[0] = (int)(a.toFloat());
+    updateUserConfig = true;
+    readyToUpdateGaugeConfig = true;
+    
+
+    server.send(200, "text/html", gaugeConfigPage);
+  });
+
+  server.on("/setGaugeType", HTTP_GET, [] {
+    String a;
+    a = server.arg(0);
+
+    //gaugeDisplayType = (int)(a.toFloat());
+    config_gaugeStyle[config_selectedConfig[0]] = (int)(a.toFloat());
+    updateUserConfig=true;
+    readyToUpdateGaugeConfig = true;
+    server.send(200, "text/html", gaugeConfigPage);
+  });
 
 
-  server.on("/setDisplayRate", HTTP_GET, []
-            {
+  server.on("/setDisplayRate", HTTP_GET, [] {
     String a, b, c;
     a = server.arg(0);
 
-    displayRefresh_ms = (int) (a.toFloat());
+    displayRefresh_ms = (int)(a.toFloat());
     readyToUpdateGaugeConfig = true;
-    server.send(200, "text/html", gaugeConfigPage); 
-    });
+    server.send(200, "text/html", gaugeConfigPage);
+  });
 
 
 
-  server.on("/setGaugeConfig", HTTP_GET, []
-            {
+  server.on("/setGaugeConfig", HTTP_GET, [] {
     String a, b, c;
     a = server.arg(0);
     b = server.arg(1);
     c = server.arg(2);
 
-    selectedGauge = (int) (a.toFloat());
-    selectedSensor = (int) (b.toFloat());
+    selectedGauge = (int)(a.toFloat());
+    selectedSensor = (int)(b.toFloat());
 
+    config_sensorData[config_selectedConfig[0]][selectedGauge] = selectedSensor;
+    //setupUserConfig();
+    //resetDisplay = true;
+
+    updateUserConfig=true;
     readyToUpdateGaugeConfig = true;
-    server.send(200, "text/html", gaugeConfigPage); 
-    });
 
-  server.on("/setWifiConfig", HTTP_GET, []
-            {
- 
+    server.send(200, "text/html", gaugeConfigPage);
+  });
+
+  server.on("/setWifiConfig", HTTP_GET, [] {
     String a, b, c;
     a = server.arg(0);
     b = server.arg(1);
@@ -200,60 +216,66 @@ server.on("/setGaugeType", HTTP_GET, []
     // newPW = server.arg(1);
     updateWifiConfig = true;
 
-    server.send(200, "text/html", wifiConfigPage); 
-    });
+    server.send(200, "text/html", wifiConfigPage);
+  });
 
-  server.on("/setLedColor", HTTP_GET, []
-            {
-      String a, b;
-      a = server.arg(0);
-      b = server.arg(1);
+  server.on("/setLedColor", HTTP_GET, [] {
+    String a, b;
+    a = server.arg(0);
+    b = server.arg(1);
 
-      LEDcolor = (int) (a.toInt());
-      LEDstyle = (int) (b.toInt());
+    LEDcolor = (int)(a.toInt());
+    LEDstyle = (int)(b.toInt());
 
-      saveLedConfig();
+    config_ledStyle[config_selectedConfig[0]] = LEDstyle;
+    config_ledColors[config_selectedConfig[0]] = LEDcolor;
 
-      server.send(200, "text/html", gaugeConfigPage); 
-      });
+    updateUserConfig=true;
+    readyToUpdateGaugeConfig = true;
 
-  server.on("/setLEDCustom", HTTP_GET, []
-            {
-      String a, r, g, b;
-      a = server.arg(0);
-      r = server.arg(1);
-      g = server.arg(2);
-      b = server.arg(3);
+    //saveLedConfig();
 
-      int LEDindex = (int) (a.toInt());
-      int LEDcolorRed = (int) (r.toInt());
-      int LEDcolorGreen = (int) (g.toInt());
-      int LEDcolorBlue = (int) (b.toInt());
+    server.send(200, "text/html", gaugeConfigPage);
+  });
 
-      saveNewLedColor(LEDindex, LEDcolorRed, LEDcolorGreen, LEDcolorBlue);
+  server.on("/setLEDCustom", HTTP_GET, [] {
+    String a, r, g, b;
+    a = server.arg(0);
+    r = server.arg(1);
+    g = server.arg(2);
+    b = server.arg(3);
+
+    int LEDindex = (int)(a.toInt());
+    int LEDcolorRed = (int)(r.toInt());
+    int LEDcolorGreen = (int)(g.toInt());
+    int LEDcolorBlue = (int)(b.toInt());
+
+    saveNewLedColor(LEDindex, LEDcolorRed, LEDcolorGreen, LEDcolorBlue);
 
 
-      saveLedConfig();
-      server.send(200, "text/html", gaugeConfigPage); 
-      });
+    //saveLedConfig();
+    server.send(200, "text/html", gaugeConfigPage);
+  });
 
 
-  server.on("/setTextColor", HTTP_GET, []
-            {
-      String a, b;
-      a = server.arg(0);
-      b = server.arg(1);
+  server.on("/setTextColor", HTTP_GET, [] {
+    String a, b;
+    a = server.arg(0);
+    b = server.arg(1);
 
-      selectedColor[(int) (a.toInt())] = (int) (b.toInt());
-      saveTextConfig();
+    //selectedColor[(int)(a.toInt())] = (int)(b.toInt());
+    config_uiColors[config_selectedConfig[0]][(int)(a.toInt())]=(int)(b.toInt());
 
-      server.send(200, "text/html", gaugeConfigPage); 
-      });
+    updateUserConfig=true;
+    readyToUpdateGaugeConfig = true;
+    
+    //saveTextConfig();
 
-  server.on("/boot", HTTP_GET, []
-            {
- 
-    String a, b, c, d, e ,f;
+    server.send(200, "text/html", gaugeConfigPage);
+  });
+
+  server.on("/boot", HTTP_GET, [] {
+    String a, b, c, d, e, f;
     a = server.arg(0);
     b = server.arg(1);
     c = server.arg(2);
@@ -261,141 +283,131 @@ server.on("/setGaugeType", HTTP_GET, []
     e = server.arg(4);
     f = server.arg(5);
 
-    bootLogo1 = (int) (a.toInt());
-    bootLogo2 = (int) (b.toInt());
-    bootLogo3 = (int) (c.toInt());
+    bootLogo1 = (int)(a.toInt());
+    bootLogo2 = (int)(b.toInt());
+    bootLogo3 = (int)(c.toInt());
 
     // Make sure we keep the correct PCB rev
     int revbuf = pcbRev;
-    pcbRev = (int) (d.toFloat());
-    if (pcbRev == 0){
+    pcbRev = (int)(d.toFloat());
+    if (pcbRev == 0) {
       pcbRev = revbuf;
     }
 
-    quickstart = (int) (e.toInt());
-    logoTime_ms = (int) (f.toInt());
+    quickstart = (int)(e.toInt());
+    logoTime_ms = (int)(f.toInt());
 
     saveBootConfig();
-    server.send(200, "text/html", bootConfigPage); 
-    });
+    server.send(200, "text/html", bootConfigPage);
+  });
 
-  server.on("/setBrightness", HTTP_GET, []
-            {
+  server.on("/setBrightness", HTTP_GET, [] {
     String a, b, c;
     a = server.arg(0);
     b = server.arg(1);
 
-    selectedBrightness = (int) (a.toFloat());
-    brightnessInput = (int) (b.toFloat());
+    selectedBrightness = (int)(a.toFloat());
+    brightnessInput = (int)(b.toFloat());
 
-    if (brightnessInput > 100){
+    if (brightnessInput > 100) {
       brightnessInput = 100;
     }
 
-    if (brightnessInput < 0){
+    if (brightnessInput < 0) {
       brightnessInput = 0;
     }
 
     brightness[selectedBrightness] = brightnessInput;
 
     readyToUpdateGaugeConfig = true;
-    server.send(200, "text/html", gaugeConfigPage); 
-    });
+    server.send(200, "text/html", gaugeConfigPage);
+  });
 
-  server.on("/setArc1", HTTP_GET, []
-            {
+  server.on("/setArc1", HTTP_GET, [] {
     String a, b, c;
     a = server.arg(0);
     b = server.arg(1);
     c = server.arg(2);
 
-    arcColor1 = (int) (a.toFloat());
+    arcColor1 = (int)(a.toFloat());
 
-    arcSeg1 = (int) (b.toFloat());
-        if (arcSeg1 == 0){
+    arcSeg1 = (int)(b.toFloat());
+    if (arcSeg1 == 0) {
       arcSeg1 = 3;
     }
 
-    arcInc1 = (int) (c.toFloat());
-    if (arcInc1 == 0){
+    arcInc1 = (int)(c.toFloat());
+    if (arcInc1 == 0) {
       arcInc1 = 6;
     }
 
     updateArcConfig = true;
     updatedArc = true;
-    server.send(200, "text/html", gaugeConfigPage); 
-    });
 
-  server.on("/setArc2", HTTP_GET, []
-            {
+    server.send(200, "text/html", gaugeConfigPage);
+  });
+
+  server.on("/setArc2", HTTP_GET, [] {
     String a, b, c;
     a = server.arg(0);
     b = server.arg(1);
     c = server.arg(2);
 
-    arcColor2 = (int) (a.toFloat());
+    arcColor2 = (int)(a.toFloat());
 
-    arcSeg2 = (int) (b.toFloat());
-    if (arcSeg2 == 0){
+    arcSeg2 = (int)(b.toFloat());
+    if (arcSeg2 == 0) {
       arcSeg2 = 3;
     }
 
-    arcInc2 = (int) (c.toFloat());
-    if (arcInc2 == 0){
+    arcInc2 = (int)(c.toFloat());
+    if (arcInc2 == 0) {
       arcInc2 = 3;
     }
-    
+
     updatedArc = true;
     updateArcConfig = true;
-    server.send(200, "text/html", gaugeConfigPage); 
-    });
+    server.send(200, "text/html", gaugeConfigPage);
+  });
 
   server.on(
-      "/update", HTTP_POST, []()
-      {
-    server.sendHeader("Connection", "close");
-    server.send(200, "text/plain", (Update.hasError()) ? "FAIL" : "OK");
-    ESP.restart(); },
+    "/update", HTTP_POST, []() {
+      server.sendHeader("Connection", "close");
+      server.send(200, "text/plain", (Update.hasError()) ? "FAIL" : "OK");
+      ESP.restart();
+    },
 
-      []()
-      {
-        HTTPUpload &upload = server.upload();
+    []() {
+      HTTPUpload &upload = server.upload();
 
-        // Uploading File
-        if (upload.status == UPLOAD_FILE_START)
-        {
+      // Uploading File
+      if (upload.status == UPLOAD_FILE_START) {
 
-          // Serial.printf("Update: %s\n", upload.filename.c_str());
-          if (!Update.begin(UPDATE_SIZE_UNKNOWN))
-          { // start with max available size
-            Update.printError(Serial);
-          }
+        // Serial.printf("Update: %s\n", upload.filename.c_str());
+        if (!Update.begin(UPDATE_SIZE_UNKNOWN)) {  // start with max available size
+          Update.printError(Serial);
         }
-        // File Uploaded, flash
-        else if (upload.status == UPLOAD_FILE_WRITE)
-        {
+      }
+      // File Uploaded, flash
+      else if (upload.status == UPLOAD_FILE_WRITE) {
 
-          /* flashing firmware to ESP*/
-          if (Update.write(upload.buf, upload.currentSize) != upload.currentSize)
-          {
-            Update.printError(Serial);
-          }
+        /* flashing firmware to ESP*/
+        if (Update.write(upload.buf, upload.currentSize) != upload.currentSize) {
+          Update.printError(Serial);
         }
+      }
 
-        // Update finished
-        else if (upload.status == UPLOAD_FILE_END)
-        {
-          //  If update is a success
-          if (Update.end(true))
-          {
-          }
-          // If update fails
-          else
-          {
-            // Update.printError(Serial);
-          }
+      // Update finished
+      else if (upload.status == UPLOAD_FILE_END) {
+        //  If update is a success
+        if (Update.end(true)) {
         }
-      });
+        // If update fails
+        else {
+          // Update.printError(Serial);
+        }
+      }
+    });
 
-      wifiEnabled = true;
+  wifiEnabled = true;
 }

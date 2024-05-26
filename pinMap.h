@@ -19,6 +19,11 @@
 #define LED_1 21
 #define LED_2 14
 
+void setupPinMode(){
+  pinMode(USER_INPUT_D1, INPUT_PULLUP);
+  pinMode(USER_INPUT_D2, INPUT_PULLUP);
+}
+
 /*
 
 TFT eSPI Library settings. May beed to be setup in userconfig file of library.
