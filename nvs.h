@@ -290,7 +290,7 @@ char newPW[16] = "update1234";
 char newHOST[16] = "kan";
 
 String dataLocation[] = { "Inside Arc", "Outer Arc", "Center", "Bottom Left", "Center Bottom", "Bottom Right", "LEDs", "Top Left", "Top Right", "Meter", "" };
-int gaugeSensor[] = { LAMBDA_1, OIL_PRESS_PSI, LAMBDA_1, COOLANT_TEMP_F, GEAR, OIL_PRESS_PSI, RPM, NO_DATA, NO_DATA, LAMBDA_1, NO_DATA };
+int gaugeSensor[] = { LAMBDA_1, LAMBDA_1, LAMBDA_1, LAMBDA_1, LAMBDA_1, LAMBDA_1, LAMBDA_1, LAMBDA_1, LAMBDA_1, LAMBDA_1, NO_DATA };
 
 int brightness[] = { 80, 10, 80, 10 };
 
@@ -359,14 +359,16 @@ bool startCan = true;
 int displayRefresh_ms = 100;
 
 
+String gaugeStyleNames[] = { "2 Arc", "Meter", "1 Arc, large digits", "Meter, large digits", "Large Digits" };
+
 // USER CONFIGURATION
 const int config_max = 3;
 int config_selectedConfig[1];
 int config_gaugeStyle[3] = { 0, 1, 2 };
-int config_sensorData[3][10] = { { TEST_DATA, TEST_DATA, TEST_DATA, TEST_DATA, TEST_DATA, TEST_DATA, TEST_DATA, TEST_DATA, TEST_DATA, TEST_DATA }, { TEST_DATA, TEST_DATA, TEST_DATA, TEST_DATA, TEST_DATA, TEST_DATA, TEST_DATA, TEST_DATA, TEST_DATA, TEST_DATA }, { TEST_DATA, TEST_DATA, TEST_DATA, TEST_DATA, TEST_DATA, TEST_DATA, TEST_DATA, TEST_DATA, TEST_DATA, TEST_DATA } };
+int config_sensorData[3][10] = { { LAMBDA_1, LAMBDA_1, LAMBDA_1, LAMBDA_1, LAMBDA_1, LAMBDA_1, LAMBDA_1, LAMBDA_1, LAMBDA_1, LAMBDA_1 }, { LAMBDA_1, LAMBDA_1, LAMBDA_1, LAMBDA_1, LAMBDA_1, LAMBDA_1, LAMBDA_1, LAMBDA_1, LAMBDA_1, LAMBDA_1 }, { LAMBDA_1, LAMBDA_1, LAMBDA_1, LAMBDA_1, LAMBDA_1, LAMBDA_1, LAMBDA_1, LAMBDA_1, LAMBDA_1, LAMBDA_1 } };
 
 int config_ledStyle[3] = {1,1,1};
-int config_ledColors[3] = {1,2,3};
+int config_ledColors[3] = {4,2,3};
 int config_uiColors[3][6] = {{ 65535, 63488, 63488, 63488, 0 }, { 65535, 63488, 63488, 63488, 0 }, { 65535, 63488, 63488, 63488, 0 }};
 
 //config_gaugeStyle[config_selectedConfig[0]] =

@@ -293,7 +293,7 @@ void updateDisplay_Analog()
     setupAnalogMeter(0, 10, ptrData[9]->dataName, ptrData[9]->units, ptrData[9]->minimum, ptrData[9]->maximum);
     tft.setTextColor(selectedColor[1], TFT_BLACK);
     tft.drawString(ptrData[9]->dataName, 20, 95, 2);
-    tft.drawString(ptrData[9]->units, 200, 95, 2);
+    tft.drawString(ptrData[9]->units, 205, 95, 2);
     analogMeterSetup = true;
   }
 
@@ -409,7 +409,7 @@ void updateDisplay_Analog_LargeText()
     setupAnalogMeter(0, 10, ptrData[9]->dataName, ptrData[9]->units, ptrData[9]->minimum, ptrData[9]->maximum);
     tft.setTextColor(selectedColor[1], TFT_BLACK);
     tft.drawString(ptrData[9]->dataName, 20, 95, 2);
-    tft.drawString(ptrData[9]->units, 200, 95, 2);
+    tft.drawString(ptrData[9]->units, 205, 95, 2);
     analogMeterSetup = true;
   }
 
@@ -485,6 +485,9 @@ void updateDisplayTask(void *pvParameters)
       resetDisplay = false;
       updatedArc = false;
       analogMeterSetup = false;
+      #ifdef DEBUG_SERIAL
+       Serial.println("Display reset");
+      #endif
     }
 
     showAlert = false;

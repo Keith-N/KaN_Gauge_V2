@@ -262,6 +262,7 @@ void CLItask()
       Serial.print(gType);
       Serial.print(" : ");
 
+
       switch (gaugeType)
       {
       case 0:
