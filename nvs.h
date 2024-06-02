@@ -290,7 +290,7 @@ char newPW[16] = "update1234";
 char newHOST[16] = "kan";
 
 String dataLocation[] = { "Inside Arc", "Outer Arc", "Center", "Bottom Left", "Center Bottom", "Bottom Right", "LEDs", "Top Left", "Top Right", "Meter", "" };
-int gaugeSensor[] = { LAMBDA_1, LAMBDA_1, LAMBDA_1, LAMBDA_1, LAMBDA_1, LAMBDA_1, LAMBDA_1, LAMBDA_1, LAMBDA_1, LAMBDA_1, NO_DATA };
+int gaugeSensor[] = { LAMBDA_1, OIL_PRESS_PSI, LAMBDA_1, COOLANT_TEMP_F, LAMBDA_1, OIL_PRESS_PSI, LAMBDA_1, LAMBDA_1, LAMBDA_1, LAMBDA_1, NO_DATA };
 
 int brightness[] = { 80, 10, 80, 10 };
 
@@ -326,9 +326,9 @@ int bootLogo1 = 1;  // BMM
 int bootLogo2 = 2;  // FOME
 int bootLogo3 = 0;  // KaN with version
 
-int LEDcolor = 1;  // LED config blue to red
+int LEDcolor = 1;  // LED config blue to green to red
 
-int LEDstyle = 0;
+int LEDstyle = 4;
 String ledStyleName[] = { "Series Single Color", "Series Multi-Color", "Single LED" };
 String ledColorName[] = { "None", "Blue -> Green -> Red", "Green -> Red", "Custom" };
 
@@ -364,12 +364,12 @@ String gaugeStyleNames[] = { "2 Arc", "Meter", "1 Arc, large digits", "Meter, la
 // USER CONFIGURATION
 const int config_max = 3;
 int config_selectedConfig[1];
-int config_gaugeStyle[3] = { 0, 1, 2 };
-int config_sensorData[3][10] = { { LAMBDA_1, LAMBDA_1, LAMBDA_1, LAMBDA_1, LAMBDA_1, LAMBDA_1, LAMBDA_1, LAMBDA_1, LAMBDA_1, LAMBDA_1 }, { LAMBDA_1, LAMBDA_1, LAMBDA_1, LAMBDA_1, LAMBDA_1, LAMBDA_1, LAMBDA_1, LAMBDA_1, LAMBDA_1, LAMBDA_1 }, { LAMBDA_1, LAMBDA_1, LAMBDA_1, LAMBDA_1, LAMBDA_1, LAMBDA_1, LAMBDA_1, LAMBDA_1, LAMBDA_1, LAMBDA_1 } };
+int config_gaugeStyle[3] = { 4, 2, 3 };
+int config_sensorData[3][10] = { { LAMBDA_1, OIL_PRESS_PSI, LAMBDA_1, COOLANT_TEMP_F, LAMBDA_1, OIL_PRESS_PSI, LAMBDA_1, LAMBDA_1, LAMBDA_1, LAMBDA_1}, { LAMBDA_1, OIL_PRESS_PSI, LAMBDA_1, COOLANT_TEMP_F, LAMBDA_1, OIL_PRESS_PSI, LAMBDA_1, LAMBDA_1, LAMBDA_1, LAMBDA_1}, { LAMBDA_1, OIL_PRESS_PSI, LAMBDA_1, COOLANT_TEMP_F, LAMBDA_1, OIL_PRESS_PSI, LAMBDA_1, LAMBDA_1, LAMBDA_1, LAMBDA_1}};
 
-int config_ledStyle[3] = {1,1,1};
-int config_ledColors[3] = {4,2,3};
-int config_uiColors[3][6] = {{ 65535, 63488, 63488, 63488, 0 }, { 65535, 63488, 63488, 63488, 0 }, { 65535, 63488, 63488, 63488, 0 }};
+int config_ledStyle[3] = { 0, 0, 0 };
+int config_ledColors[3] = { 1, 1, 1 };
+int config_uiColors[3][6] = { { 65535, 63488, 63488, 63488, 0 }, { 65535, 63488, 63488, 63488, 0 }, { 65535, 63488, 63488, 63488, 0 } };
 
 //config_gaugeStyle[config_selectedConfig[0]] =
 
@@ -391,7 +391,7 @@ void setupUserConfig() {
     gaugeSensor[iconf] = config_sensorData[cfg][iconf];
   }
 
-    for (int p = 0; (p < numDataPtr); p++) {
+  for (int p = 0; (p < numDataPtr); p++) {
     ptrData[p] = selectSensor(gaugeSensor[p]);
   }
 
@@ -402,7 +402,7 @@ void setupUserConfig() {
   LEDcolor = config_ledColors[cfg];
 
   // Gauge UI Colors
-  
+
   for (int iconf = 0; iconf < 5; iconf++) {
     selectedColor[iconf] = config_uiColors[cfg][iconf];
   }
@@ -430,7 +430,7 @@ void restoreUserConfig() {
   preferences.end();
 }
 
-                
+
 bool nextConfigCheck(bool next) {
 
   if (next == true) {
@@ -1358,7 +1358,7 @@ void checkNvsVer() {
 
   restoreBootConfig();
   restoreWifi();
-  restoreSensorMinMax();
+  //restoreSensorMinMax();
   preferences.end();
 
   if (nvsBuf != nvs || nvsBuf == 99 || setToDefaults == true) {
@@ -1372,9 +1372,8 @@ void checkNvsVer() {
     // Save default config
     saveBootConfig();
     saveWifi();
-
-    saveSensorMinMax();
-    saveSensorAlerts();
+    //saveSensorMinMax();
+    //saveSensorAlerts();
 
     nvsReset = true;
     setToDefaults = false;
@@ -1519,7 +1518,7 @@ void saveNewLedColor(const int index, int red, int green, int blue) {
 
 void checkNewConfig() {
 
-  if (updateUserConfig == true){
+  if (updateUserConfig == true) {
     setupUserConfig();
     resetDisplay = true;
     updateUserConfig = false;

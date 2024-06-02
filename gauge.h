@@ -289,7 +289,7 @@ void updateDisplay_Analog()
 
   if (analogMeterSetup == false)
   {
-    tft.fillScreen(TFT_BLACK);
+    //tft.fillScreen(TFT_BLACK);
     setupAnalogMeter(0, 10, ptrData[9]->dataName, ptrData[9]->units, ptrData[9]->minimum, ptrData[9]->maximum);
     tft.setTextColor(selectedColor[1], TFT_BLACK);
     tft.drawString(ptrData[9]->dataName, 20, 95, 2);
@@ -405,16 +405,18 @@ void updateDisplay_Analog_LargeText()
 
   if (analogMeterSetup == false)
   {
-    tft.fillScreen(TFT_BLACK);
+    //tft.fillScreen(TFT_BLACK);
     setupAnalogMeter(0, 10, ptrData[9]->dataName, ptrData[9]->units, ptrData[9]->minimum, ptrData[9]->maximum);
     tft.setTextColor(selectedColor[1], TFT_BLACK);
     tft.drawString(ptrData[9]->dataName, 20, 95, 2);
     tft.drawString(ptrData[9]->units, 205, 95, 2);
+
     analogMeterSetup = true;
   }
 
   // Meter Needle
   AnMeter.updateNeedle(ptrData[9]->scaledValue, 0, selectedColor[3], TFT_BLACK, selectedColor[0]);
+
   if (ptrData[9]->alert == true && ptrData[9]->dataName != "None")
   {
     showAlert = true;
@@ -531,16 +533,19 @@ void updateDisplayTask(void *pvParameters)
 
         int ledsON = 6 * (ptrData[6]->scaledValue - ptrData[6]->minimum) / (ptrData[6]->maximum - ptrData[6]->minimum);
 
+
         int ledCLR = ledsON - 1;
 
         if (ledCLR < 0)
         {
+          ledsON = 1;
           ledCLR = 0;
         }
 
         if (ledCLR > 5)
         {
           ledCLR = 5;
+          ledsON = 6;
         }
 
         switch (LEDstyle)

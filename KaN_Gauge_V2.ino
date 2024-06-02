@@ -50,7 +50,7 @@ int sInput;
 #define NVS
 #define WIFI_OTA
 #define CLI
-#define DEMO
+//#define DEMO
 
 int lastInput_D1 = 0;
 int debounceTimerD1 = 600;
