@@ -289,11 +289,8 @@ char newSSID[16] = "KaN Gauge";
 char newPW[16] = "update1234";
 char newHOST[16] = "kan";
 
-String dataLocation[] = { "Inside Arc", "Outer Arc", "Center", "Bottom Left", "Center Bottom", "Bottom Right", "LEDs", "Top Left", "Top Right", "Meter", "" };
 int gaugeSensor[] = { LAMBDA_1, OIL_PRESS_PSI, LAMBDA_1, COOLANT_TEMP_F, LAMBDA_1, OIL_PRESS_PSI, LAMBDA_1, LAMBDA_1, LAMBDA_1, LAMBDA_1, NO_DATA };
-
 int brightness[] = { 80, 10, 80, 10 };
-
 int logoTime_ms = 600;
 
 int selectedSensor;
@@ -360,12 +357,14 @@ int displayRefresh_ms = 100;
 
 
 String gaugeStyleNames[] = { "2 Arc", "Meter", "1 Arc, large digits", "Meter, large digits", "Large Digits" };
+String dataLocation[] = { "Inside Arc", "Outer Arc", "Center", "Bottom Left", "Center Bottom", "Bottom Right", "LEDs", "Top Left", "Top Right", "Meter", "" };
+
 
 // USER CONFIGURATION
 const int config_max = 3;
 int config_selectedConfig[1];
-int config_gaugeStyle[3] = { 4, 2, 3 };
-int config_sensorData[3][10] = { { LAMBDA_1, OIL_PRESS_PSI, LAMBDA_1, COOLANT_TEMP_F, LAMBDA_1, OIL_PRESS_PSI, LAMBDA_1, LAMBDA_1, LAMBDA_1, LAMBDA_1}, { LAMBDA_1, OIL_PRESS_PSI, LAMBDA_1, COOLANT_TEMP_F, LAMBDA_1, OIL_PRESS_PSI, LAMBDA_1, LAMBDA_1, LAMBDA_1, LAMBDA_1}, { LAMBDA_1, OIL_PRESS_PSI, LAMBDA_1, COOLANT_TEMP_F, LAMBDA_1, OIL_PRESS_PSI, LAMBDA_1, LAMBDA_1, LAMBDA_1, LAMBDA_1}};
+int config_gaugeStyle[3] = { 4, 3, 2 };
+int config_sensorData[3][10] = { { LAMBDA_1, OIL_PRESS_PSI, LAMBDA_1, COOLANT_TEMP_F, LAMBDA_1, OIL_PRESS_PSI, LAMBDA_1, LAMBDA_1, LAMBDA_1, LAMBDA_1}, { OIL_PRESS_PSI, OIL_PRESS_PSI, OIL_PRESS_PSI, LAMBDA_1, OIL_PRESS_PSI, MANIFOLD_PRESS_PSI, OIL_PRESS_PSI, OIL_PRESS_PSI, OIL_PRESS_PSI, OIL_PRESS_PSI}, { MANIFOLD_PRESS_PSI, MANIFOLD_PRESS_PSI, MANIFOLD_PRESS_PSI, COOLANT_TEMP_F, MANIFOLD_PRESS_PSI, INTAKE_TEMP_F, MANIFOLD_PRESS_PSI, MANIFOLD_PRESS_PSI, MANIFOLD_PRESS_PSI, MANIFOLD_PRESS_PSI}};
 
 int config_ledStyle[3] = { 0, 0, 0 };
 int config_ledColors[3] = { 1, 1, 1 };

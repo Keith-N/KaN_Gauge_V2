@@ -234,7 +234,7 @@ void checkWifiConfig() {
 //==============================================
 
 void setup() {
-  delay(3000);
+  //delay(3000);
   analogReadResolution(12);
 
   Serial.begin(115200);

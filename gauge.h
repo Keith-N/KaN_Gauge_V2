@@ -427,9 +427,32 @@ void updateDisplay_Analog_LargeText()
   {
 
     gaugeText(ptrData[4]->scaledValue, ptrData[4]->minimum, ptrData[4]->maximum, (130), (150), 3,
-              ptrData[4]->units, ptrData[4]->dataName, selectedColor[0], selectedColor[1], TRUE, TRUE, 15, ptrData[4]->alert, selectedColor[2]);
+              ptrData[4]->units, ptrData[4]->dataName, selectedColor[0], selectedColor[1], false, false, 15, ptrData[4]->alert, selectedColor[2]);
 
     if (ptrData[4]->alert == true)
+    {
+      showAlert = true;
+    }
+  }
+
+// Bottom Left
+  if (ptrData[3]->dataName != "None")
+  {
+    gaugeText(ptrData[3]->scaledValue, ptrData[3]->minimum, ptrData[3]->maximum, (60), (190), 1,
+              ptrData[3]->units, ptrData[3]->dataName, selectedColor[0], selectedColor[1], TRUE, TRUE, 15, ptrData[3]->alert, selectedColor[2]);
+
+    if (ptrData[3]->alert == true)
+    {
+      showAlert = true;
+    }
+  }
+
+  // Bottom Right
+  if (ptrData[5]->dataName != "None")
+  {
+    gaugeText(ptrData[5]->scaledValue, ptrData[5]->minimum, ptrData[5]->maximum, (180), (190), 1,
+              ptrData[5]->units, ptrData[5]->dataName, selectedColor[0], selectedColor[1], TRUE, TRUE, 15, ptrData[5]->alert, selectedColor[2]);
+    if (ptrData[5]->alert == true)
     {
       showAlert = true;
     }

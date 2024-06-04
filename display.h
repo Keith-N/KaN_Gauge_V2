@@ -1015,7 +1015,7 @@ void gaugeText(float value, float min, float max, int x, int y, int fontSize, co
       break;
 
     case 3:
-      tft.drawString(units, x + 40, y + unitOffset + 15, 4);
+      tft.drawString(units, x + 55, y + unitOffset + 15, 4);
       break;
 
     case 4:
