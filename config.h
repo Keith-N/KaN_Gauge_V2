@@ -12,7 +12,7 @@
 #pragma once
 
 int bootConfig;
-const String build = "0.37";
+const String build = "0.38";
 const int nvs = 4;
 const String buildType = "";
 
