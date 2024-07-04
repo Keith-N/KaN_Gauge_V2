@@ -96,7 +96,7 @@ void checkAlert()
   }
 }
 
-bool sensorAlertCheck(int min, int max, int val)
+bool sensorAlertCheck(float min, float max, float val) 
 {
 
   if (val < min)
