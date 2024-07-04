@@ -327,11 +327,11 @@ int LEDcolor = 1;  // LED config blue to green to red
 
 int LEDstyle = 4;
 String ledStyleName[] = { "Series Single Color", "Series Multi-Color", "Single LED" };
-String ledColorName[] = { "None", "Blue -> Green -> Red", "Green -> Red", "Custom" };
+String ledColorName[] = { "None", "Blue -> Green -> Red", "Green -> Red", "Custom", "Alert 1", "Alert 2"};
 
-int LEDred[4][6] = { { 0, 0, 0, 0, 0, 0 }, { 0, 100, 150, 255, 255, 255 }, { 100, 100, 100, 100, 100, 255 }, { 255, 255, 255, 255, 255, 255 } };
-int LEDgreen[4][6] = { { 0, 0, 0, 0, 0, 0 }, { 100, 200, 255, 150, 50, 0 }, { 200, 200, 200, 200, 200, 0 }, { 255, 255, 255, 255, 255, 255 } };
-int LEDblue[4][6] = { { 0, 0, 0, 0, 0, 0 }, { 150, 40, 0, 0, 0, 0 }, { 0, 0, 0, 0, 0, 0 }, { 255, 255, 255, 255, 255, 255 } };
+int LEDred[6][6] = { { 0, 0, 0, 0, 0, 0 }, { 0, 100, 150, 255, 255, 255 }, { 100, 100, 100, 100, 100, 255 }, { 255, 255, 255, 255, 255, 255 }, { 255, 255, 255, 255, 255, 255 }, { 255, 255, 255, 255, 255, 255 } };
+int LEDgreen[6][6] = { { 0, 0, 0, 0, 0, 0 }, { 100, 200, 255, 150, 50, 0 }, { 200, 200, 200, 200, 200, 0 }, { 255, 255, 255, 255, 255, 255 }, { 0, 0, 0, 0, 0, 0 }, { 0, 0, 0, 0, 0, 0 } };
+int LEDblue[6][6] = { { 0, 0, 0, 0, 0, 0 }, { 150, 40, 0, 0, 0, 0 }, { 0, 0, 0, 0, 0, 0 }, { 255, 255, 255, 255, 255, 255 }, { 0, 0, 0, 0, 0, 0 }, { 0, 0, 0, 0, 0, 0 } };
 
 float inputNewValue;
 
@@ -344,7 +344,7 @@ bool updateWifiConfig = false;
 bool resetDisplay = false;
 bool updateArcConfig = false;
 bool updatedArc = false;
-bool ffAlert = false;
+bool fullscreenAlert = true;
 int quickstart = 0;
 bool setToDefaults = false;
 bool updateGaugeType = false;
@@ -368,7 +368,7 @@ int config_sensorData[3][10] = { { LAMBDA_1, OIL_PRESS_PSI, LAMBDA_1, COOLANT_TE
 
 int config_ledStyle[3] = { 0, 0, 0 };
 int config_ledColors[3] = { 1, 0, 0 };
-int config_uiColors[3][6] = { { 65535, 63488, 63488, 63488, 0 }, { 65535, 63488, 63488, 63488, 0 }, { 65535, 63488, 63488, 63488, 0 } };
+int config_uiColors[3][6] = { {65535, 63488, 63488, 63488, 0 }, { 65535, 63488, 63488, 63488, 0 }, { 65535, 63488, 63488, 63488, 0 } };
 
 //config_gaugeStyle[config_selectedConfig[0]] =
 
@@ -465,39 +465,6 @@ void restoreDisplayRefresh() {
 }
 
 
-// void saveGaugeType()
-// {
-//   preferences.begin("gaugeType", false);
-//   //preferences.putUInt("gaugeType", gaugeDisplayType);
-//   preferences.putUInt("displayRate", displayRefresh_ms);
-//   preferences.end();
-// }
-
-// void restoreGaugeType()
-// {
-//   preferences.begin("gaugeType", false);
-//   //gaugeDisplayType = preferences.getUInt("gaugeType", gaugeDisplayType);
-//   displayRefresh_ms = preferences.getUInt("displayRate", displayRefresh_ms);
-//   preferences.end();
-// }
-
-// void saveSensorSetting()
-// {
-//   // Open R/W
-//   preferences.begin("config", false);
-//   preferences.putUInt("sensor0", gaugeSensor[0]);
-//   preferences.putUInt("sensor1", gaugeSensor[1]);
-//   preferences.putUInt("sensor2", gaugeSensor[2]);
-//   preferences.putUInt("sensor3", gaugeSensor[3]);
-//   preferences.putUInt("sensor4", gaugeSensor[4]);
-//   preferences.putUInt("sensor5", gaugeSensor[5]);
-//   preferences.putUInt("sensor6", gaugeSensor[6]);
-//   preferences.putUInt("sensor7", gaugeSensor[7]);
-//   preferences.putUInt("sensor8", gaugeSensor[8]);
-//   preferences.putUInt("sensor9", gaugeSensor[9]);
-//   preferences.end();
-// }
-
 void saveBrightnessSettings() {
   // Open R/W
   preferences.begin("bright", false);
@@ -516,47 +483,6 @@ void restoreBrightnessSettings() {
   brightness[3] = preferences.getUInt("ledH", brightness[3]);
   preferences.end();
 }
-
-// void restoreSensorSetting()
-// {
-//   // Open RO
-//   preferences.begin("config", false);
-//   gaugeSensor[0] = preferences.getUInt("sensor0", gaugeSensor[0]);
-//   gaugeSensor[1] = preferences.getUInt("sensor1", gaugeSensor[1]);
-//   gaugeSensor[2] = preferences.getUInt("sensor2", gaugeSensor[2]);
-//   gaugeSensor[3] = preferences.getUInt("sensor3", gaugeSensor[3]);
-//   gaugeSensor[4] = preferences.getUInt("sensor4", gaugeSensor[4]);
-//   gaugeSensor[5] = preferences.getUInt("sensor5", gaugeSensor[5]);
-//   gaugeSensor[6] = preferences.getUInt("sensor6", gaugeSensor[6]);
-//   gaugeSensor[7] = preferences.getUInt("sensor7", gaugeSensor[7]);
-//   gaugeSensor[8] = preferences.getUInt("sensor8", gaugeSensor[8]);
-//   gaugeSensor[9] = preferences.getUInt("sensor9", gaugeSensor[9]);
-
-// #ifdef DEBUG_SERIAL
-//   Serial.print("Ptr 0 ");
-//   Serial.println(gaugeSensor[0]);
-
-//   Serial.print("Ptr 1 ");
-//   Serial.println(gaugeSensor[1]);
-
-//   Serial.print("Ptr 2 ");
-//   Serial.println(gaugeSensor[2]);
-
-//   Serial.print("Ptr 3 ");
-//   Serial.println(gaugeSensor[3]);
-
-//   Serial.print("Ptr 4 ");
-//   Serial.println(gaugeSensor[4]);
-
-//   Serial.print("Ptr 5 ");
-//   Serial.println(gaugeSensor[5]);
-
-//   Serial.print("Ptr 6 ");
-//   Serial.println(gaugeSensor[6]);
-// #endif
-
-//   preferences.end();
-// }
 
 void restoreSensorMinMax() {
   preferences.begin("MinMax", false);
@@ -852,58 +778,6 @@ void restoreSensorAlerts() {
   preferences.end();
 }
 
-// void restoreSensorPrecsision()
-// {
-//   preferences.begin("precision", false);
-
-//   testData.precision = preferences.getInt("testprecision", testData.precision);
-//   rpm.precision = preferences.getInt("rpmprecision", rpm.precision);
-//   vss.precision = preferences.getInt("vssprecision", vss.precision);
-//   vss_mph.precision = preferences.getInt("vssMPHprecision", vss_mph.precision);
-//   accelerator.precision = preferences.getInt("acceleratorprecision", accelerator.precision);
-//   throttle1.precision = preferences.getInt("throttle1precision", throttle1.precision);
-//   throttle2.precision = preferences.getInt("throttle2precision", throttle2.precision);
-//   injectorDuty.precision = preferences.getInt("injDutyprecision", injectorDuty.precision);
-//   injectorPulse.precision = preferences.getInt("injPulseprecision", injectorPulse.precision);
-//   fuelPressureHigh.precision = preferences.getInt("fuelPresHighprecision", fuelPressureHigh.precision);
-//   fuelPressureLow.precision = preferences.getInt("fuelPresLowprecision", fuelPressureLow.precision);
-//   ethanol.precision = preferences.getInt("ethanolprecision", ethanol.precision);
-//   fuelTrim.precision = preferences.getInt("fuelTrimprecision", fuelTrim.precision);
-//   fuel.precision = preferences.getInt("fuelprecision", fuel.precision);
-//   fuelConsumed.precision = preferences.getInt("fuelUsedprecision", fuelConsumed.precision);
-//   fuelConsumption.precision = preferences.getInt("fuelFlowprecision", fuelConsumption.precision);
-//   afr.precision = preferences.getInt("afrprecision", afr.precision);
-//   lambda1.precision = preferences.getInt("lambda1precision", lambda1.precision);
-//   lambda2.precision = preferences.getInt("lambda2precision", lambda2.precision);
-//   coolantTemperature.precision = preferences.getInt("cltCprecision", coolantTemperature.precision);
-//   intakeTemperature.precision = preferences.getInt("iatCprecision", intakeTemperature.precision);
-//   auxTemp1.precision = preferences.getInt("aux1precision", auxTemp1.precision);
-//   auxTemp2.precision = preferences.getInt("aux2Cprecision", auxTemp2.precision);
-//   mcuTemp.precision = preferences.getInt("mcuCprecision", mcuTemp.precision);
-//   coolantTemperature_f.precision = preferences.getInt("cltFprecision", coolantTemperature_f.precision);
-//   intakeTemperature_f.precision = preferences.getInt("iatprecision", intakeTemperature_f.precision);
-//   ignitionTiming.precision = preferences.getInt("ignprecision", ignitionTiming.precision);
-//   auxTemp1_f.precision = preferences.getInt("aux1precision", auxTemp1_f.precision);
-//   auxTemp2_f.precision = preferences.getInt("aux2precision", auxTemp2_f.precision);
-//   manifoldPressure.precision = preferences.getInt("mapKprecision", manifoldPressure.precision);
-//   boost_kpa.precision = preferences.getInt("boostKprecision", boost_kpa.precision);
-//   boost_psi.precision = preferences.getInt("boostPprecision", boost_psi.precision);
-//   oilPressure.precision = preferences.getInt("oilKPAprecision", oilPressure.precision);
-//   manifoldPressure_psi.precision = preferences.getInt("mapKPAprecision", manifoldPressure_psi.precision);
-//   oilPressure_psi.precision = preferences.getInt("oilKPAprecision", oilPressure_psi.precision);
-//   vvtPosition.precision = preferences.getInt("vvtprecision", vvtPosition.precision);
-//   vvtExhaust1.precision = preferences.getInt("vvtEx1precision", vvtExhaust1.precision);
-//   vvtExhaust2.precision = preferences.getInt("vvtEx2precision", vvtExhaust2.precision);
-//   vvtIntake1.precision = preferences.getInt("vvtIn1precision", vvtIntake1.precision);
-//   vvtIntake2.precision = preferences.getInt("vvtIn1precision", vvtIntake2.precision);
-//   airMass.precision = preferences.getInt("airMassprecision", airMass.precision);
-//   estimatedAirflow.precision = preferences.getInt("estAirprecision", estimatedAirflow.precision);
-//   batteryVoltage.precision = preferences.getInt("batVprecision", batteryVoltage.precision);
-//   fuelPressDelta_kpa.precision = preferences.getInt("fpDeltaprecision", fuelPressDelta_kpa.precision);
-
-
-//   preferences.end();
-// }
 
 void saveSensorMinMax() {
 
@@ -1346,11 +1220,13 @@ void restoreBootConfig() {
   preferences.end();
 }
 
-void checkNvsVer() {
 
   //   Check NVS config version and wipe if it is not as expected
   //   Save startup config
   //   This will allow cleaning up stored configs if changes are made to the format
+
+void checkNvsVer() {
+
 
   preferences.begin("startup", false);
   int nvsBuf = preferences.getUInt("nvs", 0);
@@ -1378,29 +1254,6 @@ void checkNvsVer() {
     setToDefaults = false;
   }
 }
-
-// void saveTextConfig()
-// {
-
-//   preferences.begin("text", false);
-//   preferences.putUInt("text0", selectedColor[0]);
-//   preferences.putUInt("text1", selectedColor[1]);
-//   preferences.putUInt("text2", selectedColor[2]);
-//   preferences.putUInt("text3", selectedColor[3]);
-//   preferences.end();
-// }
-
-// void restoreTextConfig()
-// {
-
-//   preferences.begin("text", false);
-//   selectedColor[0] = preferences.getUInt("text0", selectedColor[0]);
-//   selectedColor[1] = preferences.getUInt("text1", selectedColor[1]);
-//   selectedColor[2] = preferences.getUInt("text2", selectedColor[2]);
-//   selectedColor[3] = preferences.getUInt("text3", selectedColor[3]);
-
-//   preferences.end();
-// }
 
 void saveArcConfig() {
 
