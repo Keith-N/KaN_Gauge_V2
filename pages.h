@@ -344,6 +344,25 @@ text-decoration: none;border: none;letter-spacing:1.25px;cursor: pointer;text-tr
   <br>
   <input type="submit" value = "Set new configuration" onClick="notify('New Configuration Sent')">
   <br>
+
+</form> 
+
+ <form action="/setAlertType">
+  <p>Select Alert Type</p>
+  
+  <label for="B"></label>
+  <select id="B" name="B"> 
+    <option value="0">No Icons</option>
+    <option value="1">Exclamation</option>
+    <option value="2">FF (Fullscreen)</option>
+    </select>
+  <br>
+
+  <br>
+  <input type="submit" value = "Set new configuration" onClick="notify('New Configuration Sent')">
+  <br>
+
+
 </form> 
   
 <form action="/setGaugeConfig">

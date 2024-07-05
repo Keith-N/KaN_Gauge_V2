@@ -155,7 +155,7 @@ void otaSetup(void) {
     config_selectedConfig[0] = (int)(a.toFloat());
     updateUserConfig = true;
     readyToUpdateGaugeConfig = true;
-    
+
 
     server.send(200, "text/html", gaugeConfigPage);
   });
@@ -166,10 +166,22 @@ void otaSetup(void) {
 
     //gaugeDisplayType = (int)(a.toFloat());
     config_gaugeStyle[config_selectedConfig[0]] = (int)(a.toFloat());
-    updateUserConfig=true;
+    updateUserConfig = true;
     readyToUpdateGaugeConfig = true;
     server.send(200, "text/html", gaugeConfigPage);
   });
+
+
+  server.on("/setAlertType", HTTP_GET, [] {
+    String a;
+    a = server.arg(0);
+
+    config_alertType = (int)(a.toFloat());
+    updateUserConfig = true;
+    readyToUpdateGaugeConfig = true;
+    server.send(200, "text/html", gaugeConfigPage);
+  });
+
 
 
   server.on("/setDisplayRate", HTTP_GET, [] {
@@ -196,7 +208,7 @@ void otaSetup(void) {
     //setupUserConfig();
     //resetDisplay = true;
 
-    updateUserConfig=true;
+    updateUserConfig = true;
     readyToUpdateGaugeConfig = true;
 
     server.send(200, "text/html", gaugeConfigPage);
@@ -230,7 +242,7 @@ void otaSetup(void) {
     config_ledStyle[config_selectedConfig[0]] = LEDstyle;
     config_ledColors[config_selectedConfig[0]] = LEDcolor;
 
-    updateUserConfig=true;
+    updateUserConfig = true;
     readyToUpdateGaugeConfig = true;
 
     //saveLedConfig();
@@ -264,11 +276,11 @@ void otaSetup(void) {
     b = server.arg(1);
 
     //selectedColor[(int)(a.toInt())] = (int)(b.toInt());
-    config_uiColors[config_selectedConfig[0]][(int)(a.toInt())]=(int)(b.toInt());
+    config_uiColors[config_selectedConfig[0]][(int)(a.toInt())] = (int)(b.toInt());
 
-    updateUserConfig=true;
+    updateUserConfig = true;
     readyToUpdateGaugeConfig = true;
-    
+
     //saveTextConfig();
 
     server.send(200, "text/html", gaugeConfigPage);

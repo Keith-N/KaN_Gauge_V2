@@ -304,6 +304,12 @@ int selectedBrightness = 3;
 
 int gaugeDisplayType = 0;
 
+#define NONE 0
+#define EXCLAMATION 1
+#define FF 2
+
+int config_alertType = EXCLAMATION;
+
 
 String arcColors[] = { "Red", "Green", "Blue", "Blue to Red", "Green to Red", "Red to Green", "White", "Black", "Custom 1", "Custom 2" };
 int customArcColor[] = { 0, 0 };
@@ -415,6 +421,7 @@ void saveUserConfig() {
   preferences.putBytes("cf_ledStyle", (byte *)(&config_ledStyle), sizeof(config_ledStyle));
   preferences.putBytes("cf_ledColors", (byte *)(&config_ledColors), sizeof(config_ledColors));
   preferences.putBytes("cf_uiColors", (byte *)(&config_uiColors), sizeof(config_uiColors));
+  preferences.putBytes("cf_alertType", (byte *)(&config_alertType), sizeof(config_alertType));
   preferences.end();
 }
 
@@ -426,6 +433,7 @@ void restoreUserConfig() {
   preferences.getBytes("cf_ledStyle", (&config_ledStyle), sizeof(config_ledStyle));
   preferences.getBytes("cf_ledColors", (&config_ledColors), sizeof(config_ledColors));
   preferences.getBytes("cf_uiColors", (&config_uiColors), sizeof(config_uiColors));
+  preferences.getBytes("cf_alertType", (&config_alertType), sizeof(config_alertType));
   preferences.end();
 }
 

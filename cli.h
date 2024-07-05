@@ -25,6 +25,7 @@ Command cmdWifiOff;
 Command cmdCanOff;
 Command cmdCanPrint;
 Command cmdGaugeType;
+Command cmdAlertType;
 Command cmdSensorLimits;
 Command cmdSensorAlerts;
 Command cmdBrightness;
@@ -53,6 +54,10 @@ void setupCLI()
   cmdGaugeType = cli.addCommand("gauge_type");
   cmdGaugeType.addArg("t");
   cmdGaugeType.setDescription(" Select gauge type");
+
+  cmdAlertType = cli.addCommand("alert_type");
+  cmdAlertType.addArg("t");
+  cmdAlertType.setDescription(" Select alert type");
 
   cmdWifiConfig = cli.addCommand("wifi");
   cmdWifiConfig.setDescription(" Print WiFi Info");
@@ -262,7 +267,6 @@ void CLItask()
       Serial.print(gType);
       Serial.print(" : ");
 
-
       switch (gaugeType)
       {
       case 0:
@@ -293,6 +297,43 @@ void CLItask()
       default:
         gaugeDisplayType = 0;
         Serial.println("Arc Style");
+        break;
+      }
+      resetDisplay = true;
+      updateGaugeType = true;
+    }
+
+     else if (c == cmdAlertType)
+    {
+      Command gauge(c);
+      Argument aType = gauge.getArgument("t");
+
+      int alertType = aType.getValue().toInt();
+      Serial.println();
+      Serial.println("Gauge Alert set to: ");
+      Serial.print(alertType);
+      Serial.print(" : ");
+
+      switch (alertType)
+      {
+      case 0:
+        config_alertType = 0;
+        Serial.println("No Icon");
+        break;
+
+      case 1:
+        config_alertType = 1;
+        Serial.println("Exclamation");
+        break;
+
+      case 2:
+        config_alertType = 2;
+        Serial.println("FF Fullscreen");
+        break;
+
+      default:
+        config_alertType = 0;
+        Serial.println("Arc Icon");
         break;
       }
       resetDisplay = true;
