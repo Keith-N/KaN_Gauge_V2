@@ -141,8 +141,8 @@ This includes two arcs across the top as well as 4 sets of digits
     showAlert = false;
     int aCheck[] = { 0, 1, 2, 3, 4, 5 };
     for (int aCheckInc = 0; aCheckInc > 6; aCheckInc++) {
-      ptrData[aCheckInc]->alert = sensorAlertCheck(ptrData[aCheckInc]->minimum, ptrData[aCheckInc]->maximum, ptrData[aCheckInc]->scaledValue);
-      if (ptrData[aCheckInc]->alert == true) {
+      ptrData[aCheck[aCheckInc]]->alert = sensorAlertCheck(ptrData[aCheck[aCheckInc]]->minimum, ptrData[aCheck[aCheckInc]]->maximum, ptrData[aCheck[aCheckInc]]->scaledValue);
+      if (ptrData[aCheck[aCheckInc]]->alert == true) {
         showAlert = true;
       }
     }
@@ -213,8 +213,8 @@ Includes one Arc and three sets of digits
     showAlert = false;
     int aCheck[] = { 0, 1, 2, 3, 5 };
     for (int aCheckInc = 0; aCheckInc > 5; aCheckInc++) {
-      ptrData[aCheckInc]->alert = sensorAlertCheck(ptrData[aCheckInc]->minimum, ptrData[aCheckInc]->maximum, ptrData[aCheckInc]->scaledValue);
-      if (ptrData[aCheckInc]->alert == true) {
+      ptrData[aCheck[aCheckInc]]->alert = sensorAlertCheck(ptrData[aCheck[aCheckInc]]->minimum, ptrData[aCheck[aCheckInc]]->maximum, ptrData[aCheck[aCheckInc]]->scaledValue);
+      if (ptrData[aCheck[aCheckInc]]->alert == true) {
         showAlert = true;
       }
     }
@@ -273,8 +273,8 @@ Includes one large set of digits
     showAlert = false;
     int aCheck[] = { 2 };
     for (int aCheckInc = 0; aCheckInc < 1; aCheckInc++) {
-      ptrData[aCheckInc]->alert = sensorAlertCheck(ptrData[aCheckInc]->minimum, ptrData[aCheckInc]->maximum, ptrData[aCheckInc]->scaledValue);
-      if (ptrData[aCheckInc]->alert == true) {
+      ptrData[aCheck[aCheckInc]]->alert = sensorAlertCheck(ptrData[aCheck[aCheckInc]]->minimum, ptrData[aCheck[aCheckInc]]->maximum, ptrData[aCheck[aCheckInc]]->scaledValue);
+      if (ptrData[aCheck[aCheckInc]]->alert == true) {
         showAlert = true;
       }
     }
@@ -323,8 +323,8 @@ This creates an analog style needle on top with up to 5 sets of digits
     showAlert = false;
     int aCheck[] = { 3, 4, 5, 7, 8 };
     for (int aCheckInc = 0; aCheckInc > 5; aCheckInc++) {
-      ptrData[aCheckInc]->alert = sensorAlertCheck(ptrData[aCheckInc]->minimum, ptrData[aCheckInc]->maximum, ptrData[aCheckInc]->scaledValue);
-      if (ptrData[aCheckInc]->alert == true) {
+      ptrData[aCheck[aCheckInc]]->alert = sensorAlertCheck(ptrData[aCheck[aCheckInc]]->minimum, ptrData[aCheck[aCheckInc]]->maximum, ptrData[aCheck[aCheckInc]]->scaledValue);
+      if (ptrData[aCheck[aCheckInc]]->alert == true) {
         showAlert = true;
       }
     }
@@ -400,8 +400,8 @@ This creates an analog style needle on top with larger center digits
     showAlert = false;
     int aCheck[] = { 3, 4, 5 };
     for (int aCheckInc = 0; aCheckInc > 3; aCheckInc++) {
-      ptrData[aCheckInc]->alert = sensorAlertCheck(ptrData[aCheckInc]->minimum, ptrData[aCheckInc]->maximum, ptrData[aCheckInc]->scaledValue);
-      if (ptrData[aCheckInc]->alert == true) {
+      ptrData[aCheck[aCheckInc]]->alert = sensorAlertCheck(ptrData[aCheck[aCheckInc]]->minimum, ptrData[aCheck[aCheckInc]]->maximum, ptrData[aCheck[aCheckInc]]->scaledValue);
+      if (ptrData[aCheck[aCheckInc]]->alert == true) {
         showAlert = true;
       }
     }
