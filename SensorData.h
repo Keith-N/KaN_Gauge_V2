@@ -444,7 +444,7 @@ sensorData fuel = {
 
 // -- ID 516 --
 sensorData afr = {
-  "AFR",
+  "E0 AFR",
   "",
   0.001,
   0,

@@ -385,7 +385,7 @@ text-decoration: none;border: none;letter-spacing:1.25px;cursor: pointer;text-tr
   
   <label for="C"></label>
   <select id="C" name="C"> 
-    <option value="0">AFR</option>
+    <option value="0">E0 AFR</option>
     <option value="1">RPM</option>
     <option value="2">Speed KPH</option>
     <option value="3">Speed MPH</option>
