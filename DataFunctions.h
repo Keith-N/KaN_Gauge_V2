@@ -184,7 +184,7 @@ void SAVE_CAN_DATA(twai_message_t CANmsg)
     break;
 
   case (516):
-    afr.scaledValue = ((((float)word(CANmsg.data[1], CANmsg.data[0])) * (afr.scaleMultiplier)) + afr.offset);
+    //afr.scaledValue = ((((float)word(CANmsg.data[1], CANmsg.data[0])) * (afr.scaleMultiplier)) + afr.offset);
     oilPressure_psi.scaledValue = ((((float)word(CANmsg.data[3], CANmsg.data[2])) * (oilPressure_psi.scaleMultiplier)) + oilPressure_psi.offset);
     oilPressure.scaledValue = ((((float)word(CANmsg.data[3], CANmsg.data[2])) * (oilPressure.scaleMultiplier)) + oilPressure.offset);
     vvtPosition.scaledValue = ((((float)word(CANmsg.data[5], CANmsg.data[4])) * (vvtPosition.scaleMultiplier)) + vvtPosition.offset);
@@ -208,9 +208,9 @@ void SAVE_CAN_DATA(twai_message_t CANmsg)
   case (519):
     lambda1.scaledValue = ((((float)word(CANmsg.data[1], CANmsg.data[0])) * (lambda1.scaleMultiplier)) + lambda1.offset);
     lambda2.scaledValue = ((((float)word(CANmsg.data[3], CANmsg.data[2])) * (lambda2.scaleMultiplier)) + lambda2.offset);
+    afr.scaledValue = lambda1.scaledValue * STOICH_RATIO;
 
     fuelPressureLow.scaledValue = ((((float)word(CANmsg.data[5], CANmsg.data[4])) * (fuelPressureLow.scaleMultiplier)) + fuelPressureLow.offset);
-
     fuelPressureHigh.scaledValue = ((((float)word(CANmsg.data[7], CANmsg.data[6])) * (fuelPressureHigh.scaleMultiplier)) + fuelPressureHigh.offset);
 
     break;

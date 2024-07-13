@@ -57,6 +57,8 @@
 #define WASTEGATE_DUTY 45
 #define FUEL_PRESS_DELTA 46
 
+#define STOICH_RATIO 14.7f
+
 // Data structure for each sensor value
 struct sensorData {
   const char *dataName;   // Name shown for data
