@@ -75,57 +75,63 @@ struct sensorData {
 };
 
 sensorData testData = {
-  "Test",
-  "%@#",
-  1,
-  0,
-  0,
-  -65,
-  65,
-  -50,
-  50,
-  0
+  "Test",  // Name shown for data
+  "%@#",   // Units shown for data
+  1,       // Used to scale the recieved value
+  0,       // The offset applied to the recieved value
+  0,       // Stored value for the sensor data, after scale and offset
+  -65,     // Minimum value used for LEDs or graphing
+  65,      // Maxumum value used for LEDs or graphing
+  -50,     // Minimum value before alerting
+  50,      // Maximum value before alerting
+  2,       // Number of values after the decimal that are used
 };
 
 sensorData noData = {
-  "None",
-  "",
-  0,
-  0,
-  0,
-  0,
-  100,
-  100,
-  -100,
-  0
+  "None",  // Name shown for data
+  "",      // Units shown for data
+  0,       // Used to scale the recieved value
+  0,       // The offset applied to the recieved value
+  0,       // Stored value for the sensor data, after scale and offset
+  0,       // Minimum value used for LEDs or graphing
+  100,     // Maxumum value used for LEDs or graphing
+  -10000,  // Minimum value before alerting
+  10000,    // Maximum value before alerting
+  2        // Number of values after the decimal that are used
 };
 
 // -- ID 512 --
 sensorData warningStatus = {
-  "Warn",
-  "",
-  1,
-  0,
-  0,
-  0,
-  100,
-  100,
-  0,
-  0
+  "Warn",  // Name shown for data
+  "",      // Units shown for data
+  1,       // Used to scale the recieved value
+  0,       // The offset applied to the recieved value
+  0,       // Stored value for the sensor data, after scale and offset
+  0,       // Minimum value used for LEDs or graphing
+  100,     // Maxumum value used for LEDs or graphing
+  -10000,  // Minimum value before alerting
+  10000,   // Maximum value before alerting
+  2        // Number of values after the decimal that are used
 };
 
+
+
 sensorData gear = {
-  "Gear",
-  "",
-  1,
-  0,
-  0,
-  0,
-  6,
-  100,
-  0,
-  0
+  "Gear",  // Name shown for data
+  "",      // Units shown for data
+  1,       // Used to scale the recieved value
+  0,       // The offset applied to the recieved value
+  0,       // Stored value for the sensor data, after scale and offset
+  0,       // Minimum value used for LEDs or graphing
+  6,       // Maxumum value used for LEDs or graphing
+  -10000,  // Minimum value before alerting
+  10000,    // Maximum value before alerting
+  2        // Number of values after the decimal that are used
+
 };
+
+
+
 
 int warningCounter = 0;
 int lastError;
@@ -138,625 +144,629 @@ int egoHeater;
 // -- ID 513 --
 
 sensorData rpm = {
-  "RPM",
-  "",
-  1,
-  0,
-  0,
-  0,
-  7000,
-  6800,
-  -100,
-  0
+  "RPM",  // Name shown for data
+  "",     // Units shown for data
+  1,      // Used to scale the recieved value
+  0,      // The offset applied to the recieved value
+  0,      // Stored value for the sensor data, after scale and offset
+  0,      // Minimum value used for LEDs or graphing
+  -100,   // Maxumum value used for LEDs or graphing
+  -10000,  // Minimum value before alerting
+  10000,   // Maximum value before alerting
+  0       // Number of values after the decimal that are used
 };
 
+
 sensorData ignitionTiming = {
-  "Ign",
-  "o",
-  0.02,
-  0,
-  0,
-  -35,
-  35,
-  50,
-  -50,
-  2
+  "Ign",  // Name shown for data
+  "o",    // Units shown for data
+  0.02,   // Used to scale the recieved value
+  0,      // The offset applied to the recieved value
+  0,      // Stored value for the sensor data, after scale and offset
+  -35,    // Minimum value used for LEDs or graphing
+  35,     // Maxumum value used for LEDs or graphing
+  -50,    // Minimum value before alerting
+  50,     // Maximum value before alerting
+  2       // Number of values after the decimal that are used
 };
 
 sensorData injectorDuty = {
-  "Inj",
-  "%",
-  0.5,
-  0,
-  0,
-  0,
-  100,
-  90,
-  -100,
-  0
+  "Inj",  // Name shown for data
+  "%",    // Units shown for data
+  0.5,    // Used to scale the recieved value
+  0,      // The offset applied to the recieved value
+  0,      // Stored value for the sensor data, after scale and offset
+  0,      // Minimum value used for LEDs or graphing
+  100,    // Maxumum value used for LEDs or graphing
+  -10,    // Minimum value before alerting
+  110,    // Maximum value before alerting
+  0       // Number of values after the decimal that are used
 };
 
 sensorData vss_mph = {
-  "Speed",
-  "mph",
-  0.6213711922,
-  0,
-  0,
-  0,
-  120,
-  255,
-  -255,
-  0
-};
+  "Speed",       // Name shown for data
+  "mph",         // Units shown for data
+  0.6213711922,  // Used to scale the recieved value
+  0,             // The offset applied to the recieved value
+  0,             // Stored value for the sensor data, after scale and offset
+  0,             // Minimum value used for LEDs or graphing
+  120,           // Maxumum value used for LEDs or graphing
+  -200,          // Minimum value before alerting
+  200,           // Maximum value before alerting
+  0              // Number of values after the decimal that are used
+};              
 
 sensorData vss = {
-  "Speed",
-  "km/h",
-  1,
-  0,
-  0,
-  0,
-  255,
-  255,
-  -255,
-  0
-};
+  "Speed",  // Name shown for data
+  "km/h",   // Units shown for data
+  1,        // Used to scale the recieved value
+  0,        // The offset applied to the recieved value
+  0,        // Stored value for the sensor data, after scale and offset
+  0,        // Minimum value used for LEDs or graphing
+  255,      // Maxumum value used for LEDs or graphing
+  -255,     // Minimum value before alerting
+  2555,     // Maximum value before alerting
+  0         // Number of values after the decimal that are used
+};          
 
 // -- ID 514 --
 
 sensorData accelerator = {
-  "Accel",
-  "%",
-  0.01,
-  0,
-  0,
-  0,
-  100,
-  200,
-  -100,
-  0
-};
+  "Accel",  // Name shown for data
+  "%",      // Units shown for data
+  0.01,     // Used to scale the recieved value
+  0,        // The offset applied to the recieved value
+  0,        // Stored value for the sensor data, after scale and offset
+  0,        // Minimum value used for LEDs or graphing
+  100,      // Maxumum value used for LEDs or graphing
+  -10,      // Minimum value before alerting
+  110,      // Maximum value before alerting
+  0         // Number of values after the decimal that are used
+}; 
 
 sensorData throttle1 = {
-  "Tps1",
-  "%",
-  0.01,
-  0,
-  0,
-  0,
-  100,
-  200,
-  -200,
-  0
+  "Tps1",  // Name shown for data
+  "%",     // Units shown for data
+  0.01,    // Used to scale the recieved value
+  0,       // The offset applied to the recieved value
+  0,       // Stored value for the sensor data, after scale and offset
+  -10,     // Minimum value used for LEDs or graphing
+  100,     // Maxumum value used for LEDs or graphing
+  -200,    // Minimum value before alerting
+  200,     // Maximum value before alerting
+  0        // Number of values after the decimal that are used
 };
+
 
 sensorData throttle2 = {
-  "Tps2",
-  "%",
-  0.01,
-  0,
-  0,
-  0,
-  100,
-  200,
-  -200,
-  0
-};
+  "Tps2",  // Name shown for data
+  "%",     // Units shown for data
+  0.01,    // Used to scale the recieved value
+  0,       // The offset applied to the recieved value
+  0,       // Stored value for the sensor data, after scale and offset
+  0,       // Minimum value used for LEDs or graphing
+  100,     // Maxumum value used for LEDs or graphing
+  -10,     // Minimum value before alerting
+  110,     // Maximum value before alerting
+  0        // Number of values after the decimal that are used
+}; 
+
 
 sensorData wastegate = {
-  "WG",
-  "%",
-  0.01,
-  0,
-  0,
-  0,
-  100,
-  200,
-  -200,
-  0
-};
+  "WG",  // Name shown for data
+  "%",   // Units shown for data
+  0.01,  // Used to scale the recieved value
+  0,     // The offset applied to the recieved value
+  0,     // Stored value for the sensor data, after scale and offset
+  0,     // Minimum value used for LEDs or graphing
+  100,   // Maxumum value used for LEDs or graphing
+  -200,  // Minimum value before alerting
+  200,   // Maximum value before alerting
+  0      // Number of values after the decimal that are used
+}; 
 
 // -- ID 515 --
 
 sensorData manifoldPressure_psi = {
-  "MAP",
-  "psi",
-  ((0.033333) * 0.1450377377),
-  0,
-  0,
-  0,
-  25,
-  999,
-  -999,
-  2
-};
+  "MAP",                        // Name shown for data
+  "psi",                        // Units shown for data
+  ((0.033333) * 0.1450377377),  // Used to scale the recieved value
+  0,                            // The offset applied to the recieved value
+  0,                            // Stored value for the sensor data, after scale and offset
+  0,                            // Minimum value used for LEDs or graphing
+  25,                           // Maxumum value used for LEDs or graphing
+  999,                          // Minimum value before alerting
+  -999,                         // Maximum value before alerting
+  2                           // Number of values after the decimal that are used
+};                        
 
 sensorData boost_psi = {
-  "Boost",
-  "psi",
-  1,
-  -14.69595,
-  -14.69595,
-  0,
-  25,
-  999,
-  -999,
-  2
-};
+  "Boost",    // Name shown for data
+  "psi",      // Units shown for data
+  1,          // Used to scale the recieved value
+  -14.69595,  // The offset applied to the recieved value
+  -14.69595,  // Stored value for the sensor data, after scale and offset
+  0,          // Minimum value used for LEDs or graphing
+  25,         // Maxumum value used for LEDs or graphing
+  -999,        // Minimum value before alerting
+  999,       // Maximum value before alerting
+  2           // Number of values after the decimal that are used
+}; 
+
 
 sensorData manifoldPressure = {
-  "MAP",
-  "kPa",
-  (0.033333),
-  0,
-  0,
-  0,
-  250,
-  999,
-  -999,
-  2
-};
+  "MAP",       // Name shown for data
+  "kPa",       // Units shown for data
+  (0.033333),  // Used to scale the recieved value
+  0,           // The offset applied to the recieved value
+  0,           // Stored value for the sensor data, after scale and offset
+  0,           // Minimum value used for LEDs or graphing
+  250,         // Maxumum value used for LEDs or graphing
+  -999,         // Minimum value before alerting
+  999,        // Maximum value before alerting
+  2            // Number of values after the decimal that are used
+};             
 
 sensorData boost_kpa = {
-  "boost",
-  "kPa",
-  1,
-  -101.325,
-  -101.325,
-  0,
-  250,
-  999,
-  -999,
-  2
-};
+  "boost",   // Name shown for data
+  "kPa",     // Units shown for data
+  1,         // Used to scale the recieved value
+  -101.325,  // The offset applied to the recieved value
+  -101.325,  // Stored value for the sensor data, after scale and offset
+  0,         // Minimum value used for LEDs or graphing
+  250,       // Maxumum value used for LEDs or graphing
+  999,       // Minimum value before alerting
+  -999,      // Maximum value before alerting
+  2          // Number of values after the decimal that are used
+};           
 
 // Convert from C to F
 sensorData coolantTemperature_f = {
-  "CLT",
-  "F",
-  1.8,
-  (32),
-  0,
-  120,
-  260,
-  250,
-  50,
-  0
+  "CLT",  // Name shown for data
+  "F",    // Units shown for data
+  1.8,    // Used to scale the recieved value
+  (32),   // The offset applied to the recieved value
+  0,      // Stored value for the sensor data, after scale and offset
+  100,    // Minimum value used for LEDs or graphing
+  250,    // Maxumum value used for LEDs or graphing
+  -200,      // Minimum value before alerting
+  240,    // Maximum value before alerting
+  0       // Number of values after the decimal that are used
 };
 
 // Convert from C to F
 sensorData intakeTemperature_f = {
-  "IAT",
-  "F",
-  1.8,
-  (32),
-  0,
-  0,
-  55,
-  120,
-  50,
-  0
-};
+  "IAT",  // Name shown for data
+  "F",    // Units shown for data
+  1.8,    // Used to scale the recieved value
+  (32),   // The offset applied to the recieved value
+  0,      // Stored value for the sensor data, after scale and offset
+  0,      // Minimum value used for LEDs or graphing
+  0,      // Maxumum value used for LEDs or graphing
+  -120,    // Minimum value before alerting
+  -250,    // Maximum value before alerting
+  0     // Number of values after the decimal that are used
+};  
 
 sensorData coolantTemperature = {
-  "CLT",
-  "C",
-  1,
-  -40,
-  0,
-  0,
-  120,
-  120,
-  10,
-  0
-};
+  "CLT",  // Name shown for data
+  "C",    // Units shown for data
+  1,      // Used to scale the recieved value
+  -40,    // The offset applied to the recieved value
+  0,      // Stored value for the sensor data, after scale and offset
+  0,      // Minimum value used for LEDs or graphing
+  120,    // Maxumum value used for LEDs or graphing
+  -120,    // Minimum value before alerting
+  200,      // Maximum value before alerting
+  0     // Number of values after the decimal that are used
+};        
 
 sensorData intakeTemperature = {
-  "IAT",
-  "C",
-  1,
-  -40,
-  0,
-  0,
-  55,
-  100,
-  10,
-  0
-};
+  "IAT",  // Name shown for data
+  "C",    // Units shown for data
+  1,      // Used to scale the recieved value
+  -40,    // The offset applied to the recieved value
+  0,      // Stored value for the sensor data, after scale and offset
+  0,      // Minimum value used for LEDs or graphing
+  55,     // Maxumum value used for LEDs or graphing
+  -100,    // Minimum value before alerting
+  250,      // Maximum value before alerting
+  2     // Number of values after the decimal that are used
+};        
 
 sensorData auxTemp1 = {
-  "Aux1",
-  "C",
-  1,
-  -40,
-  0,
-  0,
-  200,
-  100,
-  10,
-  0
-};
+  "Aux1",  // Name shown for data
+  "C",     // Units shown for data
+  1,       // Used to scale the recieved value
+  -40,     // The offset applied to the recieved value
+  0,       // Stored value for the sensor data, after scale and offset
+  0,       // Minimum value used for LEDs or graphing
+  200,     // Maxumum value used for LEDs or graphing
+  -1000,     // Minimum value before alerting
+  1000,      // Maximum value before alerting
+  0        // Number of values after the decimal that are used
+};         
 
 sensorData auxTemp1_f = {
-  "Aux1",
-  "F",
-  1.8,
-  32,
-  0,
-  0,
-  200,
-  100,
-  10,
-  0
-};
+  "Aux1",  // Name shown for data
+  "F",     // Units shown for data
+  1.8,     // Used to scale the recieved value
+  32,      // The offset applied to the recieved value
+  0,       // Stored value for the sensor data, after scale and offset
+  0,       // Minimum value used for LEDs or graphing
+  200,     // Maxumum value used for LEDs or graphing
+  -1000,     // Minimum value before alerting
+  1000,      // Maximum value before alerting
+  0        // Number of values after the decimal that are used
+};         
 
 sensorData auxTemp2 = {
-  "Aux2",
-  "C",
-  1,
-  -40,
-  0,
-  0,
-  200,
-  100,
-  10,
-  0
-};
+  "Aux2",  // Name shown for data
+  "C",     // Units shown for data
+  1,       // Used to scale the recieved value
+  -40,     // The offset applied to the recieved value
+  0,       // Stored value for the sensor data, after scale and offset
+  0,       // Minimum value used for LEDs or graphing
+  200,     // Maxumum value used for LEDs or graphing
+  -1000,     // Minimum value before alerting
+  1000,      // Maximum value before alerting
+  0        // Number of values after the decimal that are used
+};         
 
 sensorData auxTemp2_f = {
-  "Aux2",
-  "F",
-  1.8,
-  32,
-  0,
-  0,
-  200,
-  100,
-  10,
-  0
-};
+  "Aux2",  // Name shown for data
+  "F",     // Units shown for data
+  1.8,     // Used to scale the recieved value
+  32,      // The offset applied to the recieved value
+  0,       // Stored value for the sensor data, after scale and offset
+  0,       // Minimum value used for LEDs or graphing
+  200,     // Maxumum value used for LEDs or graphing
+  -1000,     // Minimum value before alerting
+  1000,      // Maximum value before alerting
+  0        // Number of values after the decimal that are used
+};         
 
 sensorData mcuTemp = {
-  "MCU",
-  "C",
-  1,
-  -40,
-  0,
-  0,
-  200,
-  80,
-  -10,
-  0
-};
+  "MCU",  // Name shown for data
+  "C",    // Units shown for data
+  1,      // Used to scale the recieved value
+  -40,    // The offset applied to the recieved value
+  0,      // Stored value for the sensor data, after scale and offset
+  0,      // Minimum value used for LEDs or graphing
+  65,    // Maxumum value used for LEDs or graphing
+  -40,     // Minimum value before alerting
+  80,    // Maximum value before alerting
+  0       // Number of values after the decimal that are used
+};        
 
 sensorData fuel = {
-  "Fuel",
-  "%",
-  0.5,
-  0,
-  0,
-  0,
-  100,
-  200,
-  15,
-  0
-};
+  "Fuel",  // Name shown for data
+  "%",     // Units shown for data
+  0.5,     // Used to scale the recieved value
+  0,       // The offset applied to the recieved value
+  0,       // Stored value for the sensor data, after scale and offset
+  0,       // Minimum value used for LEDs or graphing
+  100,     // Maxumum value used for LEDs or graphing
+  -200,     // Minimum value before alerting
+  1050,      // Maximum value before alerting
+  0        // Number of values after the decimal that are used
+};         
 
 // -- ID 516 --
 sensorData afr = {
-  "E0 AFR",
-  "",
-  0.001,
-  0,
-  0,
-  10,
-  20,
-  28,
-  -10,
-  2
+  "E0 AFR",  // Name shown for data
+  "",        // Units shown for data
+  0.001,     // Used to scale the recieved value
+  0,         // The offset applied to the recieved value
+  0,         // Stored value for the sensor data, after scale and offset
+  10,        // Minimum value used for LEDs or graphing
+  20,        // Maxumum value used for LEDs or graphing
+  -10,        // Minimum value before alerting
+  160,        // Maximum value before alerting
+  2          // Number of values after the decimal that are used
 };
 
 sensorData oilPressure_psi = {
-  "Oil",
-  "psi",
-  (0.033333) * 0.1450377377,
-  0,
-  0,
-  0,
-  100,
-  999,
-  -999,
-  0
-};
+  "Oil",                      // Name shown for data
+  "psi",                      // Units shown for data
+  (0.033333) * 0.1450377377,  // Used to scale the recieved value
+  0,                          // The offset applied to the recieved value
+  0,                          // Stored value for the sensor data, after scale and offset
+  0,                          // Minimum value used for LEDs or graphing
+  100,                        // Maxumum value used for LEDs or graphing
+  10,                         // Minimum value before alerting
+  90,                         // Maximum value before alerting
+  0                           // Number of values after the decimal that are used
+};                           
 
 sensorData oilPressure = {
-  "Oil",
-  "kPa",
-  (0.033333),
-  0,
-  0,
-  0,
-  100,
-  999,
-  -999,
-  0
-};
+  "Oil",       // Name shown for data
+  "kPa",       // Units shown for data
+  (0.033333),  // Used to scale the recieved value
+  0,           // The offset applied to the recieved value
+  0,           // Stored value for the sensor data, after scale and offset
+  0,           // Minimum value used for LEDs or graphing
+  100,         // Maxumum value used for LEDs or graphing
+  999,         // Minimum value before alerting
+  -999,        // Maximum value before alerting
+  0            // Number of values after the decimal that are used
+};             
 
 sensorData vvtPosition = {
-  "VVT",
-  "o",
-  0.02,
-  0,
-  0,
-  -50,
-  50,
-  100,
-  -100,
-  2
-};
+  "VVT",  // Name shown for data
+  "o",    // Units shown for data
+  0.02,   // Used to scale the recieved value
+  0,      // The offset applied to the recieved value
+  0,      // Stored value for the sensor data, after scale and offset
+  -25,    // Minimum value used for LEDs or graphing
+  25,     // Maxumum value used for LEDs or graphing
+  -100,    // Minimum value before alerting
+  100,   // Maximum value before alerting
+  0       // Number of values after the decimal that are used
+};        
 
 sensorData batteryVoltage = {
-  "Bat",
-  "V",
-  0.001,
-  0,
-  0,
-  8,
-  16,
-  15,
-  11,
-  2
-};
+  "Bat",  // Name shown for data
+  "V",    // Units shown for data
+  0.001,  // Used to scale the recieved value
+  0,      // The offset applied to the recieved value
+  0,      // Stored value for the sensor data, after scale and offset
+  10,      // Minimum value used for LEDs or graphing
+  16,     // Maxumum value used for LEDs or graphing
+  -11,     // Minimum value before alerting
+  160,     // Maximum value before alerting
+  2       // Number of values after the decimal that are used
+};        
 
 // -- ID 517 --
 
 sensorData airMass = {
-  "Air",
-  "mg",
-  1,
-  0,
-  0,
-  0,
-  1000,
-  9999,
-  -9999,
-  0
-};
+  "Air",  // Name shown for data
+  "mg",   // Units shown for data
+  1,      // Used to scale the recieved value
+  0,      // The offset applied to the recieved value
+  0,      // Stored value for the sensor data, after scale and offset
+  0,      // Minimum value used for LEDs or graphing
+  100,   // Maxumum value used for LEDs or graphing
+  9999,   // Minimum value before alerting
+  -9999,  // Maximum value before alerting
+  0       // Number of values after the decimal that are used
+};        
 
 sensorData estimatedAirflow = {
-  "Air",
-  "kg/h",
-  0.01,
-  0,
-  0,
-  0,
-  100,
-  999,
-  -999,
-  0
-};
+  "Air",   // Name shown for data
+  "kg/h",  // Units shown for data
+  0.01,    // Used to scale the recieved value
+  0,       // The offset applied to the recieved value
+  0,       // Stored value for the sensor data, after scale and offset
+  0,       // Minimum value used for LEDs or graphing
+  100,     // Maxumum value used for LEDs or graphing
+  999,     // Minimum value before alerting
+  -999,    // Maximum value before alerting
+  0        // Number of values after the decimal that are used
+};         
 
 sensorData injectorPulse = {
-  "Injector",
-  "ms",
-  0.003,
-  0,
-  0,
-  0,
-  100,
-  999,
-  -999,
-  2
-};
+  "Injector",  // Name shown for data
+  "ms",        // Units shown for data
+  0.003,       // Used to scale the recieved value
+  0,           // The offset applied to the recieved value
+  0,           // Stored value for the sensor data, after scale and offset
+  0,           // Minimum value used for LEDs or graphing
+  100,         // Maxumum value used for LEDs or graphing
+  999,         // Minimum value before alerting
+  -999,        // Maximum value before alerting
+  2            // Number of values after the decimal that are used
+};             
 
 // NEW - Fueling 3
 sensorData lambda1 = {
-  "Lambda",
-  "",
-  (0.0001),
-  0,
-  0,
-  0.5 * 100,
-  1.2 * 100,
-  10,
-  -10,
-  2
-};
+  "Lambda",   // Name shown for data
+  "",         // Units shown for data
+  (0.0001),   // Used to scale the recieved value
+  0,          // The offset applied to the recieved value
+  0,          // Stored value for the sensor data, after scale and offset
+  0.7 * 100,  // Minimum value used for LEDs or graphing
+  1.3 * 100,  // Maxumum value used for LEDs or graphing
+  -5,  // Minimum value before alerting
+  5,  // Maximum value before alerting
+  2           // Number of values after the decimal that are used
+};            
 
 sensorData lambda2 = {
-  "Lambda2",
-  "",
-  (0.0001),
-  0,
-  0,
-  0.5 * 100,
-  1.2 * 100,
-  100,
-  -100,
-  2
-};
+  "Lambda2",  // Name shown for data
+  "",         // Units shown for data
+  (0.0001),   // Used to scale the recieved value
+  0,          // The offset applied to the recieved value
+  0,          // Stored value for the sensor data, after scale and offset
+  0.7 * 100,  // Minimum value used for LEDs or graphing
+  1.3 * 100,  // Maxumum value used for LEDs or graphing
+  -5,  // Minimum value before alerting
+  5,  // Maximum value before alerting
+  2           // Number of values after the decimal that are used
+};            
 
 sensorData fuelPressureLow = {
-  "Fuel",
-  "kPa",
-  (0.033333),
-  0,
-  0,
-  0,
-  0,
-  999,
-  -999,
-  2
-};
+  "Fuel",      // Name shown for data
+  "kPa",       // Units shown for data
+  (0.033333),  // Used to scale the recieved value
+  0,           // The offset applied to the recieved value
+  0,           // Stored value for the sensor data, after scale and offset
+  0,           // Minimum value used for LEDs or graphing
+  50,           // Maxumum value used for LEDs or graphing
+  999,         // Minimum value before alerting
+  -999,        // Maximum value before alerting
+  2            // Number of values after the decimal that are used
+};             
 
 sensorData fuelPressureLow_psi = {
-  "Fuel",
-  "psi",
-  (0.033333),
-  0,
-  0,
-  0,
-  0,
-  999,
-  -999,
-  2
-};
+  "Fuel",      // Name shown for data
+  "psi",       // Units shown for data
+  (0.033333),  // Used to scale the recieved value
+  0,           // The offset applied to the recieved value
+  0,           // Stored value for the sensor data, after scale and offset
+  0,           // Minimum value used for LEDs or graphing
+  50,           // Maxumum value used for LEDs or graphing
+  999,         // Minimum value before alerting
+  -999,        // Maximum value before alerting
+  2            // Number of values after the decimal that are used
+};             
 
 sensorData fuelPressureHigh = {
-  "Fuel",
-  "bar",
-  0.1,
-  0,
-  0,
-  0,
-  0,
-  999,
-  -999,
-  1
-};
+  "Fuel",  // Name shown for data
+  "bar",   // Units shown for data
+  0.1,     // Used to scale the recieved value
+  0,       // The offset applied to the recieved value
+  0,       // Stored value for the sensor data, after scale and offset
+  0,       // Minimum value used for LEDs or graphing
+  250,       // Maxumum value used for LEDs or graphing
+  999,     // Minimum value before alerting
+  -999,    // Maximum value before alerting
+  1        // Number of values after the decimal that are used
+};         
 
 sensorData fuelPressureHigh_psi = {
-  "Fuel",
-  "psi",
-  0.1,
-  0,
-  0,
-  0,
-  0,
-  999,
-  -999,
-  1
-};
+  "Fuel",  // Name shown for data
+  "psi",   // Units shown for data
+  0.1,     // Used to scale the recieved value
+  0,       // The offset applied to the recieved value
+  0,       // Stored value for the sensor data, after scale and offset
+  0,       // Minimum value used for LEDs or graphing
+  250,       // Maxumum value used for LEDs or graphing
+  999,     // Minimum value before alerting
+  -999,    // Maximum value before alerting
+  1        // Number of values after the decimal that are used
+};         
 
 
 sensorData vvtIntake1 = {
-  "InVVT 1",
-  "o",
-  0.02,
-  0,
-  0,
-  0,
-  0,
-  999,
-  -999,
-  2
-};
+  "InVVT 1",  // Name shown for data
+  "o",        // Units shown for data
+  0.02,       // Used to scale the recieved value
+  0,          // The offset applied to the recieved value
+  0,          // Stored value for the sensor data, after scale and offset
+  -25,          // Minimum value used for LEDs or graphing
+  25,          // Maxumum value used for LEDs or graphing
+  999,        // Minimum value before alerting
+  -999,       // Maximum value before alerting
+  2           // Number of values after the decimal that are used
+};            
 
 sensorData vvtIntake2 = {
-  "InVVT 2",
-  "o",
-  0.02,
-  0,
-  0,
-  0,
-  0,
-  999,
-  -999,
-  2
-};
+  "InVVT 2",  // Name shown for data
+  "o",        // Units shown for data
+  0.02,       // Used to scale the recieved value
+  0,          // The offset applied to the recieved value
+  0,          // Stored value for the sensor data, after scale and offset
+  -25,          // Minimum value used for LEDs or graphing
+  25,          // Maxumum value used for LEDs or graphing
+  999,        // Minimum value before alerting
+  -999,       // Maximum value before alerting
+  2           // Number of values after the decimal that are used
+};            
 
 sensorData vvtExhaust1 = {
-  "ExVVT 1",
-  "o",
-  0.02,
-  0,
-  0,
-  0,
-  0,
-  999,
-  -999,
-  2
-};
+  "ExVVT 1",  // Name shown for data
+  "o",        // Units shown for data
+  0.02,       // Used to scale the recieved value
+  0,          // The offset applied to the recieved value
+  0,          // Stored value for the sensor data, after scale and offset
+  -25,          // Minimum value used for LEDs or graphing
+  25,          // Maxumum value used for LEDs or graphing
+  999,        // Minimum value before alerting
+  -999,       // Maximum value before alerting
+  2           // Number of values after the decimal that are used
+};            
 
 sensorData vvtExhaust2 = {
-  "ExVVT 2",
-  "o",
-  0.02,
-  0,
-  0,
-  0,
-  0,
-  999,
-  -999,
-  2
-};
+  "ExVVT 2",  // Name shown for data
+  "o",        // Units shown for data
+  0.02,       // Used to scale the recieved value
+  0,          // The offset applied to the recieved value
+  0,          // Stored value for the sensor data, after scale and offset
+  -25,          // Minimum value used for LEDs or graphing
+  25,          // Maxumum value used for LEDs or graphing
+  999,        // Minimum value before alerting
+  -999,       // Maximum value before alerting
+  2           // Number of values after the decimal that are used
+};            
 
 // NEW fueling 2
 
 sensorData fuelConsumed = {
-  "Fuel",
-  "g",
-  1,
-  0,
-  0,
-  0,
-  0,
-  999,
-  -999,
-  0
-};
+  "Fuel",  // Name shown for data
+  "g",     // Units shown for data
+  1,       // Used to scale the recieved value
+  0,       // The offset applied to the recieved value
+  0,       // Stored value for the sensor data, after scale and offset
+  0,       // Minimum value used for LEDs or graphing
+  100,       // Maxumum value used for LEDs or graphing
+  999,     // Minimum value before alerting
+  -999,    // Maximum value before alerting
+  0        // Number of values after the decimal that are used
+};         
 
 sensorData fuelConsumption = {
-  "Fuel",
-  "g/s",
-  0.005,
-  0,
-  0,
-  0,
-  0,
-  999,
-  -999,
-  2
-};
+  "Fuel",  // Name shown for data
+  "g/s",   // Units shown for data
+  0.005,   // Used to scale the recieved value
+  0,       // The offset applied to the recieved value
+  0,       // Stored value for the sensor data, after scale and offset
+  0,       // Minimum value used for LEDs or graphing
+  100,       // Maxumum value used for LEDs or graphing
+  999,     // Minimum value before alerting
+  -999,    // Maximum value before alerting
+  2        // Number of values after the decimal that are used
+};         
 
 sensorData fuelTrim = {
-  "FuelTrim",
-  "%",
-  0.01,
-  0,
-  0,
-  0,
-  0,
-  999,
-  -999,
-  2
-};
+  "FuelTrim",  // Name shown for data
+  "%",         // Units shown for data
+  0.01,        // Used to scale the recieved value
+  0,           // The offset applied to the recieved value
+  0,           // Stored value for the sensor data, after scale and offset
+  -10,           // Minimum value used for LEDs or graphing
+  10,           // Maxumum value used for LEDs or graphing
+  999,         // Minimum value before alerting
+  -999,        // Maximum value before alerting
+  2            // Number of values after the decimal that are used
+};             
 
 sensorData ethanol = {
-  "Ethanol",
-  "%",
-  1,
-  0,
-  0,
-  0,
-  100,
-  999,
-  -999,
-  0
-};
+  "Ethanol",  // Name shown for data
+  "%",        // Units shown for data
+  1,          // Used to scale the recieved value
+  0,          // The offset applied to the recieved value
+  0,          // Stored value for the sensor data, after scale and offset
+  0,          // Minimum value used for LEDs or graphing
+  100,        // Maxumum value used for LEDs or graphing
+  999,        // Minimum value before alerting
+  -999,       // Maximum value before alerting
+  0           // Number of values after the decimal that are used
+};            
 
 sensorData fuelPressDelta_kpa = {
-  "F Delta",
-  "kpa",
-  1,
-  0,
-  0,
-  0,
-  100,
-  999,
-  -999,
-  0
-};
+  "F Delta",  // Name shown for data
+  "kpa",      // Units shown for data
+  1,          // Used to scale the recieved value
+  0,          // The offset applied to the recieved value
+  0,          // Stored value for the sensor data, after scale and offset
+  0,          // Minimum value used for LEDs or graphing
+  100,        // Maxumum value used for LEDs or graphing
+  999,        // Minimum value before alerting
+  -999,       // Maximum value before alerting
+  2           // Number of values after the decimal that are used
+};            
 
 sensorData fuelPressDelta_psi = {
-  "FDelta",
-  "psi",
-  1,
-  0,
-  0,
-  0,
-  100,
-  999,
-  -999,
-  0
-};
+  "FDelta",  // Name shown for data
+  "psi",     // Units shown for data
+  1,         // Used to scale the recieved value
+  0,         // The offset applied to the recieved value
+  0,         // Stored value for the sensor data, after scale and offset
+  0,         // Minimum value used for LEDs or graphing
+  100,       // Maxumum value used for LEDs or graphing
+  999,       // Minimum value before alerting
+  -999,      // Maximum value before alerting
+  2          // Number of values after the decimal that are used
+};           

@@ -355,6 +355,7 @@ text-decoration: none;border: none;letter-spacing:1.25px;cursor: pointer;text-tr
     <option value="0">No Icons</option>
     <option value="1">Exclamation</option>
     <option value="2">FF (Fullscreen)</option>
+    <option value="3">LED flash</option>
     </select>
   <br>
 
@@ -444,7 +445,7 @@ text-decoration: none;border: none;letter-spacing:1.25px;cursor: pointer;text-tr
 <p>Configure Data Limits</p>
   <label for="A"></label>
   <select id="A" name="A">
-    <option value="0">AFR</option>
+    <option value="0">E0 AFR</option>
     <option value="1">RPM</option>
     <option value="2">Speed KPH</option>
     <option value="3">Speed MPH</option>
@@ -526,10 +527,10 @@ text-decoration: none;border: none;letter-spacing:1.25px;cursor: pointer;text-tr
   <p>Set Brightness</p>
     <label for="A"></label>
     <select id="A" name="A">
-    <option value="0">Display Low</option>
-    <option value="1">Display High</option>
-    <option value="2">LED Low</option>
-    <option value="3">LED High</option>
+    <option value="0">Display A1 Low</option>
+    <option value="1">Display A1 High</option>
+    <option value="2">LED A1 Low</option>
+    <option value="3">LED A1 High</option>
     </select>
   <br>
 
@@ -620,6 +621,7 @@ text-decoration: none;border: none;letter-spacing:1.25px;cursor: pointer;text-tr
     <option value="65049">Pink</option>
     <option value="2016">Green</option>
     <option value="30735">Purple</option>
+    <option value="0">Black</option>
     </select>
 
 <br>

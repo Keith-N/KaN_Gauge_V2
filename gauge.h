@@ -42,7 +42,7 @@ void checkAlerts() {
 
   for (int alInc = 0; alInc < 8; alInc++) {
     ptrData[alInc]->alert = false;
-    ptrData[alInc]->alert = sensorAlertCheck(ptrData[alInc]->minimum, ptrData[alInc]->maximum, ptrData[alInc]->scaledValue);
+    ptrData[alInc]->alert = sensorAlertCheck(ptrData[alInc]->alertLow, ptrData[alInc]->maximum, ptrData[alInc]->scaledValue);
 
 #ifdef DEBUG_SERIAL
     Serial.print(alInc);
@@ -143,7 +143,7 @@ void updateDisplay() {
 
   int aCheck[] = { 0, 1, 2, 3, 4, 5 };
   for (int aCheckInc = 0; aCheckInc < 6; aCheckInc++) {
-    ptrData[aCheck[aCheckInc]]->alert = sensorAlertCheck(ptrData[aCheck[aCheckInc]]->minimum, ptrData[aCheck[aCheckInc]]->maximum, ptrData[aCheck[aCheckInc]]->scaledValue);
+    ptrData[aCheck[aCheckInc]]->alert = sensorAlertCheck(ptrData[aCheck[aCheckInc]]->alertLow, ptrData[aCheck[aCheckInc]]->alertHigh, ptrData[aCheck[aCheckInc]]->scaledValue);
 
     if (ptrData[aCheck[aCheckInc]]->alert == true) {
       showAlert = true;
@@ -214,9 +214,10 @@ void updateDisplay_LargeText() {
   int y_2 = y_1 + (radius1 - radius2) / 2;
 
   showAlert = false;
-  int aCheck[] = { 0, 1, 2, 3, 5 };
-  for (int aCheckInc = 0; aCheckInc < 5; aCheckInc++) {
-    ptrData[aCheck[aCheckInc]]->alert = sensorAlertCheck(ptrData[aCheck[aCheckInc]]->minimum, ptrData[aCheck[aCheckInc]]->maximum, ptrData[aCheck[aCheckInc]]->scaledValue);
+
+  int aCheck[] = { 1, 2, 3, 5 };
+  for (int aCheckInc = 0; aCheckInc < 4; aCheckInc++) {
+    ptrData[aCheck[aCheckInc]]->alert = sensorAlertCheck(ptrData[aCheck[aCheckInc]]->alertLow, ptrData[aCheck[aCheckInc]]->alertHigh, ptrData[aCheck[aCheckInc]]->scaledValue);
     if (ptrData[aCheck[aCheckInc]]->alert == true) {
       showAlert = true;
     }
@@ -278,7 +279,7 @@ void updateDisplay_Large() {
   int aCheck[] = { 2 };
 
   for (int aCheckInc = 0; aCheckInc < 1; aCheckInc++) {
-    ptrData[aCheck[aCheckInc]]->alert = sensorAlertCheck(ptrData[aCheck[aCheckInc]]->minimum, ptrData[aCheck[aCheckInc]]->maximum, ptrData[aCheck[aCheckInc]]->scaledValue);
+    ptrData[aCheck[aCheckInc]]->alert = sensorAlertCheck(ptrData[aCheck[aCheckInc]]->alertLow, ptrData[aCheck[aCheckInc]]->alertHigh, ptrData[aCheck[aCheckInc]]->scaledValue);
 
     if (ptrData[aCheck[aCheckInc]]->alert == true) {
       showAlert = true;
@@ -329,7 +330,7 @@ void updateDisplay_Analog() {
   showAlert = false;
   int aCheck[] = { 3, 4, 5, 7, 8 };
   for (int aCheckInc = 0; aCheckInc < 5; aCheckInc++) {
-    ptrData[aCheck[aCheckInc]]->alert = sensorAlertCheck(ptrData[aCheck[aCheckInc]]->minimum, ptrData[aCheck[aCheckInc]]->maximum, ptrData[aCheck[aCheckInc]]->scaledValue);
+    ptrData[aCheck[aCheckInc]]->alert = sensorAlertCheck(ptrData[aCheck[aCheckInc]]->alertLow, ptrData[aCheck[aCheckInc]]->alertHigh, ptrData[aCheck[aCheckInc]]->scaledValue);
     if (ptrData[aCheck[aCheckInc]]->alert == true) {
       showAlert = true;
     }
@@ -406,7 +407,7 @@ void updateDisplay_Analog_LargeText() {
   showAlert = false;
   int aCheck[] = { 3, 4, 5 };
   for (int aCheckInc = 0; aCheckInc < 3; aCheckInc++) {
-    ptrData[aCheck[aCheckInc]]->alert = sensorAlertCheck(ptrData[aCheck[aCheckInc]]->minimum, ptrData[aCheck[aCheckInc]]->maximum, ptrData[aCheck[aCheckInc]]->scaledValue);
+    ptrData[aCheck[aCheckInc]]->alert = sensorAlertCheck(ptrData[aCheck[aCheckInc]]->alertLow, ptrData[aCheck[aCheckInc]]->alertHigh, ptrData[aCheck[aCheckInc]]->scaledValue);
     if (ptrData[aCheck[aCheckInc]]->alert == true) {
       showAlert = true;
     }
@@ -466,7 +467,9 @@ void updateDisplayTask(void *pvParameters) {
       lastDisplayUpdate_ms = millis();
 
       if (showAlert == false && alertInProgress == true) {
-        resetDisplay = true;
+        if (config_alertType == 2) {
+          resetDisplay = true;
+        }
         alertInProgress = false;
       }
 
@@ -530,6 +533,10 @@ void updateDisplayTask(void *pvParameters) {
             displayFullscreenAlert_ff();
             break;
 
+          case 3:
+            displayAlert_noIcon();
+            break;
+
           default:
             displayAlert_noIcon();
             break;
@@ -539,8 +546,13 @@ void updateDisplayTask(void *pvParameters) {
 
       if (ledEnabled == true) {
         if (showAlert == true) {
+
           if (alertActive == true) {
+
             if (config_alertType == 2) {
+              ledSeries(6, 255, 0, 0, ledBrightness);
+            }
+            if (config_alertType == 3) {
               ledSeries(6, 255, 0, 0, ledBrightness);
             }
           }
@@ -549,8 +561,10 @@ void updateDisplayTask(void *pvParameters) {
             if (config_alertType == 2) {
               ledSeries(6, 255, 185, 0, ledBrightness);
             }
+            if (config_alertType == 3) {
+              ledSeries(6, 0, 0, 0, ledBrightness);
+            }
           }
-
         }
 
         else {
