@@ -239,7 +239,7 @@ void setup() {
 
   Serial.begin(115200);
   setupPinMode();
-  attachInterrupt(USER_INPUT_D2, inputButtonD1_ISR, FALLING);
+  //attachInterrupt(USER_INPUT_D2, inputButtonD1_ISR, FALLING);
 
 #ifdef DEBUG_SERIAL
   Serial.println("Setup ...");

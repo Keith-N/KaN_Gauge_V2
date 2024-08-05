@@ -216,10 +216,10 @@ void SAVE_CAN_DATA(twai_message_t CANmsg)
     break;
 
   case (520):
-    vvtIntake1.scaledValue = ((((float)word(CANmsg.data[1], CANmsg.data[0])) * (vvtIntake1.scaleMultiplier)) + vvtIntake1.offset);
-    vvtIntake2.scaledValue = ((((float)word(CANmsg.data[3], CANmsg.data[2])) * (vvtIntake2.scaleMultiplier)) + vvtIntake2.offset);
-    vvtExhaust1.scaledValue = ((((float)word(CANmsg.data[5], CANmsg.data[4])) * (vvtExhaust1.scaleMultiplier)) + vvtExhaust1.offset);
-    vvtExhaust2.scaledValue = ((((float)word(CANmsg.data[7], CANmsg.data[6])) * (vvtExhaust2.scaleMultiplier)) + vvtExhaust2.offset);
+    vvtIntake1.scaledValue = (float) CANmsg.data[0] * vvtIntake1.scaleMultiplier + vvtIntake1.offset;
+    vvtIntake2.scaledValue = (float) CANmsg.data[4] * vvtIntake2.scaleMultiplier + vvtIntake2.offset;
+    vvtExhaust1.scaledValue = (float) CANmsg.data[2] * vvtExhaust1.scaleMultiplier + vvtExhaust1.offset;
+    vvtExhaust2.scaledValue = (float) CANmsg.data[6] * vvtExhaust2.scaleMultiplier + vvtExhaust2.offset;
     break;
 
     // MS CAN

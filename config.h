@@ -12,9 +12,9 @@
 #pragma once
 
 int bootConfig;
-const String build = "0.39";
+const String build = "0.40";
 const int nvs = 4;
-const String buildType = "Alert Testing";
+const String buildType = "";
 
 // revision of PCB 1.2 = 102
 int pcbRev = 102;

@@ -642,11 +642,11 @@ sensorData fuelPressureHigh_psi = {
 sensorData vvtIntake1 = {
   "InVVT 1",  // Name shown for data
   "o",        // Units shown for data
-  0.02,       // Used to scale the recieved value
+  1,       // Used to scale the recieved value
   0,          // The offset applied to the recieved value
   0,          // Stored value for the sensor data, after scale and offset
-  -25,          // Minimum value used for LEDs or graphing
-  25,          // Maxumum value used for LEDs or graphing
+  -100,          // Minimum value used for LEDs or graphing
+  100,          // Maxumum value used for LEDs or graphing
   999,        // Minimum value before alerting
   -999,       // Maximum value before alerting
   2           // Number of values after the decimal that are used
@@ -655,11 +655,11 @@ sensorData vvtIntake1 = {
 sensorData vvtIntake2 = {
   "InVVT 2",  // Name shown for data
   "o",        // Units shown for data
-  0.02,       // Used to scale the recieved value
+  1,       // Used to scale the recieved value
   0,          // The offset applied to the recieved value
   0,          // Stored value for the sensor data, after scale and offset
-  -25,          // Minimum value used for LEDs or graphing
-  25,          // Maxumum value used for LEDs or graphing
+  -100,          // Minimum value used for LEDs or graphing
+  100,          // Maxumum value used for LEDs or graphing
   999,        // Minimum value before alerting
   -999,       // Maximum value before alerting
   2           // Number of values after the decimal that are used
@@ -668,11 +668,11 @@ sensorData vvtIntake2 = {
 sensorData vvtExhaust1 = {
   "ExVVT 1",  // Name shown for data
   "o",        // Units shown for data
-  0.02,       // Used to scale the recieved value
+  1,       // Used to scale the recieved value
   0,          // The offset applied to the recieved value
   0,          // Stored value for the sensor data, after scale and offset
-  -25,          // Minimum value used for LEDs or graphing
-  25,          // Maxumum value used for LEDs or graphing
+  -100,          // Minimum value used for LEDs or graphing
+  100,          // Maxumum value used for LEDs or graphing
   999,        // Minimum value before alerting
   -999,       // Maximum value before alerting
   2           // Number of values after the decimal that are used
@@ -681,11 +681,11 @@ sensorData vvtExhaust1 = {
 sensorData vvtExhaust2 = {
   "ExVVT 2",  // Name shown for data
   "o",        // Units shown for data
-  0.02,       // Used to scale the recieved value
+  1,       // Used to scale the recieved value
   0,          // The offset applied to the recieved value
   0,          // Stored value for the sensor data, after scale and offset
-  -25,          // Minimum value used for LEDs or graphing
-  25,          // Maxumum value used for LEDs or graphing
+  -100,          // Minimum value used for LEDs or graphing
+  100,          // Maxumum value used for LEDs or graphing
   999,        // Minimum value before alerting
   -999,       // Maximum value before alerting
   2           // Number of values after the decimal that are used
