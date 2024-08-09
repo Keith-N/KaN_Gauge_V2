@@ -1,7 +1,7 @@
 /*
   KaN Gauge V2
-  04-28-2024
-  v0.34
+  08-08-2024
+  v0.40
 
   Build target ESP32 S3
 
@@ -143,7 +143,6 @@ void inputTask(void *pvParameters) {
 #endif
 
     buttonPressD1 = nextConfigCheck(buttonPressD1);
-
   }
 }
 
@@ -239,7 +238,7 @@ void setup() {
 
   Serial.begin(115200);
   setupPinMode();
-  //attachInterrupt(USER_INPUT_D2, inputButtonD1_ISR, FALLING);
+  attachInterrupt(USER_INPUT_D2, inputButtonD1_ISR, FALLING);
 
 #ifdef DEBUG_SERIAL
   Serial.println("Setup ...");

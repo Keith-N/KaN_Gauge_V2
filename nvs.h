@@ -1391,7 +1391,6 @@ void checkNewConfig() {
 #endif
 
     //gaugeSensor[selectedGauge] = selectedSensor;
-
     // wifiTimer_ms = wifiTimer_ms + wifiTimer_ms_increment;
 
 #ifdef DEBUG_SERIAL
