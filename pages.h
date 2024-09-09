@@ -433,6 +433,8 @@ text-decoration: none;border: none;letter-spacing:1.25px;cursor: pointer;text-tr
     <option value="44">Boost Psi</option>
     <option value="45">Wastegate Duty</option>
     <option value="46">Fuel Pressure Delta</option>
+    <option value="47">Oil Temp</option>
+    <option value="48">Oil Temp F</option>
     </select>
 
   <br>
@@ -492,6 +494,8 @@ text-decoration: none;border: none;letter-spacing:1.25px;cursor: pointer;text-tr
     <option value="44">Boost psi</option>
     <option value="45">Wastegate Duty</option>
     <option value="46">Fuel Pressure Delta</option>
+    <option value="47">Oil Temp</option>
+    <option value="48">Oil Temp F</option>
 
     </select>
   <br>
