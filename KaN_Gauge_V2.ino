@@ -142,7 +142,6 @@ void inputTask(void *pvParameters) {
 #ifdef DEMO
     incrementTestData();
 #endif
-
     buttonPressD1 = nextConfigCheck(buttonPressD1);
   }
 }
