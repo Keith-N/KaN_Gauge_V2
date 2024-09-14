@@ -600,10 +600,10 @@ void restoreSensorMinMax() {
   auxTemp2_f.maximum = preferences.getInt("aux2FMAX", auxTemp2_f.maximum);
 
   oilTemperature_f.minimum = preferences.getInt("oilTFMIN", oilTemperature_f.minimum);
-  oilTemperature_f.maximum = preferences.getInt("oilTFMIN", oilTemperature_f.maximum);
+  oilTemperature_f.maximum = preferences.getInt("oilTFMAX", oilTemperature_f.maximum);
 
   oilTemperature.minimum = preferences.getInt("oilTMIN", oilTemperature.minimum);
-  oilTemperature.maximum = preferences.getInt("oilTMIN", oilTemperature.maximum);
+  oilTemperature.maximum = preferences.getInt("oilTMAX", oilTemperature.maximum);
 
   manifoldPressure.minimum = preferences.getInt("mapKPAMIN", manifoldPressure.minimum);
   manifoldPressure.maximum = preferences.getInt("mapKPAMAX", manifoldPressure.maximum);
@@ -732,8 +732,8 @@ void restoreSensorAlerts() {
   oilTemperature.alertLow = preferences.getInt("oilTLOW", oilTemperature.alertLow);
   oilTemperature.alertHigh = preferences.getInt("oilTHI", oilTemperature.alertHigh);
 
-  oilTemperature_f.alertLow = preferences.getInt("oilTfLOW", oilTemperature_f.alertLow);
-  oilTemperature_f.alertHigh = preferences.getInt("oilfTHI", oilTemperature_f.alertHigh);
+  oilTemperature_f.alertLow = preferences.getInt("oilTFLOW", oilTemperature_f.alertLow);
+  oilTemperature_f.alertHigh = preferences.getInt("oilTFHI", oilTemperature_f.alertHigh);
 
   auxTemp1.alertLow = preferences.getInt("aux1CLOW", auxTemp1.alertLow);
   auxTemp1.alertHigh = preferences.getInt("aux1CHI", auxTemp1.alertHigh);
@@ -1061,8 +1061,8 @@ void saveSensorAlerts() {
   preferences.putInt("aux1CLOW", auxTemp1.alertLow);
   preferences.putInt("aux1CHI", auxTemp1.alertHigh);
 
-  preferences.putInt("oilTfLOW", oilTemperature_f.alertLow);
-  preferences.putInt("oilTfLOW", oilTemperature_f.alertHigh);
+  preferences.putInt("oilTFLOW", oilTemperature_f.alertLow);
+  preferences.putInt("oilTFHI", oilTemperature_f.alertHigh);
 
   preferences.putInt("oilTLOW", oilTemperature.alertLow);
   preferences.putInt("oilTLOW", oilTemperature.alertHigh);
