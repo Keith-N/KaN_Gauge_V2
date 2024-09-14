@@ -23,8 +23,7 @@ Speed: 500k
 No Filters
 */
 
-void canSetup()
-{
+void canSetup() {
 
   twai_general_config_t g_config = TWAI_GENERAL_CONFIG_DEFAULT((gpio_num_t)CAN_TX, (gpio_num_t)CAN_RX, TWAI_MODE_NORMAL);
   // twai_general_config_t g_config = TWAI_GENERAL_CONFIG_DEFAULT((gpio_num_t)CAN_TX, (gpio_num_t)CAN_RX, TWAI_MODE_LISTEN_ONLY);
@@ -32,14 +31,11 @@ void canSetup()
   twai_filter_config_t f_config = TWAI_FILTER_CONFIG_ACCEPT_ALL();
 
   // Install TWAI driver
-  if (twai_driver_install(&g_config, &t_config, &f_config) == ESP_OK)
-  {
+  if (twai_driver_install(&g_config, &t_config, &f_config) == ESP_OK) {
 #ifdef DEBUG_SERIAL
     Serial.println("Driver installed");
 #endif
-  }
-  else
-  {
+  } else {
 #ifdef DEBUG_SERIAL
     Serial.println("Failed to install driver");
 #endif
@@ -48,15 +44,12 @@ void canSetup()
   }
 
   // Start TWAI driver
-  if (twai_start() == ESP_OK)
-  {
+  if (twai_start() == ESP_OK) {
     canEnabled = true;
 #ifdef DEBUG_SERIAL
     Serial.println("Driver started");
 #endif
-  }
-  else
-  {
+  } else {
 #ifdef DEBUG_SERIAL
     Serial.println("Failed to start driver");
 #endif
@@ -69,14 +62,11 @@ void canSetup()
 When a CAN message is recieved, pass it to be processed and values saved
 */
 
-void canReceive()
-{
+void canReceive() {
 
-  if (twai_receive(&CANMessage, 0) == ESP_OK)
-  {
+  if (twai_receive(&CANMessage, 0) == ESP_OK) {
 
-    if (printCan == true)
-    {
+    if (printCan == true) {
       Serial.print("0x");
       // id = CANMessage.identifier;
       Serial.print(CANMessage.identifier, HEX);
@@ -86,11 +76,9 @@ void canReceive()
       Serial.print(CANMessage.rtr);
       Serial.print("\t");
       Serial.print(CANMessage.data_length_code);
-      for (int i = 0; i < CANMessage.data_length_code; i++)
-      {
+      for (int i = 0; i < CANMessage.data_length_code; i++) {
         Serial.print("\t0x");
-        if (CANMessage.data[i] <= 0x0F)
-        {
+        if (CANMessage.data[i] <= 0x0F) {
           Serial.print(0);
         }
         Serial.print(CANMessage.data[i], HEX);
@@ -102,16 +90,14 @@ void canReceive()
   }
 }
 
-void canReceiveTask(void *pvParameters)
-{
+void canReceiveTask(void *pvParameters) {
 
 #ifdef DEBUG_SERIAL
   Serial.print("CAN Task on core: ");
   Serial.println(xPortGetCoreID());
 #endif
 
-  for (;;)
-  {
+  for (;;) {
     canReceive();
   }
 }

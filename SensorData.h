@@ -364,7 +364,7 @@ sensorData coolantTemperature = {
 };
 
 sensorData oilTemperature = {
-  "OilT",  // Name shown for data
+  "Oil",  // Name shown for data
   "C",    // Units shown for data
   1,      // Used to scale the recieved value
   -40,    // The offset applied to the recieved value
@@ -377,13 +377,13 @@ sensorData oilTemperature = {
 };
 
 sensorData oilTemperature_f = {
-  "OilT",  // Name shown for data
+  "Oil",  // Name shown for data
   "F",    // Units shown for data
   1.8,    // Used to scale the recieved value
   (32),   // The offset applied to the recieved value
   0,      // Stored value for the sensor data, after scale and offset
   0,      // Minimum value used for LEDs or graphing
-  0,      // Maxumum value used for LEDs or graphing
+  250,      // Maxumum value used for LEDs or graphing
   -120,    // Minimum value before alerting
   250,    // Maximum value before alerting
   0     // Number of values after the decimal that are used

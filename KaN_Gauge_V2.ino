@@ -1,9 +1,10 @@
 /*
   KaN Gauge V2
-  08-08-2024
-  v0.40
+  13-09-2024
+  v0.41
 
   Build target ESP32 S3
+  Use Espressif esp32 board package 3.0.4 (Based on ESP-IDF v5.1.4)
 
   Extract libraries included in /libraries to your libraries directory 
     Typically ".../Arduino/liberaries/" in User/Documents directory
@@ -332,8 +333,8 @@ void setup() {
 #ifdef DEBUG_SERIAL
   Serial.println("Starting!");
 #endif
-}
 
+}
 //==============================================
 //  Main Loop
 //==============================================
