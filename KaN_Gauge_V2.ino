@@ -64,9 +64,6 @@ void inputButtonD1_ISR() {
   if ((millis() - lastInput_D1) > debounceTimerD1) {
     buttonPressD1 = true;
     lastInput_D1 = millis();
-#ifdef DEBUG_SERIAL
-    Serial.println("button pressed");
-#endif
   }
 }
 
