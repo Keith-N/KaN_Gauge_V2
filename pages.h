@@ -352,7 +352,7 @@ text-decoration: none;border: none;letter-spacing:1.25px;cursor: pointer;text-tr
   
   <label for="B"></label>
   <select id="B" name="B"> 
-    <option value="0">No Icons</option>
+    <option value="0">Only Text Color</option>
     <option value="1">Exclamation</option>
     <option value="2">FF (Fullscreen)</option>
     <option value="3">LED flash</option>
@@ -639,9 +639,9 @@ text-decoration: none;border: none;letter-spacing:1.25px;cursor: pointer;text-tr
   <p>Set LED Style</p>
     <label for="A"></label>
     <select id="A" name="A">
-    <option value="0">No LEDs</option>
     <option value="1">Blue -> Green -> Red</option>
     <option value="2">Green -> Red</option>
+    <option value="0">No LEDs</option>
     <option value="3">Custom</option>
     </select>
 <br>

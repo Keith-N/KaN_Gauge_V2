@@ -31,7 +31,6 @@ int alertTime2_ms = 250;
 String alert_names[] = { "No Icon", "Exclamation", "FF" };
 bool checkFullscreenAlert[] = { false, false, true };
 
-
 void checkAlerts() {
 
 #ifdef DEBUG_SERIAL
@@ -92,25 +91,31 @@ void displayFullscreenAlert_ff() {
   }
 
   else {
+    alertActive = false;
     drawAlert(120, 210, 50, 0);
   }
 }
 
 void displayAlert_exc() {
+
   if (showAlert == true) {
 
     if (millis() > (lastAlert_ms + alertTime_ms)) {
       alertActive = !alertActive;
       lastAlert_ms = millis();
     }
+
     if (alertActive == true) {
       drawAlert(120, 210, 50, 1);
-    } else if (alertActive == false) {
+
+    } 
+    else if (alertActive == false) {
       drawAlert(120, 210, 50, 0);
     }
   }
 
   else {
+    alertActive = false;
     drawAlert(120, 210, 50, 0);
   }
 }
@@ -214,7 +219,6 @@ void updateDisplay_LargeText() {
   int y_2 = y_1 + (radius1 - radius2) / 2;
 
   showAlert = false;
-
   int aCheck[] = { 1, 2, 3, 5 };
   for (int aCheckInc = 0; aCheckInc < 4; aCheckInc++) {
     ptrData[aCheck[aCheckInc]]->alert = sensorAlertCheck(ptrData[aCheck[aCheckInc]]->alertLow, ptrData[aCheck[aCheckInc]]->alertHigh, ptrData[aCheck[aCheckInc]]->scaledValue);
@@ -542,9 +546,16 @@ void updateDisplayTask(void *pvParameters) {
             break;
         }
       }
+      else{
+
+        // Clean up Exclaimation if printed and no Alert exsists
+        drawAlert(120, 210, 50, 0);
+      }
 
 
       if (ledEnabled == true) {
+
+        bool skipLED = false;
         if (showAlert == true) {
 
           if (alertActive == true) {
@@ -555,6 +566,7 @@ void updateDisplayTask(void *pvParameters) {
             if (config_alertType == 3) {
               ledSeries(6, 255, 0, 0, ledBrightness);
             }
+            skipLED = true;
           }
 
           else {
@@ -564,13 +576,14 @@ void updateDisplayTask(void *pvParameters) {
             if (config_alertType == 3) {
               ledSeries(6, 0, 0, 0, ledBrightness);
             }
+            skipLED = true;
           }
         }
 
-        else {
-          int ledsON = 6 * (ptrData[6]->scaledValue - ptrData[6]->minimum) / (ptrData[6]->maximum - ptrData[6]->minimum);
+        if (skipLED == true) {
+        } else {
 
-
+          int ledsON = 7 * (ptrData[6]->scaledValue - ptrData[6]->minimum) / (ptrData[6]->maximum - ptrData[6]->minimum);
           int ledCLR = ledsON - 1;
 
           if (ledCLR < 0) {
