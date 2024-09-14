@@ -1065,7 +1065,7 @@ void saveSensorAlerts() {
   preferences.putInt("oilTFHI", oilTemperature_f.alertHigh);
 
   preferences.putInt("oilTLOW", oilTemperature.alertLow);
-  preferences.putInt("oilTLOW", oilTemperature.alertHigh);
+  preferences.putInt("oilTLHI", oilTemperature.alertHigh);
 
   preferences.putInt("aux2CLOW", auxTemp2.alertLow);
   preferences.putInt("aux2CHI", auxTemp2.alertHigh);
