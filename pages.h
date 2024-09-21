@@ -435,6 +435,8 @@ text-decoration: none;border: none;letter-spacing:1.25px;cursor: pointer;text-tr
     <option value="46">Fuel Pressure Delta</option>
     <option value="47">Oil Temp</option>
     <option value="48">Oil Temp F</option>
+    <option value="49">Fuel Temp</option>
+    <option value="50">Fuel Temp F</option>
     </select>
 
   <br>
@@ -496,6 +498,8 @@ text-decoration: none;border: none;letter-spacing:1.25px;cursor: pointer;text-tr
     <option value="46">Fuel Pressure Delta</option>
     <option value="47">Oil Temp</option>
     <option value="48">Oil Temp F</option>
+    <option value="49">Fuel Temp</option>
+    <option value="50">Fuel Temp F</option>
 
     </select>
   <br>

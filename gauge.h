@@ -28,8 +28,8 @@ int lastAlert_ms = 0;
 int alertTime_ms = 250;
 int alertTime2_ms = 250;
 
-String alert_names[] = { "No Icon", "Exclamation", "FF" };
-bool checkFullscreenAlert[] = { false, false, true };
+String alert_names[] = { "No Icon", "Exclamation", "FF", "LED" };
+bool checkFullscreenAlert[] = { false, false, true, false };
 
 void checkAlerts() {
 

@@ -58,6 +58,8 @@
 #define FUEL_PRESS_DELTA 46
 #define OIL_TEMP 47
 #define OIL_TEMP_F 48
+#define FUEL_TEMP 49
+#define FUEL_TEMP_F 50
 
 #define STOICH_RATIO 14.7f
 
@@ -378,6 +380,32 @@ sensorData oilTemperature = {
 
 sensorData oilTemperature_f = {
   "Oil",  // Name shown for data
+  "F",    // Units shown for data
+  1.8,    // Used to scale the recieved value
+  (32),   // The offset applied to the recieved value
+  0,      // Stored value for the sensor data, after scale and offset
+  0,      // Minimum value used for LEDs or graphing
+  250,      // Maxumum value used for LEDs or graphing
+  -120,    // Minimum value before alerting
+  250,    // Maximum value before alerting
+  0     // Number of values after the decimal that are used
+};
+
+sensorData fuelTemperature = {
+  "Fuel",  // Name shown for data
+  "C",    // Units shown for data
+  1,      // Used to scale the recieved value
+  -40,    // The offset applied to the recieved value
+  0,      // Stored value for the sensor data, after scale and offset
+  0,      // Minimum value used for LEDs or graphing
+  120,    // Maxumum value used for LEDs or graphing
+  -120,    // Minimum value before alerting
+  200,      // Maximum value before alerting
+  0     // Number of values after the decimal that are used
+};
+
+sensorData fuelTemperature_f = {
+  "Fuel",  // Name shown for data
   "F",    // Units shown for data
   1.8,    // Used to scale the recieved value
   (32),   // The offset applied to the recieved value

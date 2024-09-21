@@ -191,7 +191,10 @@ void SAVE_CAN_DATA(twai_message_t CANmsg)
     oilTemperature.scaledValue = (((float)(CANmsg.data[4]) * (oilTemperature.scaleMultiplier)) + oilTemperature.offset);
     oilTemperature_f.scaledValue = ((oilTemperature.scaledValue * (oilTemperature_f.scaleMultiplier)) + oilTemperature_f.offset);
 
-    vvtPosition.scaledValue = ((((float)word(CANmsg.data[5], CANmsg.data[4])) * (vvtPosition.scaleMultiplier)) + vvtPosition.offset);
+    fuelTemperature.scaledValue = (((float)(CANmsg.data[5]) * (fuelTemperature.scaleMultiplier)) + fuelTemperature.offset);
+    fuelTemperature_f.scaledValue = ((fuelTemperature_f.scaledValue * (fuelTemperature_f.scaleMultiplier)) + fuelTemperature_f.offset);
+
+    //vvtPosition.scaledValue = ((((float)word(CANmsg.data[5], CANmsg.data[4])) * (vvtPosition.scaleMultiplier)) + vvtPosition.offset);
     batteryVoltage.scaledValue = ((((float)word(CANmsg.data[7], CANmsg.data[6])) * (batteryVoltage.scaleMultiplier)) + batteryVoltage.offset);
     break;
 

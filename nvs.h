@@ -269,9 +269,18 @@ sensorData *selectSensor(int dataSelection) {
       return &oilTemperature;
       break;
 
-      case OIL_TEMP_F:
+    case OIL_TEMP_F:
       return &oilTemperature_f;
       break;
+
+    case FUEL_TEMP:
+      return &fuelTemperature;
+      break;
+
+    case FUEL_TEMP_F:
+      return &fuelTemperature_f;
+      break;
+
 
     default:
       return &afr;
@@ -315,8 +324,9 @@ int gaugeDisplayType = 0;
 #define NONE 0
 #define EXCLAMATION 1
 #define FF 2
+#define LED 3
 
-int config_alertType = EXCLAMATION;
+int config_alertType = NONE;
 
 
 String arcColors[] = { "Red", "Green", "Blue", "Blue to Red", "Green to Red", "Red to Green", "White", "Black", "Custom 1", "Custom 2" };
@@ -605,6 +615,12 @@ void restoreSensorMinMax() {
   oilTemperature.minimum = preferences.getInt("oilTMIN", oilTemperature.minimum);
   oilTemperature.maximum = preferences.getInt("oilTMAX", oilTemperature.maximum);
 
+  fuelTemperature_f.minimum = preferences.getInt("fuelTFMIN", fuelTemperature_f.minimum);
+  fuelTemperature_f.maximum = preferences.getInt("fuelTFMAX", fuelTemperature_f.maximum);
+
+  fuelTemperature.minimum = preferences.getInt("fuelTMIN", fuelTemperature.minimum);
+  fuelTemperature.maximum = preferences.getInt("fuelTMAX", fuelTemperature.maximum);
+
   manifoldPressure.minimum = preferences.getInt("mapKPAMIN", manifoldPressure.minimum);
   manifoldPressure.maximum = preferences.getInt("mapKPAMAX", manifoldPressure.maximum);
 
@@ -734,6 +750,12 @@ void restoreSensorAlerts() {
 
   oilTemperature_f.alertLow = preferences.getInt("oilTFLOW", oilTemperature_f.alertLow);
   oilTemperature_f.alertHigh = preferences.getInt("oilTFHI", oilTemperature_f.alertHigh);
+
+  fuelTemperature.alertLow = preferences.getInt("fuelTLOW", fuelTemperature.alertLow);
+  fuelTemperature.alertHigh = preferences.getInt("fuelTHI", fuelTemperature.alertHigh);
+
+  fuelTemperature_f.alertLow = preferences.getInt("fuelTFLOW", fuelTemperature_f.alertLow);
+  fuelTemperature_f.alertHigh = preferences.getInt("fuelTFHI", fuelTemperature_f.alertHigh);
 
   auxTemp1.alertLow = preferences.getInt("aux1CLOW", auxTemp1.alertLow);
   auxTemp1.alertHigh = preferences.getInt("aux1CHI", auxTemp1.alertHigh);
@@ -915,6 +937,12 @@ void saveSensorMinMax() {
   preferences.putInt("oilTMIN", oilTemperature.minimum);
   preferences.putInt("oilTMAX", oilTemperature.maximum);
 
+  preferences.putInt("fuelTFMIN", fuelTemperature_f.minimum);
+  preferences.putInt("fuelTFMAX", fuelTemperature_f.maximum);
+
+  preferences.putInt("fuelTMIN", fuelTemperature.minimum);
+  preferences.putInt("fuelTMAX", fuelTemperature.maximum);
+
   preferences.putInt("ignMIN", ignitionTiming.minimum);
   preferences.putInt("ignMAX", ignitionTiming.maximum);
 
@@ -1067,6 +1095,12 @@ void saveSensorAlerts() {
   preferences.putInt("oilTLOW", oilTemperature.alertLow);
   preferences.putInt("oilTHI", oilTemperature.alertHigh);
 
+  preferences.putInt("fuelTFLOW", fuelTemperature_f.alertLow);
+  preferences.putInt("fuelTFHI", fuelTemperature_f.alertHigh);
+  
+  preferences.putInt("fuelTLOW", fuelTemperature.alertLow);
+  preferences.putInt("fuelTHI", fuelTemperature.alertHigh);
+
   preferences.putInt("aux2CLOW", auxTemp2.alertLow);
   preferences.putInt("aux2CHI", auxTemp2.alertHigh);
 
@@ -1106,8 +1140,8 @@ void saveSensorAlerts() {
   preferences.putInt("oilKPALOW", oilPressure_psi.alertLow);
   preferences.putInt("oilKPAHI", oilPressure_psi.alertHigh);
 
-  preferences.putInt("vvtLOW", vvtPosition.alertLow);
-  preferences.putInt("vvtHI", vvtPosition.alertHigh);
+  // preferences.putInt("vvtLOW", vvtPosition.alertLow);
+  // preferences.putInt("vvtHI", vvtPosition.alertHigh);
 
   preferences.putInt("vvtEx1LOW", vvtExhaust1.alertLow);
   preferences.putInt("vvtEx1HI", vvtExhaust1.alertHigh);
