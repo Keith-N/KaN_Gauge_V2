@@ -317,7 +317,10 @@ int selectedGauge;
 int selectedLedMode;
 int selectedDisplayRate;
 int brightnessInput;
+int brightnessInput2;
 int selectedBrightness = 3;
+
+float newMin, newMax, newHigh, newLow;
 
 int gaugeDisplayType = 0;
 
@@ -1182,34 +1185,39 @@ void eraseNVS() {
   nvs_flash_init();   // initialize the NVS partition.
 }
 
-void setSensorMinMax(int sensor, int limit, float newValue) {
+void setSensorMinMax(int sensor, float min, float max, float low, float high) {
+//void setSensorMinMax(int sensor, float min, float newValue) {
 
   newSensorConfig = selectSensor(sensor);
+  newSensorConfig->minimum = min;
+  newSensorConfig->maximum = max;
+  newSensorConfig->alertLow = low;
+  newSensorConfig->alertHigh = high;
 
-  switch (limit) {
-    case 1:
-      newSensorConfig->minimum = newValue;
-      break;
+  // switch (limit) {
+  //   case 1:
+  //     newSensorConfig->minimum = newValue;
+  //     break;
 
-    case 2:
-      newSensorConfig->maximum = newValue;
-      break;
+  //   case 2:
+  //     newSensorConfig->maximum = newValue;
+  //     break;
 
-    case 3:
-      newSensorConfig->alertLow = newValue;
-      break;
+  //   case 3:
+  //     newSensorConfig->alertLow = newValue;
+  //     break;
 
-    case 4:
-      newSensorConfig->alertHigh = newValue;
-      break;
+  //   case 4:
+  //     newSensorConfig->alertHigh = newValue;
+  //     break;
 
-    case 5:
-      newSensorConfig->precision = newValue;
-      break;
+  //   case 5:
+  //     newSensorConfig->precision = newValue;
+  //     break;
 
-    default:
-      break;
-  }
+  //   default:
+  //     break;
+  // }
 }
 
 // void saveLedConfig()
@@ -1500,7 +1508,8 @@ void checkNewConfig() {
   }
 
   if (readyToUpdateLimits == true) {
-    setSensorMinMax(selectedSensor, selectedLimit, inputNewValue);
+    //setSensorMinMax(selectedSensor, selectedLimit, inputNewValue);
+    setSensorMinMax(selectedSensor, newMin, newMax, newLow, newHigh);
     saveSensorMinMax();
     saveSensorAlerts();
 

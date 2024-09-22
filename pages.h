@@ -299,9 +299,7 @@ text-decoration: none;border: none;letter-spacing:1.25px;cursor: pointer;text-tr
   
   <title> Gauge Configuration </title>
 
-
 </head>
-
 <body>
 
   <script type="text/javascript">
@@ -313,7 +311,7 @@ text-decoration: none;border: none;letter-spacing:1.25px;cursor: pointer;text-tr
   <h1 style="color:white;">Gauge Configuration</h1>
 
 <form action="/setConfig">
-  <p>Select Configuration</p>
+  <p>Select current configuration</p>
   
   <label for="B"></label>
   <select id="B" name="B"> 
@@ -322,15 +320,14 @@ text-decoration: none;border: none;letter-spacing:1.25px;cursor: pointer;text-tr
     <option value="2">3</option>
     </select>
   <br>
-
   <br>
   <input type="submit" value = "Set new configuration" onClick="notify('New Configuration Sent')">
   <br>
 </form> 
 
- <form action="/setGaugeType">
+<form action="/setGaugeType">
   <p>Select Gauge Type</p>
-  
+  <p1> for current configuration </p1><br><br>
   <label for="B"></label>
   <select id="B" name="B"> 
     <option value="0">2x Arc with 4x Digital</option>
@@ -340,34 +337,15 @@ text-decoration: none;border: none;letter-spacing:1.25px;cursor: pointer;text-tr
     <option value="4">1x Large numbers</option>
     </select>
   <br>
-
   <br>
   <input type="submit" value = "Set new configuration" onClick="notify('New Configuration Sent')">
   <br>
-
 </form> 
 
- <form action="/setAlertType">
-  <p>Select Alert Type</p>
-  
-  <label for="B"></label>
-  <select id="B" name="B"> 
-    <option value="0">Only Text Color</option>
-    <option value="1">Exclamation</option>
-    <option value="2">FF (Fullscreen)</option>
-    <option value="3">LED flash</option>
-    </select>
-  <br>
 
-  <br>
-  <input type="submit" value = "Set new configuration" onClick="notify('New Configuration Sent')">
-  <br>
-
-
-</form> 
-  
 <form action="/setGaugeConfig">
   <p>Select Gauge Sensors</p>
+  <p1>Selects displayed sensor for selected location in current configuration</p1> <br><br>
   
   <label for="B"></label>
   <select id="B" name="B"> 
@@ -444,9 +422,30 @@ text-decoration: none;border: none;letter-spacing:1.25px;cursor: pointer;text-tr
   <br>
 </form>
 
+<form action="/setAlertType">
+  <p>Select Alert Type</p>
+  <p1>Occurs when a displayed value exceeds Alert High/Low</p1>
+  <br> <br>
+  
+  <label for="B"></label>
+  <select id="B" name="B"> 
+    <option value="0">Only Text Color</option>
+    <option value="1">Exclamation</option>
+    <option value="2">FF (Fullscreen)</option>
+    <option value="3">LED flash</option>
+    </select>
+  <br>
+
+  <br>
+  <input type="submit" value = "Set new configuration" onClick="notify('New Configuration Sent')">
+  <br> 
+</form> 
 
 <form action="/setLimitConfig"> 
-<p>Configure Data Limits</p>
+<p>Configure Data Limits</p><br>
+<p1> Min/Max used Arc/Meter/LEDs </p1> <br>
+<p1> Alert Low/High used to activate Alert </p1> <br> <br>
+<p1>Sensor</p1>
   <label for="A"></label>
   <select id="A" name="A">
     <option value="0">E0 AFR</option>
@@ -500,21 +499,28 @@ text-decoration: none;border: none;letter-spacing:1.25px;cursor: pointer;text-tr
     <option value="48">Oil Temp F</option>
     <option value="49">Fuel Temp</option>
     <option value="50">Fuel Temp F</option>
-
     </select>
-  <br>
-    
+  <br> <br>
+  
+  <p1>Minimum</p1>
   <label for="B"></label>
-  <select id="B" name="B"> 
-    <option value="1">Minimum</option>
-    <option value="2">Maximum</option>
-    <option value="3">Alert Low</option>
-    <option value="4">Alert High</option>
-    </select>
+  <input type="text" id="B" name="B">
+  <br>
+   
+  <p1>Maximum</p1>
+  <label for="C"></label>
+  <input type="text" id="C" name="C">
   <br>
   
-  <label for="C"></label>
-  <input type="text" id="C" name="C"><br>
+  <p1>Alert Low</p1> 
+  <label for="D"></label>
+  <input type="text" id="D" name="D">
+  <br>
+  
+  <p1>Alert High</p1>
+  <label for="E"></label>
+  <input type="text" id="E" name="E">
+  <br>
   
   <br>
   <input type="submit" value ="Set new value" onClick="notify('New limit sent')">
@@ -523,27 +529,35 @@ text-decoration: none;border: none;letter-spacing:1.25px;cursor: pointer;text-tr
 
 
 <form action="/setDisplayRate"> 
-  <p>Set display update rate in ms</p>
+<p> Display Update Rate </p><br>
+ 
   <label for="A"></label>
-  <input type="text" id="A" name="A"><br>
-  <br>
+  <input type="text" id="A" name="A">
+  <p1>ms</p1>
+  <br> <br>
   <input type="submit" value ="Set new value" onClick="notify('New value sent')">
   <br>
 </form>
 
 <form action="/setBrightness"> 
-  <p>Set Brightness</p>
+  <p>Set Brightness</p><br>
+  <p1>Values from 0 to 100 Brightness based on Analog input </p1> <br> <br>
+  
     <label for="A"></label>
     <select id="A" name="A">
-    <option value="0">Display A1 Low</option>
-    <option value="1">Display A1 High</option>
-    <option value="2">LED A1 Low</option>
-    <option value="3">LED A1 High</option>
+    <option value="0">Display</option>
+    <option value="2">LEDs</option>
     </select>
-  <br>
+  <br> <br>
 
+  <p1>Input 0V</p1>
   <label for="B"></label>
   <input type="text" id="B" name="B"><br>
+  
+  <p1>Input 12V</p1>
+  <label for="C"></label>
+  <input type="text" id="C" name="C"><br>
+  
   
   <br>
   <input type="submit" value ="Set new value" onClick="notify('New limit sent')">
@@ -551,7 +565,8 @@ text-decoration: none;border: none;letter-spacing:1.25px;cursor: pointer;text-tr
 </form>
 
 <form action="/setArc1"> 
-  <p>Inner Arc</p>
+  <p>Inner Arc Configuration</p>
+  <p1>Color</p1>
     <label for="A"></label>
     <select id="A" name="A">
     <option value="0">Red</option>
@@ -565,12 +580,12 @@ text-decoration: none;border: none;letter-spacing:1.25px;cursor: pointer;text-tr
   <br>
   <br>
 
-  <p>Segments Width</p>
+  <p1>Segments Width</p1>
   <label for="B"></label>
   <input type="text" id="B" name="B"><br>
   <br>
 
-  <p>Segment Spacing</p>
+  <p1>Segment Spacing</p1>
   <label for="C"></label>
   <input type="text" id="C" name="C"><br>
   
@@ -580,7 +595,8 @@ text-decoration: none;border: none;letter-spacing:1.25px;cursor: pointer;text-tr
 </form>
 
 <form action="/setArc2"> 
-  <p>Outer Arc</p>
+  <p>Outer Arc Configuration</p>
+  <p1>Color</p1>
     <label for="A"></label>
     <select id="A" name="A">
     <option value="0">Red</option>
@@ -594,12 +610,12 @@ text-decoration: none;border: none;letter-spacing:1.25px;cursor: pointer;text-tr
   <br>
   <br>
 
-  <p>Segments Width</p>
+  <p1>Segments Width</p1>
   <label for="B"></label>
   <input type="text" id="B" name="B"><br>
   <br>
 
-  <p>Segment Spacing</p>
+  <p1>Segment Spacing</p1>
   <label for="C"></label>
   <input type="text" id="C" name="C"><br>
   
@@ -609,13 +625,13 @@ text-decoration: none;border: none;letter-spacing:1.25px;cursor: pointer;text-tr
 </form>
 
 <form action="/setTextColor"> 
-  <p>Set Colors</p>
+  <p>Set Display Colors</p>
     <label for="A"></label>
     <select id="A" name="A">
-    <option value="0">Value</option>
-    <option value="1">Units</option>
-    <option value="2">Alert</option>
-    <option value="3">Needle</option>
+    <option value="0">Value Digits</option>
+    <option value="1">Unit Text</option>
+    <option value="2">Alert Digits</option>
+    <option value="3">Meter Needle</option>
     </select>
 
     <label for="B"></label>
@@ -640,7 +656,7 @@ text-decoration: none;border: none;letter-spacing:1.25px;cursor: pointer;text-tr
 </form>
 
 <form action="/setLedColor"> 
-  <p>Set LED Style</p>
+  <p>Set LED Colors</p>
     <label for="A"></label>
     <select id="A" name="A">
     <option value="1">Blue -> Green -> Red</option>
@@ -654,8 +670,8 @@ text-decoration: none;border: none;letter-spacing:1.25px;cursor: pointer;text-tr
     <p>Set LED Style</p>
     <label for="B"></label>
     <select id="B" name="B">
-    <option value="0">Single Color</option>
-    <option value="1">Multi-Color</option>
+    <option value="0">One Color Sequential LEDs</option>
+    <option value="1">Multi-Color Sequential LEDs</option>
     <option value="2">Single LED</option>
     </select>
 
@@ -668,12 +684,11 @@ text-decoration: none;border: none;letter-spacing:1.25px;cursor: pointer;text-tr
 </form>
 
 <form action="/setLEDCustom"> 
-  <p>Set Color for Custom LED option</p>
-  <p>0 to 255</p>
+  <p>Set Custom LED Color</p>
+  <p1>Values from 0 to 100</p1>
+<br> <br>
 
-<br>
-
-  <p>Select LED</p>
+  <p1>LED</p1>
     <label for="A"></label>
     <select id="A" name="A">
     <option value="0">1</option>
@@ -683,19 +698,17 @@ text-decoration: none;border: none;letter-spacing:1.25px;cursor: pointer;text-tr
     <option value="4">5</option>
     <option value="5">6</option>
     </select>
+  <br> <br>
 
-  <br>
-  <br>
-
-  <p> Red </p>
+  <p1> Red </p1>
   <label for="R"></label>
   <input type="text" id="R" name="R"><br>
 
-  <p> Green </p>
+  <p1> Green </p1>
   <label for="G"></label>
   <input type="text" id="G" name="G"><br>
 
-  <p> Blue </p>
+  <p1> Blue </p1>
   <label for="B"></label>
   <input type="text" id="B" name="B"><br>
 

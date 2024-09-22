@@ -135,14 +135,18 @@ void otaSetup(void) {
   });
 
   server.on("/setLimitConfig", HTTP_GET, [] {
-    String a, b, c;
+    String a, b, c, d, e;
     a = server.arg(0);
     b = server.arg(1);
     c = server.arg(2);
+    d = server.arg(3);
+    e = server.arg(4);
 
     selectedSensor = (int)(a.toFloat());
-    selectedLimit = (int)(b.toFloat());
-    inputNewValue = c.toFloat();
+    newMin = b.toFloat();
+    newMax = c.toFloat();
+    newLow = d.toFloat();
+    newHigh = e.toFloat();
 
     readyToUpdateLimits = true;
     server.send(200, "text/html", gaugeConfigPage);
@@ -259,9 +263,9 @@ void otaSetup(void) {
     b = server.arg(3);
 
     int LEDindex = (int)(a.toInt());
-    int LEDcolorRed = (int)(r.toInt());
-    int LEDcolorGreen = (int)(g.toInt());
-    int LEDcolorBlue = (int)(b.toInt());
+    int LEDcolorRed = (int)(r.toInt()) * 100/255;
+    int LEDcolorGreen = (int)(g.toInt()) * 100/255;
+    int LEDcolorBlue = (int)(b.toInt()) * 100/255;
 
     saveNewLedColor(LEDindex, LEDcolorRed, LEDcolorGreen, LEDcolorBlue);
 
@@ -318,9 +322,11 @@ void otaSetup(void) {
     String a, b, c;
     a = server.arg(0);
     b = server.arg(1);
+    c = server.arg(2);
 
     selectedBrightness = (int)(a.toFloat());
     brightnessInput = (int)(b.toFloat());
+    brightnessInput2 = (int)(b.toFloat());
 
     if (brightnessInput > 100) {
       brightnessInput = 100;
@@ -330,7 +336,16 @@ void otaSetup(void) {
       brightnessInput = 0;
     }
 
+    if (brightnessInput2 > 100) {
+      brightnessInput2 = 100;
+    }
+
+    if (brightnessInput2 < 0) {
+      brightnessInput2 = 0;
+    }
+
     brightness[selectedBrightness] = brightnessInput;
+    brightness[selectedBrightness+1] = brightnessInput2;
 
     readyToUpdateGaugeConfig = true;
     server.send(200, "text/html", gaugeConfigPage);
