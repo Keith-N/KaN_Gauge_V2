@@ -17,5 +17,6 @@ const int nvs = 4;
 const String buildType = "";
 
 // revision of PCB 1.2 = 102
-int pcbRev = 102;
+int pcbRev = 103;
+ 
  
