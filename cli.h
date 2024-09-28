@@ -675,7 +675,7 @@ void CLItask()
       Serial.print("B ");
       Serial.print(blueVal);
 
-      saveNewLedColor(simSensor, redVal, greenVal, blueVal);
+      saveNewLedColor();
     }
     else if (c == cmdSetSensor)
     {

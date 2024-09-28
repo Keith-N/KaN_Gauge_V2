@@ -320,7 +320,7 @@ int brightnessInput;
 int brightnessInput2;
 int selectedBrightness = 3;
 
-float newMin, newMax, newHigh, newLow;
+String newMin, newMax, newHigh, newLow;
 
 int gaugeDisplayType = 0;
 
@@ -354,7 +354,7 @@ int LEDcolor = 1;  // LED config blue to green to red
 
 int LEDstyle = 4;
 String ledStyleName[] = { "Series Single Color", "Series Multi-Color", "Single LED" };
-String ledColorName[] = { "None", "Blue -> Green -> Red", "Green -> Red", "Custom", "Alert 1", "Alert 2"};
+String ledColorName[] = { "None", "Blue -> Green -> Red", "Green -> Red", "Custom", "Alert 1", "Alert 2" };
 
 int LEDred[6][6] = { { 0, 0, 0, 0, 0, 0 }, { 0, 100, 150, 255, 255, 255 }, { 100, 100, 100, 100, 100, 255 }, { 255, 255, 255, 255, 255, 255 }, { 255, 255, 255, 255, 255, 255 }, { 255, 255, 255, 255, 255, 255 } };
 int LEDgreen[6][6] = { { 0, 0, 0, 0, 0, 0 }, { 100, 200, 255, 150, 50, 0 }, { 200, 200, 200, 200, 200, 0 }, { 255, 255, 255, 255, 255, 255 }, { 0, 0, 0, 0, 0, 0 }, { 0, 0, 0, 0, 0, 0 } };
@@ -391,11 +391,11 @@ String dataLocation[] = { "Inside Arc", "Outer Arc", "Center", "Bottom Left", "C
 const int config_max = 3;
 int config_selectedConfig[1];
 int config_gaugeStyle[3] = { 4, 3, 2 };
-int config_sensorData[3][10] = { { LAMBDA_1, OIL_PRESS_PSI, LAMBDA_1, COOLANT_TEMP_F, LAMBDA_1, OIL_PRESS_PSI, LAMBDA_1, LAMBDA_1, LAMBDA_1, LAMBDA_1}, { OIL_PRESS_PSI, OIL_PRESS_PSI, OIL_PRESS_PSI, LAMBDA_1, OIL_PRESS_PSI, MANIFOLD_PRESS_PSI, OIL_PRESS_PSI, OIL_PRESS_PSI, OIL_PRESS_PSI, OIL_PRESS_PSI}, { MANIFOLD_PRESS_PSI, MANIFOLD_PRESS_PSI, MANIFOLD_PRESS_PSI, COOLANT_TEMP_F, MANIFOLD_PRESS_PSI, INTAKE_TEMP_F, MANIFOLD_PRESS_PSI, MANIFOLD_PRESS_PSI, MANIFOLD_PRESS_PSI, MANIFOLD_PRESS_PSI}};
+int config_sensorData[3][10] = { { LAMBDA_1, OIL_PRESS_PSI, LAMBDA_1, COOLANT_TEMP_F, LAMBDA_1, OIL_PRESS_PSI, LAMBDA_1, LAMBDA_1, LAMBDA_1, LAMBDA_1 }, { OIL_PRESS_PSI, OIL_PRESS_PSI, OIL_PRESS_PSI, LAMBDA_1, OIL_PRESS_PSI, MANIFOLD_PRESS_PSI, OIL_PRESS_PSI, OIL_PRESS_PSI, OIL_PRESS_PSI, OIL_PRESS_PSI }, { MANIFOLD_PRESS_PSI, MANIFOLD_PRESS_PSI, MANIFOLD_PRESS_PSI, COOLANT_TEMP_F, MANIFOLD_PRESS_PSI, INTAKE_TEMP_F, MANIFOLD_PRESS_PSI, MANIFOLD_PRESS_PSI, MANIFOLD_PRESS_PSI, MANIFOLD_PRESS_PSI } };
 
 int config_ledStyle[3] = { 0, 0, 0 };
 int config_ledColors[3] = { 1, 0, 0 };
-int config_uiColors[3][6] = { {65535, 63488, 63488, 63488, 0 }, { 65535, 63488, 63488, 63488, 0 }, { 65535, 63488, 63488, 63488, 0 } };
+int config_uiColors[3][6] = { { 65535, 63488, 63488, 63488, 0 }, { 65535, 63488, 63488, 63488, 0 }, { 65535, 63488, 63488, 63488, 0 } };
 
 //config_gaugeStyle[config_selectedConfig[0]] =
 
@@ -1100,7 +1100,7 @@ void saveSensorAlerts() {
 
   preferences.putInt("fuelTFLOW", fuelTemperature_f.alertLow);
   preferences.putInt("fuelTFHI", fuelTemperature_f.alertHigh);
-  
+
   preferences.putInt("fuelTLOW", fuelTemperature.alertLow);
   preferences.putInt("fuelTHI", fuelTemperature.alertHigh);
 
@@ -1185,14 +1185,22 @@ void eraseNVS() {
   nvs_flash_init();   // initialize the NVS partition.
 }
 
-void setSensorMinMax(int sensor, float min, float max, float low, float high) {
-//void setSensorMinMax(int sensor, float min, float newValue) {
+void setSensorMinMax(int sensor, String min, String max, String low, String high) {
+  //void setSensorMinMax(int sensor, float min, float newValue) {
 
   newSensorConfig = selectSensor(sensor);
-  newSensorConfig->minimum = min;
-  newSensorConfig->maximum = max;
-  newSensorConfig->alertLow = low;
-  newSensorConfig->alertHigh = high;
+  if (min != "") {
+    newSensorConfig->minimum = (float)min.toFloat();
+  }
+  if (max != "") {
+    newSensorConfig->maximum = (float)max.toFloat();
+  }
+  if (low != "") {
+    newSensorConfig->alertLow = (float)low.toFloat();
+  }
+  if (high != "") {
+    newSensorConfig->alertHigh = (float)high.toFloat();
+  }
 
   // switch (limit) {
   //   case 1:
@@ -1304,9 +1312,9 @@ void restoreBootConfig() {
 }
 
 
-  //   Check NVS config version and wipe if it is not as expected
-  //   Save startup config
-  //   This will allow cleaning up stored configs if changes are made to the format
+//   Check NVS config version and wipe if it is not as expected
+//   Save startup config
+//   This will allow cleaning up stored configs if changes are made to the format
 
 void checkNvsVer() {
 
@@ -1389,64 +1397,71 @@ void restoreLedColor() {
   preferences.end();
 }
 
-void saveNewLedColor(const int index, int red, int green, int blue) {
+void saveNewLedColor() {
 
-  if (red > 255 || red < 0) {
-    red = 255;
+  for (int saveLED = 0; saveLED < 6; saveLED++) {
+
+    int red = LEDred[3][saveLED];
+    int blue = LEDblue[3][saveLED];
+    int green = LEDgreen[3][saveLED];
+
+    // if (red > 255 || red < 0) {
+    //   red = 255;
+    // }
+
+    // if (green > 255 || green < 0) {
+    //   green = 255;
+    // }
+
+    // if (blue > 255 || blue < 0) {
+    //   blue = 255;
+    // }
+
+    preferences.begin("led", false);
+
+    switch (saveLED) {
+
+      case 0:
+
+        preferences.putUInt("red0", red);
+        preferences.putUInt("green0", green);
+        preferences.putUInt("blue0", blue);
+        break;
+
+      case 1:
+        preferences.putUInt("red1", red);
+        preferences.putUInt("green1", green);
+        preferences.putUInt("blue1", blue);
+        break;
+
+      case 2:
+        preferences.putUInt("red2", red);
+        preferences.putUInt("green2", green);
+        preferences.putUInt("blue2", blue);
+        break;
+
+      case 3:
+        preferences.putUInt("red3", red);
+        preferences.putUInt("green3", green);
+        preferences.putUInt("blue3", blue);
+        break;
+
+      case 4:
+        preferences.putUInt("red4", red);
+        preferences.putUInt("green4", green);
+        preferences.putUInt("blue4", blue);
+        break;
+
+      case 5:
+        preferences.putUInt("red5", red);
+        preferences.putUInt("green5", green);
+        preferences.putUInt("blue5", blue);
+        break;
+    }
+    preferences.end();
+
+    //restoreLedColor();
   }
-
-  if (green > 255 || green < 0) {
-    green = 255;
-  }
-
-  if (blue > 255 || blue < 0) {
-    blue = 255;
-  }
-
-  preferences.begin("led", false);
-
-  switch (index) {
-
-    case 0:
-
-      preferences.putUInt("red0", red);
-      preferences.putUInt("green0", green);
-      preferences.putUInt("blue0", blue);
-      break;
-
-    case 1:
-      preferences.putUInt("red1", red);
-      preferences.putUInt("green1", green);
-      preferences.putUInt("blue1", blue);
-      break;
-
-    case 2:
-      preferences.putUInt("red2", red);
-      preferences.putUInt("green2", green);
-      preferences.putUInt("blue2", blue);
-      break;
-
-    case 3:
-      preferences.putUInt("red3", red);
-      preferences.putUInt("green3", green);
-      preferences.putUInt("blue3", blue);
-      break;
-
-    case 4:
-      preferences.putUInt("red4", red);
-      preferences.putUInt("green4", green);
-      preferences.putUInt("blue4", blue);
-      break;
-
-    case 5:
-      preferences.putUInt("red5", red);
-      preferences.putUInt("green5", green);
-      preferences.putUInt("blue5", blue);
-      break;
-  }
-  preferences.end();
-
-  restoreLedColor();
 }
 
 // ========================================================= Check Config =============================================

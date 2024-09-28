@@ -444,7 +444,8 @@ text-decoration: none;border: none;letter-spacing:1.25px;cursor: pointer;text-tr
 <form action="/setLimitConfig"> 
 <p>Configure Data Limits</p><br>
 <p1> Min/Max used Arc/Meter/LEDs </p1> <br>
-<p1> Alert Low/High used to activate Alert </p1> <br> <br>
+<p1> Alert Low/High used to activate Alert </p1> <br> 
+<br>
 <p1>Sensor</p1>
   <label for="A"></label>
   <select id="A" name="A">
@@ -687,34 +688,99 @@ text-decoration: none;border: none;letter-spacing:1.25px;cursor: pointer;text-tr
   <p>Set Custom LED Color</p>
   <p1>Values from 0 to 100</p1>
 <br> <br>
-
-  <p1>LED</p1>
-    <label for="A"></label>
-    <select id="A" name="A">
-    <option value="0">1</option>
-    <option value="1">2</option>
-    <option value="2">3</option>
-    <option value="3">4</option>
-    <option value="4">5</option>
-    <option value="5">6</option>
-    </select>
-  <br> <br>
-
-  <p1> Red </p1>
-  <label for="R"></label>
-  <input type="text" id="R" name="R"><br>
-
-  <p1> Green </p1>
-  <label for="G"></label>
-  <input type="text" id="G" name="G"><br>
-
-  <p1> Blue </p1>
-  <label for="B"></label>
-  <input type="text" id="B" name="B"><br>
-
-  <br>
-
   
+
+ <p1> LED 1 </p1>
+  <br>
+  <p1> R </p1>
+  <label for="R1"></label>
+  <input type="text" id="R1" name="R1"><br>
+
+  <p1> G </p1>
+  <label for="G1"></label>
+  <input type="text" id="G1" name="G1"><br>
+
+  <p1> B </p1>
+  <label for="B1"></label>
+  <input type="text" id="B1" name="B1"><br>
+  
+   <br> <br>
+    
+  <p1> LED 2 </p1>
+  <br>
+  <p1> R </p1>
+  <label for="R2"></label>
+  <input type="text" id="R2" name="R2"><br>
+
+  <p1> G </p1>
+  <label for="G2"></label>
+  <input type="text" id="G2" name="G2"><br>
+
+  <p1> B </p1>
+  <label for="B2"></label>
+  <input type="text" id="B2" name="B2"><br>
+  
+   <br> 
+   
+  <p1> LED 3 </p1>
+  <br>
+  <p1> R </p1>
+  <label for="R3"></label>
+  <input type="text" id="R3" name="R3"><br>
+
+  <p1> G </p1>
+  <label for="G3"></label>
+  <input type="text" id="G3" name="G3"><br>
+
+  <p1> B </p1>
+  <label for="B3"></label>
+  <input type="text" id="B3" name="B3"><br>
+  <br>
+  
+  <p1> LED 4 </p1>
+  <br>
+  <p1> R </p1>
+  <label for="R4"></label>
+  <input type="text" id="R4" name="R4"><br>
+
+  <p1> G </p1>
+  <label for="G4"></label>
+  <input type="text" id="G4" name="G4"><br>
+
+  <p1> B </p1>
+  <label for="B4"></label>
+  <input type="text" id="B4" name="B4"><br>
+  <br>
+  
+  <p1> LED 5 </p1>
+  <br>
+  <p1> R </p1>
+  <label for="R5"></label>
+  <input type="text" id="R5" name="R5"><br>
+
+  <p1> G </p1>
+  <label for="G5"></label>
+  <input type="text" id="G5" name="G5"><br>
+
+  <p1> B </p1>
+  <label for="B5"></label>
+  <input type="text" id="B5" name="B5"><br>
+  <br>
+  
+  <p1> LED 6 </p1>
+  <br>
+  <p1> R </p1>
+  <label for="R6"></label>
+  <input type="text" id="R6" name="R6"><br>
+
+  <p1> G </p1>
+  <label for="G6"></label>
+  <input type="text" id="G6" name="G6"><br>
+
+  <p1> B </p1>
+  <label for="B6"></label>
+  <input type="text" id="B6" name="B6"><br>
+   
   <br>
   <input type="submit" value ="Set new value" onClick="notify('New limit sent')">
   <br>

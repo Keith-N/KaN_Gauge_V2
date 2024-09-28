@@ -143,12 +143,13 @@ void otaSetup(void) {
     e = server.arg(4);
 
     selectedSensor = (int)(a.toFloat());
-    newMin = b.toFloat();
-    newMax = c.toFloat();
-    newLow = d.toFloat();
-    newHigh = e.toFloat();
+    newMin = b;
+    newMax = c;
+    newLow = d;
+    newHigh = e;
 
     readyToUpdateLimits = true;
+
     server.send(200, "text/html", gaugeConfigPage);
   });
 
@@ -256,21 +257,28 @@ void otaSetup(void) {
   });
 
   server.on("/setLEDCustom", HTTP_GET, [] {
-    String a, r, g, b;
-    a = server.arg(0);
-    r = server.arg(1);
-    g = server.arg(2);
-    b = server.arg(3);
+    // Setup LED values taken from user input if value is present. If not then keep the current value
+    // Convert input value to 255 from 100
 
-    int LEDindex = (int)(a.toInt());
-    int LEDcolorRed = (int)(r.toInt()) * 100/255;
-    int LEDcolorGreen = (int)(g.toInt()) * 100/255;
-    int LEDcolorBlue = (int)(b.toInt()) * 100/255;
+    for (int ledInd = 0; ledInd < 6; ledInd++) {
+      int indexInc = ledInd * 3;
 
-    saveNewLedColor(LEDindex, LEDcolorRed, LEDcolorGreen, LEDcolorBlue);
+      if (server.arg(indexInc) != "") {
+        LEDred[3][ledInd] = ((int)(server.arg(indexInc).toInt())) * 255 / 100;
+      }
 
+      if (server.arg(indexInc + 1) != "") {
+        LEDgreen[3][ledInd] = ((int)(server.arg(indexInc + 1).toInt())) * 255 / 100;
+      }
 
-    //saveLedConfig();
+      if (server.arg(indexInc + 2) != "") {
+        LEDblue[3][ledInd] = ((int)(server.arg(indexInc + 2).toInt())) * 255 / 100;
+      }
+    }
+
+    //saveNewLedColor(ledSave, LEDred[3][ledSave], LEDgreen[3][ledSave], LEDblue[3][ledSave]);
+    saveNewLedColor();
+
     server.send(200, "text/html", gaugeConfigPage);
   });
 
@@ -344,8 +352,13 @@ void otaSetup(void) {
       brightnessInput2 = 0;
     }
 
-    brightness[selectedBrightness] = brightnessInput;
-    brightness[selectedBrightness+1] = brightnessInput2;
+    if (b != "") {
+      brightness[selectedBrightness] = brightnessInput;
+    }
+
+    if (c != "") {
+      brightness[selectedBrightness + 1] = brightnessInput2;
+    }
 
     readyToUpdateGaugeConfig = true;
     server.send(200, "text/html", gaugeConfigPage);
