@@ -16,6 +16,7 @@
 #include "bootlogos/fome.h"
 #include "bootlogos/mazda.h"
 #include "bootlogos/kan.h"
+#include "bootlogos/customBoot.h"
 
 #include "wifi.h"
 #include "pinMap.h"
@@ -257,7 +258,7 @@ void pngDraw(PNGDRAW *pDraw)
 void printBootLogo(int bootLogoSel)
 {
 
-  int16_t rcBMM, rcFOME, rcMazda, rcKan;
+  int16_t rcBMM, rcFOME, rcMazda, rcKan, rcCustomBoot;
 
   switch (bootLogoSel)
   {
@@ -300,6 +301,16 @@ void printBootLogo(int bootLogoSel)
     {
       tft.startWrite();
       rcMazda = png.decode(NULL, 0);
+      tft.endWrite();
+    }
+    break;
+
+    case 4:
+    rcCustomBoot = png.openFLASH((uint8_t *)customBoot, sizeof(customBoot), pngDraw);
+    if (rcCustomBoot == PNG_SUCCESS)
+    {
+      tft.startWrite();
+      rcCustomBoot = png.decode(NULL, 0);
       tft.endWrite();
     }
     break;
@@ -985,7 +996,7 @@ void gaugeText(float value, float min, float max, int x, int y, int fontSize, co
     break;
 
   case 5:
-    tft.setTextPadding(25 * 5);
+    tft.setTextPadding(500);
     tft.drawString(buf, x + 15, y - 20, 8);
     break;
 

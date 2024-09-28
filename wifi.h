@@ -44,9 +44,6 @@ bool opened = false;
 // bool updateWifiConfig = false;
 
 
-
-
-
 /*
     Service any client connections to the gauge
 */

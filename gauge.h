@@ -28,6 +28,11 @@ int lastAlert_ms = 0;
 int alertTime_ms = 250;
 int alertTime2_ms = 250;
 
+#define ALERT_TEXT_COLOR 0
+#define ALERT_EXC 1
+#define ALERT_FF 2
+#define ALERT_LED 3
+
 String alert_names[] = { "No Icon", "Exclamation", "FF", "LED" };
 bool checkFullscreenAlert[] = { false, false, true, false };
 
@@ -108,8 +113,7 @@ void displayAlert_exc() {
     if (alertActive == true) {
       drawAlert(120, 210, 50, 1);
 
-    } 
-    else if (alertActive == false) {
+    } else if (alertActive == false) {
       drawAlert(120, 210, 50, 0);
     }
   }
@@ -545,8 +549,7 @@ void updateDisplayTask(void *pvParameters) {
             displayAlert_noIcon();
             break;
         }
-      }
-      else{
+      } else {
 
         // Clean up Exclaimation if printed and no Alert exsists
         drawAlert(120, 210, 50, 0);
@@ -556,24 +559,25 @@ void updateDisplayTask(void *pvParameters) {
       if (ledEnabled == true) {
 
         bool skipLED = false;
-        if (showAlert == true) {
 
+        if (showAlert == true) {
           if (alertActive == true) {
 
-            if (config_alertType == 2) {
+            if (config_alertType == ALERT_FF) {
               ledSeries(6, 255, 0, 0, ledBrightness);
             }
-            if (config_alertType == 3) {
+
+            if (config_alertType == ALERT_LED) {
               ledSeries(6, 255, 0, 0, ledBrightness);
             }
             skipLED = true;
           }
 
           else {
-            if (config_alertType == 2) {
+            if (config_alertType == ALERT_FF) {
               ledSeries(6, 255, 185, 0, ledBrightness);
             }
-            if (config_alertType == 3) {
+            if (config_alertType == ALERT_LED) {
               ledSeries(6, 0, 0, 0, ledBrightness);
             }
             skipLED = true;

@@ -209,6 +209,10 @@ text-decoration: none;border: none;letter-spacing:1.25px;cursor: pointer;text-tr
 <input type="submit" value = "Configure WiFi">
 </form>
 
+<form action="/boot">
+<input type="submit" value = "Configure Start">
+</form>
+
 <form action="/reset">
 <input type="submit" value = "Restart Gauge">
 </form>
@@ -991,6 +995,7 @@ text-decoration: none;border: none;letter-spacing:1.25px;cursor: pointer;text-tr
     <option value="1">BMM</option>
     <option value="2">FOME</option>
     <option value="3">Mazda</option>
+    <option value="4">Custom</option>
     </select>
   <br>
   <br>
@@ -1001,6 +1006,7 @@ text-decoration: none;border: none;letter-spacing:1.25px;cursor: pointer;text-tr
     <option value="1">BMM</option>
     <option value="2">FOME</option>
     <option value="3">Mazda</option>
+    <option value="4">Custom</option>
     </select>
 <br>
 <br>
@@ -1011,6 +1017,7 @@ text-decoration: none;border: none;letter-spacing:1.25px;cursor: pointer;text-tr
     <option value="1">BMM</option>
     <option value="2">FOME</option>
     <option value="3">Mazda</option>
+    <option value="4">Custom</option>
     </select>
 <br>
 <br>
