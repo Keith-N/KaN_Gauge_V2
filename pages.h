@@ -103,7 +103,7 @@ String update1 =
     "</form>"
     "<form action='/'>"
     "<button>"
-    "<a href='https://github.com/Keith-N/KaN-Gauge/releases' target='_blank'>Firmware Releases</a>"
+    "<a href='https://github.com/Keith-N/KaN_Gauge_V2/releases' target='_blank'>Firmware Releases</a>"
     "</button>"
     "<input type='submit' value = 'Back'>"
     "</form>" +
