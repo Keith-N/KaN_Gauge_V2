@@ -355,14 +355,14 @@ text-decoration: none;border: none;letter-spacing:1.25px;cursor: pointer;text-tr
   <select id="B" name="B"> 
     <option value="0">Arc Inside</option>
     <option value="1">Arc Outside</option>
-    <option value="2">Digits Center</option>
-    <option value="3">Digits Bottom Left</option>
-    <option value="4">Digits Bottom Center</option>
-    <option value="5">Digits Bottom Right</option>
-    <option value="6">LEDs</option>
-    <option value="7">Digits Center Left</option>
-    <option value="8">Digits Center Right</option>
     <option value="9">Analog Meter</option>
+    <option value="6">LEDs</option>
+    <option value="2">Digits Top</option>
+    <option value="7">Digits Left</option>
+    <option value="8">Digits Right</option>
+    <option value="4">Digits Center </option>
+    <option value="3">Digits Bottom Left</option>
+    <option value="5">Digits Bottom Right</option>
     </select>
   <br>
   
