@@ -222,13 +222,16 @@ text-decoration: none;border: none;letter-spacing:1.25px;cursor: pointer;text-tr
 </form>
 
 <button>
-<a href="https://github.com/Keith-N/KaN-Gauge/wiki" target="_blank" >GitHub</a>
+<a href="https://github.com/Keith-N/KaN_Gauge_V2/wiki" target="_blank" >GitHub</a>
 </button>
 <br>
 <button>
-<a href="https://github.com/Keith-N/KaN-Gauge/releases" target="_blank">Firmware Releases</a>
+<a href="https://github.com/Keith-N/KaN_Gauge_V2/releases" target="_blank">Firmware Releases</a>
 </button>
-
+<br>
+<button>
+<a href="https://github.com/Keith-N/KaN_Gauge_V2/wiki/Gauge-Types" target="_blank">Gauge Types</a>
+</button>
 
 
 </body>
@@ -424,6 +427,9 @@ text-decoration: none;border: none;letter-spacing:1.25px;cursor: pointer;text-tr
   <br>
   <input type="submit" value = "Set new configuration" onClick="notify('New Configuration Sent')">
   <br>
+<button>
+<a href="https://github.com/Keith-N/KaN_Gauge_V2/wiki/Gauge-Types" target="_blank">Gauge Types</a>
+</button>
 </form>
 
 <form action="/setAlertType">
