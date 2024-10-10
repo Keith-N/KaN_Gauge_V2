@@ -1337,8 +1337,8 @@ void checkNvsVer() {
     preferences.end();
 
     // Save default config
-    saveBootConfig();
-    saveWifi();
+    //saveBootConfig();
+    //saveWifi();
     //saveSensorMinMax();
     //saveSensorAlerts();
 
