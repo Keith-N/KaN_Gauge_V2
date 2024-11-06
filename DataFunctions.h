@@ -232,23 +232,27 @@ void SAVE_CAN_DATA(twai_message_t CANmsg)
     // MS CAN
   case (1512):
 
-    manifoldPressure.scaledValue = (((float)word(CANmsg.data[1], CANmsg.data[0])) / 10);
-    rpm.scaledValue = (((int)word(CANmsg.data[3], CANmsg.data[2])));
+    manifoldPressure.scaledValue = (((float)word(CANmsg.data[0], CANmsg.data[1])) / 10);
+    boost_kpa.scaledValue = manifoldPressure.scaledValue + boost_kpa.offset;
+    manifoldPressure_psi.scaledValue = ((manifoldPressure.scaledValue) * (manifoldPressure_psi.scaleMultiplier) + manifoldPressure_psi.offset);
+    
+    boost_psi.scaledValue = manifoldPressure_psi.scaledValue + boost_psi.offset;
+    rpm.scaledValue = (((int)word(CANmsg.data[2], CANmsg.data[3])));
 
     // Add scale to temp C only F in broadcast
-    coolantTemperature_f.scaledValue = ((((int)word(CANmsg.data[5], CANmsg.data[4])) / 10));
-    throttle1.scaledValue = ((((int)word(CANmsg.data[7], CANmsg.data[6])) / 10));
+    coolantTemperature_f.scaledValue = ((((int)word(CANmsg.data[4], CANmsg.data[5])) / 10));
+    throttle1.scaledValue = ((((int)word(CANmsg.data[6], CANmsg.data[7])) / 10));
     break;
 
   case (1513):
     // PW1
-    injectorPulse.scaledValue = (((float)word(CANmsg.data[1], CANmsg.data[0])) / 1000);
+    injectorPulse.scaledValue = (((float)word(CANmsg.data[0], CANmsg.data[1])) / 1000);
     // PW2
-    // injectorPulse2.scaledValue = ((((float)word(CANmsg.data[3], CANmsg.data[2])) / 1000;
+    injectorPulse2.scaledValue = (((float)word(CANmsg.data[2], CANmsg.data[3])) / 1000);
     // mat
-    intakeTemperature_f.scaledValue = ((float)word((CANmsg.data[5]), (CANmsg.data[4]))) / 10;
+    intakeTemperature_f.scaledValue = ((float)word((CANmsg.data[4]), (CANmsg.data[5]))) / 10;
     // adv_deg
-    ignitionTiming.scaledValue = ((float)word(CANmsg.data[7], CANmsg.data[6])) / 10;
+    ignitionTiming.scaledValue = ((float)word(CANmsg.data[6], CANmsg.data[7])) / 10;
     break;
 
   case (1514):
@@ -256,14 +260,14 @@ void SAVE_CAN_DATA(twai_message_t CANmsg)
     // AFR1
     afr.scaledValue = (((float)(CANmsg.data[1]) / 10));
     // EGO corr 1
-    fuelTrim.scaledValue = (((float)word(CANmsg.data[3], CANmsg.data[2])) / 10);
+    fuelTrim.scaledValue = (((float)word(CANmsg.data[2], CANmsg.data[3])) / 10);
     // EGT 1
     // pwseq1
     break;
 
   case (1515):
     // Battery
-    batteryVoltage.scaledValue = (((float)word(CANmsg.data[1], CANmsg.data[0])) / 10);
+    batteryVoltage.scaledValue = (((float)word(CANmsg.data[0], CANmsg.data[1])) / 10);
     // Sensor 1
     // Sensor 2
     // knock retard
@@ -271,7 +275,7 @@ void SAVE_CAN_DATA(twai_message_t CANmsg)
 
   case (1516):
     // Vss 1
-    vss.scaledValue = (((float)word(CANmsg.data[1], CANmsg.data[0])) / 10);
+    vss.scaledValue = (((float)word(CANmsg.data[0], CANmsg.data[1])) / 10);
     // tc_rtd
     // Launch time
     break;

@@ -27,7 +27,7 @@ Preferences preferences;
 #define BMM 1
 #define FOME 2
 #define MAZDA 3
-#define CUSTOM 3
+#define CUSTOM 4
 #define REV 102
 
 // Meter color schemes

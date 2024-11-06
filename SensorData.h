@@ -504,7 +504,7 @@ sensorData fuel = {
   0,       // Minimum value used for LEDs or graphing
   100,     // Maxumum value used for LEDs or graphing
   -200,     // Minimum value before alerting
-  1050,      // Maximum value before alerting
+  200,      // Maximum value before alerting
   0        // Number of values after the decimal that are used
 };         
 
@@ -614,6 +614,19 @@ sensorData injectorPulse = {
   -999,        // Maximum value before alerting
   2            // Number of values after the decimal that are used
 };             
+
+sensorData injectorPulse2 = {
+  "Injector2",  // Name shown for data
+  "ms",        // Units shown for data
+  0.003,       // Used to scale the recieved value
+  0,           // The offset applied to the recieved value
+  0,           // Stored value for the sensor data, after scale and offset
+  0,           // Minimum value used for LEDs or graphing
+  100,         // Maxumum value used for LEDs or graphing
+  999,         // Minimum value before alerting
+  -999,        // Maximum value before alerting
+  2            // Number of values after the decimal that are used
+}; 
 
 // NEW - Fueling 3
 sensorData lambda1 = {
