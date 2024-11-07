@@ -26,28 +26,6 @@ bool ALERT = false;
 
 // ========================================================== Functions =========================================================================
 
-float rollOverAdjust(float t, float scale, int b)
-{
-
-  switch (b)
-  {
-
-  case 16:
-
-    if (t > (65535 / 2 * scale))
-    {
-      t = t - (65535 * scale);
-    }
-
-    break;
-
-  default:
-    break;
-  }
-
-  return t;
-}
-
 void incrementTestData()
 {
   // Increment test data
@@ -145,16 +123,10 @@ void SAVE_CAN_DATA(twai_message_t CANmsg)
     break;
 
   case (514):
-    accelerator.scaledValue = ((((int)word(CANmsg.data[1], CANmsg.data[0])) * (accelerator.scaleMultiplier)) + accelerator.offset);
-    throttle1.scaledValue = ((((int)word(CANmsg.data[3], CANmsg.data[2])) * (throttle1.scaleMultiplier)) + throttle1.offset);
-    throttle2.scaledValue = ((((int)word(CANmsg.data[5], CANmsg.data[4])) * (throttle2.scaleMultiplier)) + throttle2.offset);
-    wastegate.scaledValue = ((((int)word(CANmsg.data[7], CANmsg.data[6])) * (wastegate.scaleMultiplier)) + wastegate.offset);
-
-    // If a negative/large value is calculated
-    accelerator.scaledValue = rollOverAdjust(accelerator.scaledValue, accelerator.scaleMultiplier, 16);
-    throttle1.scaledValue = rollOverAdjust(throttle1.scaledValue, throttle1.scaleMultiplier, 16);
-    throttle2.scaledValue = rollOverAdjust(throttle2.scaledValue, throttle2.scaleMultiplier, 16);
-    wastegate.scaledValue = rollOverAdjust(wastegate.scaledValue, wastegate.scaleMultiplier, 16);
+    accelerator.scaledValue = ((((short)word(CANmsg.data[1], CANmsg.data[0])) * (accelerator.scaleMultiplier)) + accelerator.offset);
+    throttle1.scaledValue = ((((short)word(CANmsg.data[3], CANmsg.data[2])) * (throttle1.scaleMultiplier)) + throttle1.offset);
+    throttle2.scaledValue = ((((short)word(CANmsg.data[5], CANmsg.data[4])) * (throttle2.scaleMultiplier)) + throttle2.offset);
+    wastegate.scaledValue = ((((short)word(CANmsg.data[7], CANmsg.data[6])) * (wastegate.scaleMultiplier)) + wastegate.offset);
 
     break;
 
@@ -207,8 +179,7 @@ void SAVE_CAN_DATA(twai_message_t CANmsg)
   case (518):
     fuelConsumed.scaledValue = ((((float)word(CANmsg.data[1], CANmsg.data[0])) * (fuelConsumed.scaleMultiplier)) + fuelConsumed.offset);
     fuelConsumption.scaledValue = ((((float)word(CANmsg.data[3], CANmsg.data[2])) * (fuelConsumption.scaleMultiplier)) + fuelConsumption.offset);
-    fuelTrim.scaledValue = ((((float)word(CANmsg.data[5], CANmsg.data[4])) * (fuelTrim.scaleMultiplier)) + fuelTrim.offset);
-    fuelTrim.scaledValue = rollOverAdjust(fuelTrim.scaledValue, fuelTrim.scaleMultiplier, 16);
+    fuelTrim.scaledValue = ((((short)word(CANmsg.data[5], CANmsg.data[4])) * (fuelTrim.scaleMultiplier)) + fuelTrim.offset);
 
     break;
 
@@ -243,7 +214,7 @@ void SAVE_CAN_DATA(twai_message_t CANmsg)
     coolantTemperature_f.scaledValue = ((((int)word(CANmsg.data[4], CANmsg.data[5])) / 10));
     coolantTemperature.scaledValue = (coolantTemperature_f.scaledValue - 32) / 1.8;
 
-    throttle1.scaledValue = ((((int)word(CANmsg.data[6], CANmsg.data[7])) / 10));
+    throttle1.scaledValue = ((((short)word(CANmsg.data[6], CANmsg.data[7])) / 10));
     break;
 
   case (1513):
