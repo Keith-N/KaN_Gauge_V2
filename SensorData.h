@@ -63,6 +63,8 @@
 
 #define STOICH_RATIO 14.7f
 
+
+
 // Data structure for each sensor value
 struct sensorData {
   const char *dataName;   // Name shown for data
@@ -289,7 +291,7 @@ sensorData boost_psi = {
   "psi",      // Units shown for data
   1,          // Used to scale the recieved value
   -14.69595,  // The offset applied to the recieved value
-  -14.69595,  // Stored value for the sensor data, after scale and offset
+  0,  // Stored value for the sensor data, after scale and offset
   0,          // Minimum value used for LEDs or graphing
   25,         // Maxumum value used for LEDs or graphing
   -999,        // Minimum value before alerting
@@ -316,7 +318,7 @@ sensorData boost_kpa = {
   "kPa",     // Units shown for data
   1,         // Used to scale the recieved value
   -101.325,  // The offset applied to the recieved value
-  -101.325,  // Stored value for the sensor data, after scale and offset
+  0,  // Stored value for the sensor data, after scale and offset
   0,         // Minimum value used for LEDs or graphing
   250,       // Maxumum value used for LEDs or graphing
   999,       // Minimum value before alerting
@@ -510,7 +512,7 @@ sensorData fuel = {
 
 // -- ID 516 --
 sensorData afr = {
-  "E0 AFR",  // Name shown for data
+  "AFR",  // Name shown for data
   "",        // Units shown for data
   0.001,     // Used to scale the recieved value
   0,         // The offset applied to the recieved value

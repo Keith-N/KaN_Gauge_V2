@@ -351,7 +351,7 @@ text-decoration: none;border: none;letter-spacing:1.25px;cursor: pointer;text-tr
 
 
 <form action="/setGaugeConfig">
-  <p>Select Gauge Sensors</p>
+  <p>Select Gauge Sensors FOME</p>
   <p1>Selects displayed sensor for selected location in current configuration</p1> <br><br>
   
   <label for="B"></label>
@@ -431,6 +431,73 @@ text-decoration: none;border: none;letter-spacing:1.25px;cursor: pointer;text-tr
 <a href="https://github.com/Keith-N/KaN_Gauge_V2/wiki/Gauge-Types" target="_blank">Gauge Types</a>
 </button>
 </form>
+
+<form action="/setGaugeConfig">
+<p>Select Gauge Sensors MS</p>
+  <p1>Selects displayed sensor for selected location in current configuration</p1> 
+  <br><br>
+  <label for="B"></label>
+  <select id="B" name="B"> 
+    <option value="0">Arc Inside</option>
+    <option value="1">Arc Outside</option>
+    <option value="9">Analog Meter</option>
+    <option value="6">LEDs</option>
+    <option value="2">Digits Top</option>
+    <option value="7">Digits Left</option>
+    <option value="8">Digits Right</option>
+    <option value="4">Digits Center </option>
+    <option value="3">Digits Bottom Left</option>
+    <option value="5">Digits Bottom Right</option>
+    </select>
+  <br>
+  
+  <label for="C"></label>
+  <select id="C" name="C"> 
+    <option value="0">AFR</option>
+
+    <option value="1">RPM</option>
+
+    <option value="2">Speed KPH</option>
+    <option value="3">Speed MPH</option>
+
+    <option value="4">MAP kpa</option>
+    <option value="5">MAP psi</option>
+
+    <option value="6">Coolant Temp C</option>
+    <option value="7">Coolant Temp F</option>
+
+    <option value="8">Intake Temp C</option>
+    <option value="9">Intake Temp F</option>
+
+    <option value="11">Ignition Timing</option>
+
+    <option value="12">Injector Duty</option>
+    <option value="13">Injector Pulse</option>
+
+    <option value="14">TPS</option>
+    <option value="21">Aux 1</option>
+    <option value="23">Aux 2</option>
+    <option value="25">Battery Voltage</option>
+
+    <option value="33">Fuel Trim</option>
+
+    <option value="41">No Data</option>
+    <option value="42">Test Data</option>
+
+    <option value="43">Boost kPa</option>
+    <option value="44">Boost Psi</option>
+
+
+    </select>
+
+  <br>
+  <input type="submit" value = "Set new configuration" onClick="notify('New Configuration Sent')">
+  <br>
+<button>
+<a href="https://github.com/Keith-N/KaN_Gauge_V2/wiki/Gauge-Types" target="_blank">Gauge Types</a>
+</button>
+</form>
+
 
 <form action="/setAlertType">
   <p>Select Alert Type</p>

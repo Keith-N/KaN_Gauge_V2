@@ -234,23 +234,24 @@ void SAVE_CAN_DATA(twai_message_t CANmsg)
 
     manifoldPressure.scaledValue = (((float)word(CANmsg.data[0], CANmsg.data[1])) / 10);
     boost_kpa.scaledValue = manifoldPressure.scaledValue + boost_kpa.offset;
-    manifoldPressure_psi.scaledValue = ((manifoldPressure.scaledValue) * (manifoldPressure_psi.scaleMultiplier) + manifoldPressure_psi.offset);
-    
+
+    manifoldPressure_psi.scaledValue = ((manifoldPressure.scaledValue) * (0.1450377377));
     boost_psi.scaledValue = manifoldPressure_psi.scaledValue + boost_psi.offset;
+
     rpm.scaledValue = (((int)word(CANmsg.data[2], CANmsg.data[3])));
 
-    // Add scale to temp C only F in broadcast
     coolantTemperature_f.scaledValue = ((((int)word(CANmsg.data[4], CANmsg.data[5])) / 10));
+    coolantTemperature.scaledValue = (coolantTemperature_f.scaledValue - 32) / 1.8;
+
     throttle1.scaledValue = ((((int)word(CANmsg.data[6], CANmsg.data[7])) / 10));
     break;
 
   case (1513):
     // PW1
     injectorPulse.scaledValue = (((float)word(CANmsg.data[0], CANmsg.data[1])) / 1000);
-    // PW2
-    injectorPulse2.scaledValue = (((float)word(CANmsg.data[2], CANmsg.data[3])) / 1000);
     // mat
     intakeTemperature_f.scaledValue = ((float)word((CANmsg.data[4]), (CANmsg.data[5]))) / 10;
+    intakeTemperature.scaledValue = (intakeTemperature_f.scaledValue-32)/1.8;
     // adv_deg
     ignitionTiming.scaledValue = ((float)word(CANmsg.data[6], CANmsg.data[7])) / 10;
     break;
@@ -269,7 +270,9 @@ void SAVE_CAN_DATA(twai_message_t CANmsg)
     // Battery
     batteryVoltage.scaledValue = (((float)word(CANmsg.data[0], CANmsg.data[1])) / 10);
     // Sensor 1
+    auxTemp1.scaledValue = (((float)word(CANmsg.data[2], CANmsg.data[3])) / 100);
     // Sensor 2
+    auxTemp2.scaledValue = (((float)word(CANmsg.data[4], CANmsg.data[5])) / 100);
     // knock retard
     break;
 
