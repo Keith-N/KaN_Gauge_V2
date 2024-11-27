@@ -1,3 +1,4 @@
+//==============================================
 /*
   KaN Gauge V2
   13-09-2024
@@ -18,7 +19,7 @@
   Using libraries from library manager / github should be okay, but will require modifications to the TFT_eSPI libraries.
   
 */
-
+//==============================================
 
 //==============================================
 //  Libraries
@@ -237,12 +238,14 @@ void setup() {
   setupPinMode();
   attachInterrupt(USER_INPUT_D2, inputButtonD1_ISR, FALLING);
 
+ hardwareConfig = checkResistorConfig();
+
 #ifdef DEBUG_SERIAL
   Serial.println("Setup ...");
   Serial.print("Build : ");
-  Serial.println(build);
-  Serial.print("Build Type : ");
-  Serial.println(buildType);
+  Serial.println(softwareVersion);
+  Serial.print("Build Note : ");
+  Serial.println(buildNote);
   Serial.print("NVS : ");
   Serial.println(nvs);
 #endif
@@ -262,7 +265,7 @@ void setup() {
 
 #ifdef DEBUG_SERIAL
   Serial.print("PCB Rev : ");
-  Serial.println(pcbRev);
+  Serial.println(hardwareConfig);
 #endif
 
 #ifdef DEBUG_SERIAL

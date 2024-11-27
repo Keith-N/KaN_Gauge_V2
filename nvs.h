@@ -1,3 +1,4 @@
+//==============================================
 /*
 
   'nvs.h'
@@ -5,6 +6,8 @@
   Handles configuration checks and restoring previously saved configurations
 
 */
+//==============================================
+
 #pragma once
 #include "config.h"
 #include "DataFunctions.h"
@@ -309,7 +312,7 @@ char newHOST[16] = "kan";
 
 int gaugeSensor[] = { LAMBDA_1, OIL_PRESS_PSI, LAMBDA_1, COOLANT_TEMP_F, LAMBDA_1, OIL_PRESS_PSI, LAMBDA_1, LAMBDA_1, LAMBDA_1, LAMBDA_1, NO_DATA };
 int brightness[] = { 80, 10, 80, 10 };
-int logoTime_ms = 600;
+int logoTime_ms = 800;
 
 int selectedSensor;
 int selectedLimit;
@@ -384,7 +387,7 @@ bool startCan = true;
 int displayRefresh_ms = 100;
 
 
-String gaugeStyleNames[] = { "2 Arc", "Meter", "1 Arc, large digits", "Meter, large digits", "Large Digits" };
+String gaugeStyleNames[] = { "2x Arc with 4x Digital", "1x Meter with 5x Digital", "1x Arc with large numbers", "1x Meter with large numbers", "Large numbers" };
 String dataLocation[] = { "Inside Arc", "Outer Arc", "Center", "Bottom Left", "Center Bottom", "Bottom Right", "LEDs", "Top Left", "Top Right", "Meter", "" };
 
 

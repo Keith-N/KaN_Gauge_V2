@@ -1,10 +1,11 @@
+//==============================================
 /*
   'display.h'
 
   Display setup and and printing functions.
 
 */
-
+//==============================================
 #pragma once
 
 #include <TFT_eWidget.h>

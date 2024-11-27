@@ -1,10 +1,13 @@
+//==============================================
 /*
+   
    'dataFunctions.h'
 
    This takes the recieved CAN messages and processes them based on defined scaling factors and offsets,
     then stores them inside the data structs.
 
 */
+//==============================================
 #pragma once
 
 #include "wifi.h"

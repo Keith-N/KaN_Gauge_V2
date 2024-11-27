@@ -1,3 +1,4 @@
+//==============================================
 /*
 
   'sensorData.h'
@@ -5,7 +6,7 @@
   Contains unique IDs for sensor identification, formatting, and calculation
 
 */
-
+//==============================================
 #pragma once
 
 // Assigned unique IDs for all sensor data
@@ -67,7 +68,8 @@
 
 // Data structure for each sensor value
 struct sensorData {
-  const char *dataName;   // Name shown for data
+  const char *dataNameFull;   // Full Name shown for data
+  const char *dataName;   // Name shown for data on gauge
   const char *units;      // Units shown for data
   float scaleMultiplier;  // Used to scale the recieved value
   float offset;           // The offset applied to the recieved value
@@ -81,6 +83,7 @@ struct sensorData {
 };
 
 sensorData testData = {
+  "Test Data",
   "Test",  // Name shown for data
   "%@#",   // Units shown for data
   1,       // Used to scale the recieved value
@@ -94,6 +97,7 @@ sensorData testData = {
 };
 
 sensorData noData = {
+  "No Data",
   "None",  // Name shown for data
   "",      // Units shown for data
   0,       // Used to scale the recieved value
@@ -108,6 +112,7 @@ sensorData noData = {
 
 // -- ID 512 --
 sensorData warningStatus = {
+  "Warning Status",
   "Warn",  // Name shown for data
   "",      // Units shown for data
   1,       // Used to scale the recieved value
@@ -123,6 +128,7 @@ sensorData warningStatus = {
 
 
 sensorData gear = {
+  "Detected Gear",
   "Gear",  // Name shown for data
   "",      // Units shown for data
   1,       // Used to scale the recieved value
@@ -150,13 +156,14 @@ int egoHeater;
 // -- ID 513 --
 
 sensorData rpm = {
+  "RPM",
   "RPM",  // Name shown for data
   "",     // Units shown for data
   1,      // Used to scale the recieved value
   0,      // The offset applied to the recieved value
   0,      // Stored value for the sensor data, after scale and offset
   0,      // Minimum value used for LEDs or graphing
-  -100,   // Maxumum value used for LEDs or graphing
+  6500,   // Maxumum value used for LEDs or graphing
   -10000,  // Minimum value before alerting
   10000,   // Maximum value before alerting
   0       // Number of values after the decimal that are used
@@ -164,6 +171,7 @@ sensorData rpm = {
 
 
 sensorData ignitionTiming = {
+  "Ignition Timing",
   "Ign",  // Name shown for data
   "o",    // Units shown for data
   0.02,   // Used to scale the recieved value
@@ -177,6 +185,7 @@ sensorData ignitionTiming = {
 };
 
 sensorData injectorDuty = {
+  "Injector Dutycycle",
   "Inj",  // Name shown for data
   "%",    // Units shown for data
   0.5,    // Used to scale the recieved value
@@ -190,6 +199,7 @@ sensorData injectorDuty = {
 };
 
 sensorData vss_mph = {
+  "Spped MPH",
   "Speed",       // Name shown for data
   "mph",         // Units shown for data
   0.6213711922,  // Used to scale the recieved value
@@ -203,6 +213,7 @@ sensorData vss_mph = {
 };              
 
 sensorData vss = {
+  "Speed km/h",
   "Speed",  // Name shown for data
   "km/h",   // Units shown for data
   1,        // Used to scale the recieved value
@@ -218,6 +229,7 @@ sensorData vss = {
 // -- ID 514 --
 
 sensorData accelerator = {
+  "Accelerator Position",
   "Accel",  // Name shown for data
   "%",      // Units shown for data
   0.01,     // Used to scale the recieved value
@@ -231,6 +243,7 @@ sensorData accelerator = {
 }; 
 
 sensorData throttle1 = {
+  "Throttle Position 1",
   "Tps1",  // Name shown for data
   "%",     // Units shown for data
   0.01,    // Used to scale the recieved value
@@ -245,6 +258,7 @@ sensorData throttle1 = {
 
 
 sensorData throttle2 = {
+  "Throttle Position 2",  
   "Tps2",  // Name shown for data
   "%",     // Units shown for data
   0.01,    // Used to scale the recieved value
@@ -259,6 +273,7 @@ sensorData throttle2 = {
 
 
 sensorData wastegate = {
+  "Wastegate Dutycycle",
   "WG",  // Name shown for data
   "%",   // Units shown for data
   0.01,  // Used to scale the recieved value
@@ -274,6 +289,7 @@ sensorData wastegate = {
 // -- ID 515 --
 
 sensorData manifoldPressure_psi = {
+  "Manifold Prssure psi",
   "MAP",                        // Name shown for data
   "psi",                        // Units shown for data
   ((0.033333) * 0.1450377377),  // Used to scale the recieved value
@@ -287,6 +303,7 @@ sensorData manifoldPressure_psi = {
 };                        
 
 sensorData boost_psi = {
+  "Boost Pressure psi",
   "Boost",    // Name shown for data
   "psi",      // Units shown for data
   1,          // Used to scale the recieved value
@@ -301,6 +318,7 @@ sensorData boost_psi = {
 
 
 sensorData manifoldPressure = {
+  "Manifold Pressure kPa",
   "MAP",       // Name shown for data
   "kPa",       // Units shown for data
   (0.033333),  // Used to scale the recieved value
@@ -314,6 +332,7 @@ sensorData manifoldPressure = {
 };             
 
 sensorData boost_kpa = {
+  "Boost Pressure kPa",
   "boost",   // Name shown for data
   "kPa",     // Units shown for data
   1,         // Used to scale the recieved value
@@ -328,6 +347,7 @@ sensorData boost_kpa = {
 
 // Convert from C to F
 sensorData coolantTemperature_f = {
+  "Coolant Temperature F",
   "CLT",  // Name shown for data
   "F",    // Units shown for data
   1.8,    // Used to scale the recieved value
@@ -342,6 +362,7 @@ sensorData coolantTemperature_f = {
 
 // Convert from C to F
 sensorData intakeTemperature_f = {
+  "Intake Temperature F",
   "IAT",  // Name shown for data
   "F",    // Units shown for data
   1.8,    // Used to scale the recieved value
@@ -355,6 +376,7 @@ sensorData intakeTemperature_f = {
 };  
 
 sensorData coolantTemperature = {
+  "Coolant Temperature C",
   "CLT",  // Name shown for data
   "C",    // Units shown for data
   1,      // Used to scale the recieved value
@@ -368,6 +390,7 @@ sensorData coolantTemperature = {
 };
 
 sensorData oilTemperature = {
+  "Oil Temperature C",
   "Oil",  // Name shown for data
   "C",    // Units shown for data
   1,      // Used to scale the recieved value
@@ -381,6 +404,7 @@ sensorData oilTemperature = {
 };
 
 sensorData oilTemperature_f = {
+  "Oil Temperature F",
   "Oil",  // Name shown for data
   "F",    // Units shown for data
   1.8,    // Used to scale the recieved value
@@ -394,6 +418,7 @@ sensorData oilTemperature_f = {
 };
 
 sensorData fuelTemperature = {
+  "Fuel Temperature C",
   "Fuel",  // Name shown for data
   "C",    // Units shown for data
   1,      // Used to scale the recieved value
@@ -407,6 +432,7 @@ sensorData fuelTemperature = {
 };
 
 sensorData fuelTemperature_f = {
+  "Fuel Temperature F",
   "Fuel",  // Name shown for data
   "F",    // Units shown for data
   1.8,    // Used to scale the recieved value
@@ -420,6 +446,7 @@ sensorData fuelTemperature_f = {
 };
 
 sensorData intakeTemperature = {
+  "Intake Temperature C",
   "IAT",  // Name shown for data
   "C",    // Units shown for data
   1,      // Used to scale the recieved value
@@ -433,6 +460,7 @@ sensorData intakeTemperature = {
 };        
 
 sensorData auxTemp1 = {
+  "Auxiliary Temperature 1 C",
   "Aux1",  // Name shown for data
   "C",     // Units shown for data
   1,       // Used to scale the recieved value
@@ -446,6 +474,7 @@ sensorData auxTemp1 = {
 };         
 
 sensorData auxTemp1_f = {
+  "Auxiliary Temperature 1 F",
   "Aux1",  // Name shown for data
   "F",     // Units shown for data
   1.8,     // Used to scale the recieved value
@@ -459,6 +488,7 @@ sensorData auxTemp1_f = {
 };         
 
 sensorData auxTemp2 = {
+  "Auxiliary Temperature 2 C",
   "Aux2",  // Name shown for data
   "C",     // Units shown for data
   1,       // Used to scale the recieved value
@@ -472,6 +502,7 @@ sensorData auxTemp2 = {
 };         
 
 sensorData auxTemp2_f = {
+  "Auxiliary Temperature 2 F",
   "Aux2",  // Name shown for data
   "F",     // Units shown for data
   1.8,     // Used to scale the recieved value
@@ -485,6 +516,7 @@ sensorData auxTemp2_f = {
 };         
 
 sensorData mcuTemp = {
+  "Processor Temperature C",
   "MCU",  // Name shown for data
   "C",    // Units shown for data
   1,      // Used to scale the recieved value
@@ -498,6 +530,7 @@ sensorData mcuTemp = {
 };        
 
 sensorData fuel = {
+  "Fuel Level",
   "Fuel",  // Name shown for data
   "%",     // Units shown for data
   0.5,     // Used to scale the recieved value
@@ -512,6 +545,7 @@ sensorData fuel = {
 
 // -- ID 516 --
 sensorData afr = {
+  "AFR",
   "AFR",  // Name shown for data
   "",        // Units shown for data
   0.001,     // Used to scale the recieved value
@@ -525,6 +559,7 @@ sensorData afr = {
 };
 
 sensorData oilPressure_psi = {
+  "Oil Pressure psi",
   "Oil",                      // Name shown for data
   "psi",                      // Units shown for data
   (0.033333) * 0.1450377377,  // Used to scale the recieved value
@@ -538,6 +573,7 @@ sensorData oilPressure_psi = {
 };                           
 
 sensorData oilPressure = {
+  "Oil Pressure kPa",
   "Oil",       // Name shown for data
   "kPa",       // Units shown for data
   (0.033333),  // Used to scale the recieved value
@@ -551,6 +587,7 @@ sensorData oilPressure = {
 };             
 
 sensorData vvtPosition = {
+  "VVT Position",
   "VVT",  // Name shown for data
   "o",    // Units shown for data
   0.02,   // Used to scale the recieved value
@@ -564,6 +601,7 @@ sensorData vvtPosition = {
 };        
 
 sensorData batteryVoltage = {
+  "Battery Voltage",
   "Bat",  // Name shown for data
   "V",    // Units shown for data
   0.001,  // Used to scale the recieved value
@@ -579,6 +617,7 @@ sensorData batteryVoltage = {
 // -- ID 517 --
 
 sensorData airMass = {
+  "Air Mass mg",
   "Air",  // Name shown for data
   "mg",   // Units shown for data
   1,      // Used to scale the recieved value
@@ -592,6 +631,7 @@ sensorData airMass = {
 };        
 
 sensorData estimatedAirflow = {
+  "Estimated Air Flow kg/h",
   "Air",   // Name shown for data
   "kg/h",  // Units shown for data
   0.01,    // Used to scale the recieved value
@@ -605,6 +645,7 @@ sensorData estimatedAirflow = {
 };         
 
 sensorData injectorPulse = {
+  "Injector Pulse ms",
   "Injector",  // Name shown for data
   "ms",        // Units shown for data
   0.003,       // Used to scale the recieved value
@@ -618,6 +659,7 @@ sensorData injectorPulse = {
 };             
 
 sensorData injectorPulse2 = {
+  "Injector Pulse 2 ms",
   "Injector2",  // Name shown for data
   "ms",        // Units shown for data
   0.003,       // Used to scale the recieved value
@@ -632,6 +674,7 @@ sensorData injectorPulse2 = {
 
 // NEW - Fueling 3
 sensorData lambda1 = {
+  "Lambda 1",
   "Lambda",   // Name shown for data
   "",         // Units shown for data
   (0.0001),   // Used to scale the recieved value
@@ -645,6 +688,7 @@ sensorData lambda1 = {
 };            
 
 sensorData lambda2 = {
+  "Lambda2",
   "Lambda2",  // Name shown for data
   "",         // Units shown for data
   (0.0001),   // Used to scale the recieved value
@@ -658,6 +702,7 @@ sensorData lambda2 = {
 };            
 
 sensorData fuelPressureLow = {
+  "Low Fuel Pressure kPa",
   "Fuel",      // Name shown for data
   "kPa",       // Units shown for data
   (0.033333),  // Used to scale the recieved value
@@ -671,6 +716,7 @@ sensorData fuelPressureLow = {
 };             
 
 sensorData fuelPressureLow_psi = {
+  "Low Fuel Pressure psi",
   "Fuel",      // Name shown for data
   "psi",       // Units shown for data
   (0.033333),  // Used to scale the recieved value
@@ -684,6 +730,7 @@ sensorData fuelPressureLow_psi = {
 };             
 
 sensorData fuelPressureHigh = {
+  "High Fuel Pressure bar",
   "Fuel",  // Name shown for data
   "bar",   // Units shown for data
   0.1,     // Used to scale the recieved value
@@ -697,6 +744,7 @@ sensorData fuelPressureHigh = {
 };         
 
 sensorData fuelPressureHigh_psi = {
+  "High Fuel Pressure psi",
   "Fuel",  // Name shown for data
   "psi",   // Units shown for data
   0.1,     // Used to scale the recieved value
@@ -711,6 +759,7 @@ sensorData fuelPressureHigh_psi = {
 
 
 sensorData vvtIntake1 = {
+  "Intake VVT 1 Position",
   "InVVT 1",  // Name shown for data
   "o",        // Units shown for data
   1,       // Used to scale the recieved value
@@ -724,6 +773,7 @@ sensorData vvtIntake1 = {
 };            
 
 sensorData vvtIntake2 = {
+  "Intake VVT 2 Position",
   "InVVT 2",  // Name shown for data
   "o",        // Units shown for data
   1,       // Used to scale the recieved value
@@ -737,6 +787,7 @@ sensorData vvtIntake2 = {
 };            
 
 sensorData vvtExhaust1 = {
+  "Exhaust VVT 1 Position",
   "ExVVT 1",  // Name shown for data
   "o",        // Units shown for data
   1,       // Used to scale the recieved value
@@ -750,6 +801,7 @@ sensorData vvtExhaust1 = {
 };            
 
 sensorData vvtExhaust2 = {
+  "Exhaust VVT 2 Position",
   "ExVVT 2",  // Name shown for data
   "o",        // Units shown for data
   1,       // Used to scale the recieved value
@@ -765,6 +817,7 @@ sensorData vvtExhaust2 = {
 // NEW fueling 2
 
 sensorData fuelConsumed = {
+  "Fuel Consumed g",
   "Fuel",  // Name shown for data
   "g",     // Units shown for data
   1,       // Used to scale the recieved value
@@ -778,6 +831,7 @@ sensorData fuelConsumed = {
 };         
 
 sensorData fuelConsumption = {
+  "Fuel Consumption g/s",
   "Fuel",  // Name shown for data
   "g/s",   // Units shown for data
   0.005,   // Used to scale the recieved value
@@ -791,6 +845,7 @@ sensorData fuelConsumption = {
 };         
 
 sensorData fuelTrim = {
+  "Fuel Trim",
   "FuelTrim",  // Name shown for data
   "%",         // Units shown for data
   0.01,        // Used to scale the recieved value
@@ -804,6 +859,7 @@ sensorData fuelTrim = {
 };             
 
 sensorData ethanol = {
+  "Ethanol",
   "Ethanol",  // Name shown for data
   "%",        // Units shown for data
   1,          // Used to scale the recieved value
@@ -817,6 +873,7 @@ sensorData ethanol = {
 };            
 
 sensorData fuelPressDelta_kpa = {
+  "Fuel Pressure Delta kPa",
   "F Delta",  // Name shown for data
   "kpa",      // Units shown for data
   1,          // Used to scale the recieved value
@@ -830,6 +887,7 @@ sensorData fuelPressDelta_kpa = {
 };            
 
 sensorData fuelPressDelta_psi = {
+  "Fuel Pressure Delta psi",
   "FDelta",  // Name shown for data
   "psi",     // Units shown for data
   1,         // Used to scale the recieved value

@@ -1,3 +1,9 @@
+//==============================================
+/* 'cli.h'
+
+*/
+//==============================================
+
 #pragma once
 #include <SimpleCLI.h>
 #include "config.h"
@@ -251,7 +257,7 @@ void CLItask()
       Serial.print("Build Type : ");
       Serial.println(buildType);
       Serial.print("PCB Revision : ");
-      Serial.println(pcbRev);
+       Serial.println(hardwareConfig);
       Serial.print("NVS Version : ");
       Serial.println(nvs);
     }
@@ -520,15 +526,6 @@ void CLItask()
       saveBootConfig();
     }
 
-    else if (c == cmdBoardConfig)
-    {
-      Command sim(c);
-
-      Argument rev = sim.getArgument("r");
-      pcbRev = rev.getValue().toInt();
-      Serial.println("New rev Config saved");
-      saveBootConfig();
-    }
 
     else if (c == cmdSensorAlerts)
     {

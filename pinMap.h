@@ -1,4 +1,12 @@
+//==============================================
+/*
+  
+  'pinmap.h'
 
+
+
+*/
+//==============================================
 
 #pragma once
 
@@ -19,46 +27,59 @@
 #define LED_1 21
 #define LED_2 14
 
-void setupPinMode(){
+
+void setupPinMode() {
   pinMode(USER_INPUT_D1, INPUT_PULLUP);
   pinMode(USER_INPUT_D2, INPUT_PULLUP);
+  pinMode(USER_INPUT_A1, INPUT);
+  pinMode(USER_INPUT_A2, INPUT);
 }
 
-/*
 
-TFT eSPI Library settings. May beed to be setup in userconfig file of library.
+String checkResistorConfig() {
+  pinMode(R24, INPUT_PULLUP);
+  pinMode(R25, INPUT_PULLUP);
+  pinMode(R26, INPUT_PULLUP);
+  pinMode(R27, INPUT_PULLUP);
 
-*/
+  /* 
+  Shift and OR each pull-down resistor 
+  0 = populated, 1 = not populated
+  binary values will range from 0000 (all populated) to 1111 (none populated)
+  |R27|R26|R25|R24|
+  */
 
-/*
-
-#define GC9A01_DRIVER
-
-#define TFT_HEIGHT 240 // GC9A01 240 x 240
-
-//#define TFT_MISO 21
-#define TFT_MOSI 11
-#define TFT_SCLK 12
-#define TFT_DC 13
-#define TFT_CS   10  // Chip select control pin/#define TFT_DC    13  // Data Command control pin
-//#define TFT_RST   36  // Reset pin (could connect to RST pin)
-#define TFT_RST  -1  // Set TFT_RST to -1 if display RESET is connected to ESP32 board RST
-#define TFT_BL   6  // LED back-light
-
-// #define SPI_FREQUENCY   1000000
-// #define SPI_FREQUENCY   5000000
-// #define SPI_FREQUENCY  10000000
-// #define SPI_FREQUENCY  20000000
- #define SPI_FREQUENCY  27000000
-// #define SPI_FREQUENCY  40000000
-// #define SPI_FREQUENCY  55000000 // STM32 SPI1 only (SPI2 maximum is 27MHz)
-// #define SPI_FREQUENCY  80000000
-
-// Optional reduced SPI frequency for reading TFT
-#define SPI_READ_FREQUENCY  20000000
-
-// The XPT2046 requires a lower SPI clock rate of 2.5MHz so we define that here:
-#define SPI_TOUCH_FREQUENCY  2500000
+  int ResConfig = 0;
+  ResConfig |= (bool) analogRead(R24) << 0;
+  ResConfig |= (bool) analogRead(R25) << 1;
+  ResConfig |= (bool) analogRead(R26) << 2;
+  ResConfig |= (bool) analogRead(R27) << 3;
 
 
-*/
+#ifdef DEBUG_SERIAL
+  Serial.print("Resistors = ");
+  Serial.println(ResConfig, BIN);
+  Serial.println(ResConfig);
+#endif
+
+  // Choose board Revision based on resistor configuration
+  String Rev = "";
+  switch(ResConfig){
+
+    case (0):
+    Rev = "1.4";
+    break;
+
+    case(12):
+    //1.2 and 1.3 are equivalent
+    Rev = "1.3";
+    break;
+
+    default:
+    Rev = "0";
+    break;
+  }
+
+  // Returns hardware revision
+  return Rev;
+}
