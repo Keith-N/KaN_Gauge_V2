@@ -40,9 +40,7 @@
 #include "pages/displayConfig.h"
 #include "pages/ledConfig.h"
 
-//#define WIFI_STA_MODE
-char ssid_sta[16] = "ssid";
-char password_sta[16] = "password";
+
 
 // WiFi OTA
 WebServer server(80);

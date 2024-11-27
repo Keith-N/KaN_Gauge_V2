@@ -376,7 +376,7 @@ void showBootLogos(int start)
 // Draw array "icon" of defined width and height at coordinate x,y
 // Maximum icon size is 255x255 pixels to avoid integer overflow
 
-int ringMeter(float value, float vmin, float vmax, int x, int y, int r, const char *units, byte scheme)
+int ringMeter(float value, float vmin, float vmax, int x, int y, int r, const char *units, byte scheme, int digit, int decimals)
 {
 
   // Minimum value of r is about 52 before value text intrudes on ring
@@ -500,7 +500,7 @@ int ringMeter(float value, float vmin, float vmax, int x, int y, int r, const ch
   return x + r;
 }
 
-int ringMeterNoText(float value, float vmin, float vmax, int x, int y, int r, const char *units, byte scheme)
+int ringMeterNoText(float value, float vmin, float vmax, int x, int y, int r, const char *units, byte scheme, int digit, int decimals)
 {
   // int xpos = 20, ypos = 50, gap = 100, radius = 116;
   // Minimum value of r is about 52 before value text intrudes on ring
@@ -740,7 +740,7 @@ int ringMeter1(float value, float vmin, float vmax, int x, int y, int r, const c
   return x + r;
 }
 
-int ringMeter2(float value, float vmin, float vmax, int x, int y, int r, const char *units, byte scheme, byte seg, byte inc)
+int ringMeter2(float value, float vmin, float vmax, int x, int y, int r, const char *units, byte scheme, byte seg, byte inc, int digit, int decimals)
 {
   // int xpos = 20, ypos = 50, gap = 100, radius = 116;
   //  Minimum value of r is about 52 before value text intrudes on ring
@@ -854,7 +854,7 @@ int ringMeter2(float value, float vmin, float vmax, int x, int y, int r, const c
   return x + r;
 }
 
-void gaugeArc(float value, float min, float max, int x, int y, int r, int arcWidth, int totalAngle, byte scheme, byte numSegments, byte numIncrements)
+void gaugeArc(float value, float min, float max, int x, int y, int r, int arcWidth, int totalAngle, byte scheme, byte numSegments, byte numIncrements, int digits, int decimals)
 {
 
   int color = TFT_BLUE;
@@ -944,7 +944,7 @@ void gaugeArc(float value, float min, float max, int x, int y, int r, int arcWid
   }
 }
 
-void gaugeText(float value, float min, float max, int x, int y, int fontSize, const char *units, const char *name, int color, int color2, bool printUnits, bool printname, int unitOffset, bool alert, int alertColor)
+void gaugeText(float value, float min, float max, int x, int y, int fontSize, const char *units, const char *name, int color, int color2, bool printUnits, bool printname, int unitOffset, bool alert, int alertColor, int digit, int decimals)
 {
 
   // if (name == "None") {return;}
@@ -953,7 +953,7 @@ void gaugeText(float value, float min, float max, int x, int y, int fontSize, co
   char buf[10];
   byte len = 5;
 
-  dtostrf(value, len, 2, buf);
+  dtostrf(value, digit, decimals, buf);
 
   buf[len] = ' ';
 
@@ -1078,7 +1078,7 @@ void gaugeText(float value, float min, float max, int x, int y, int fontSize, co
   }
 }
 
-void gaugeText2(float value, float min, float max, int x, int y, int fontSize, const char *units, int color, int color2, bool printUnits, int unitOffset, bool alert, int alertColor)
+void gaugeText2(float value, float min, float max, int x, int y, int fontSize, const char *units, int color, int color2, bool printUnits, int unitOffset, bool alert, int alertColor, int digit, int decimals)
 {
 
   // Convert value to a string

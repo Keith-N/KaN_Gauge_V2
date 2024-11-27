@@ -78,7 +78,8 @@ struct sensorData {
   float maximum;          // Maxumum value used for LEDs or graphing
   float alertLow;         // Minimum value before alerting
   float alertHigh;        // Maximum value before alerting
-  int precision;          // Number of values after the decimal that are used
+  int digits;              // Total number of digits before decimal
+  int decimal;          // Number of values after the decimal that are used
   bool alert;             // Set when the value is outside of the alert window defined by Min -> Max
 };
 
@@ -93,6 +94,7 @@ sensorData testData = {
   65,      // Maxumum value used for LEDs or graphing
   -50,     // Minimum value before alerting
   50,      // Maximum value before alerting
+  3,
   2,       // Number of values after the decimal that are used
 };
 
@@ -107,6 +109,7 @@ sensorData noData = {
   100,     // Maxumum value used for LEDs or graphing
   -10000,  // Minimum value before alerting
   10000,    // Maximum value before alerting
+  2,
   2        // Number of values after the decimal that are used
 };
 
@@ -122,7 +125,8 @@ sensorData warningStatus = {
   100,     // Maxumum value used for LEDs or graphing
   -10000,  // Minimum value before alerting
   10000,   // Maximum value before alerting
-  2        // Number of values after the decimal that are used
+  1,
+  0        // Number of values after the decimal that are used
 };
 
 
@@ -138,7 +142,8 @@ sensorData gear = {
   6,       // Maxumum value used for LEDs or graphing
   -10000,  // Minimum value before alerting
   10000,    // Maximum value before alerting
-  2        // Number of values after the decimal that are used
+  1,
+  0        // Number of values after the decimal that are used
 
 };
 
@@ -166,6 +171,7 @@ sensorData rpm = {
   6500,   // Maxumum value used for LEDs or graphing
   -10000,  // Minimum value before alerting
   10000,   // Maximum value before alerting
+  5,
   0       // Number of values after the decimal that are used
 };
 
@@ -181,7 +187,8 @@ sensorData ignitionTiming = {
   35,     // Maxumum value used for LEDs or graphing
   -50,    // Minimum value before alerting
   50,     // Maximum value before alerting
-  2       // Number of values after the decimal that are used
+  2,
+  1       // Number of values after the decimal that are used
 };
 
 sensorData injectorDuty = {
@@ -195,6 +202,7 @@ sensorData injectorDuty = {
   100,    // Maxumum value used for LEDs or graphing
   -10,    // Minimum value before alerting
   110,    // Maximum value before alerting
+  3,
   0       // Number of values after the decimal that are used
 };
 
@@ -209,6 +217,7 @@ sensorData vss_mph = {
   120,           // Maxumum value used for LEDs or graphing
   -200,          // Minimum value before alerting
   200,           // Maximum value before alerting
+  3,
   0              // Number of values after the decimal that are used
 };              
 
@@ -223,6 +232,7 @@ sensorData vss = {
   255,      // Maxumum value used for LEDs or graphing
   -255,     // Minimum value before alerting
   2555,     // Maximum value before alerting
+  3,
   0         // Number of values after the decimal that are used
 };          
 
@@ -239,6 +249,7 @@ sensorData accelerator = {
   100,      // Maxumum value used for LEDs or graphing
   -10,      // Minimum value before alerting
   110,      // Maximum value before alerting
+  3,
   0         // Number of values after the decimal that are used
 }; 
 
@@ -253,6 +264,7 @@ sensorData throttle1 = {
   100,     // Maxumum value used for LEDs or graphing
   -200,    // Minimum value before alerting
   200,     // Maximum value before alerting
+  3,
   0        // Number of values after the decimal that are used
 };
 
@@ -268,6 +280,7 @@ sensorData throttle2 = {
   100,     // Maxumum value used for LEDs or graphing
   -10,     // Minimum value before alerting
   110,     // Maximum value before alerting
+  3,
   0        // Number of values after the decimal that are used
 }; 
 
@@ -283,6 +296,7 @@ sensorData wastegate = {
   100,   // Maxumum value used for LEDs or graphing
   -200,  // Minimum value before alerting
   200,   // Maximum value before alerting
+  3,
   0      // Number of values after the decimal that are used
 }; 
 
@@ -299,6 +313,7 @@ sensorData manifoldPressure_psi = {
   25,                           // Maxumum value used for LEDs or graphing
   999,                          // Minimum value before alerting
   -999,                         // Maximum value before alerting
+  3,
   2                           // Number of values after the decimal that are used
 };                        
 
@@ -313,6 +328,7 @@ sensorData boost_psi = {
   25,         // Maxumum value used for LEDs or graphing
   -999,        // Minimum value before alerting
   999,       // Maximum value before alerting
+  3,
   2           // Number of values after the decimal that are used
 }; 
 
@@ -328,6 +344,7 @@ sensorData manifoldPressure = {
   250,         // Maxumum value used for LEDs or graphing
   -999,         // Minimum value before alerting
   999,        // Maximum value before alerting
+  3,
   2            // Number of values after the decimal that are used
 };             
 
@@ -342,6 +359,7 @@ sensorData boost_kpa = {
   250,       // Maxumum value used for LEDs or graphing
   999,       // Minimum value before alerting
   -999,      // Maximum value before alerting
+  3,
   2          // Number of values after the decimal that are used
 };           
 
@@ -357,6 +375,7 @@ sensorData coolantTemperature_f = {
   250,    // Maxumum value used for LEDs or graphing
   -200,      // Minimum value before alerting
   240,    // Maximum value before alerting
+  3,
   0       // Number of values after the decimal that are used
 };
 
@@ -372,6 +391,7 @@ sensorData intakeTemperature_f = {
   0,      // Maxumum value used for LEDs or graphing
   -120,    // Minimum value before alerting
   250,    // Maximum value before alerting
+  3,
   0     // Number of values after the decimal that are used
 };  
 
@@ -386,6 +406,7 @@ sensorData coolantTemperature = {
   120,    // Maxumum value used for LEDs or graphing
   -120,    // Minimum value before alerting
   200,      // Maximum value before alerting
+  3,
   0     // Number of values after the decimal that are used
 };
 
@@ -400,6 +421,7 @@ sensorData oilTemperature = {
   120,    // Maxumum value used for LEDs or graphing
   -120,    // Minimum value before alerting
   200,      // Maximum value before alerting
+  3,
   0     // Number of values after the decimal that are used
 };
 
@@ -414,6 +436,7 @@ sensorData oilTemperature_f = {
   250,      // Maxumum value used for LEDs or graphing
   -120,    // Minimum value before alerting
   250,    // Maximum value before alerting
+  3,
   0     // Number of values after the decimal that are used
 };
 
@@ -428,6 +451,7 @@ sensorData fuelTemperature = {
   120,    // Maxumum value used for LEDs or graphing
   -120,    // Minimum value before alerting
   200,      // Maximum value before alerting
+  3,
   0     // Number of values after the decimal that are used
 };
 
@@ -442,6 +466,7 @@ sensorData fuelTemperature_f = {
   250,      // Maxumum value used for LEDs or graphing
   -120,    // Minimum value before alerting
   250,    // Maximum value before alerting
+  3,
   0     // Number of values after the decimal that are used
 };
 
@@ -456,7 +481,8 @@ sensorData intakeTemperature = {
   55,     // Maxumum value used for LEDs or graphing
   -100,    // Minimum value before alerting
   250,      // Maximum value before alerting
-  2     // Number of values after the decimal that are used
+  3,
+  0     // Number of values after the decimal that are used
 };        
 
 sensorData auxTemp1 = {
@@ -470,6 +496,7 @@ sensorData auxTemp1 = {
   200,     // Maxumum value used for LEDs or graphing
   -1000,     // Minimum value before alerting
   1000,      // Maximum value before alerting
+  3,
   0        // Number of values after the decimal that are used
 };         
 
@@ -484,6 +511,7 @@ sensorData auxTemp1_f = {
   200,     // Maxumum value used for LEDs or graphing
   -1000,     // Minimum value before alerting
   1000,      // Maximum value before alerting
+  3,
   0        // Number of values after the decimal that are used
 };         
 
@@ -498,6 +526,7 @@ sensorData auxTemp2 = {
   200,     // Maxumum value used for LEDs or graphing
   -1000,     // Minimum value before alerting
   1000,      // Maximum value before alerting
+  3,
   0        // Number of values after the decimal that are used
 };         
 
@@ -512,6 +541,7 @@ sensorData auxTemp2_f = {
   200,     // Maxumum value used for LEDs or graphing
   -1000,     // Minimum value before alerting
   1000,      // Maximum value before alerting
+  3,
   0        // Number of values after the decimal that are used
 };         
 
@@ -526,6 +556,7 @@ sensorData mcuTemp = {
   65,    // Maxumum value used for LEDs or graphing
   -40,     // Minimum value before alerting
   80,    // Maximum value before alerting
+  3,
   0       // Number of values after the decimal that are used
 };        
 
@@ -540,6 +571,7 @@ sensorData fuel = {
   100,     // Maxumum value used for LEDs or graphing
   -200,     // Minimum value before alerting
   200,      // Maximum value before alerting
+  3,
   0        // Number of values after the decimal that are used
 };         
 
@@ -555,6 +587,7 @@ sensorData afr = {
   20,        // Maxumum value used for LEDs or graphing
   -10,        // Minimum value before alerting
   160,        // Maximum value before alerting
+  2,
   2          // Number of values after the decimal that are used
 };
 
@@ -569,7 +602,8 @@ sensorData oilPressure_psi = {
   100,                        // Maxumum value used for LEDs or graphing
   10,                         // Minimum value before alerting
   90,                         // Maximum value before alerting
-  0                           // Number of values after the decimal that are used
+  3,
+  2                           // Number of values after the decimal that are used
 };                           
 
 sensorData oilPressure = {
@@ -583,7 +617,8 @@ sensorData oilPressure = {
   100,         // Maxumum value used for LEDs or graphing
   999,         // Minimum value before alerting
   -999,        // Maximum value before alerting
-  0            // Number of values after the decimal that are used
+  3,
+  2            // Number of values after the decimal that are used
 };             
 
 sensorData vvtPosition = {
@@ -597,7 +632,8 @@ sensorData vvtPosition = {
   25,     // Maxumum value used for LEDs or graphing
   -100,    // Minimum value before alerting
   100,   // Maximum value before alerting
-  0       // Number of values after the decimal that are used
+  3,
+  1       // Number of values after the decimal that are used
 };        
 
 sensorData batteryVoltage = {
@@ -611,7 +647,8 @@ sensorData batteryVoltage = {
   16,     // Maxumum value used for LEDs or graphing
   -11,     // Minimum value before alerting
   160,     // Maximum value before alerting
-  2       // Number of values after the decimal that are used
+  2,
+  1       // Number of values after the decimal that are used
 };        
 
 // -- ID 517 --
@@ -627,6 +664,7 @@ sensorData airMass = {
   100,   // Maxumum value used for LEDs or graphing
   9999,   // Minimum value before alerting
   -9999,  // Maximum value before alerting
+  3,
   0       // Number of values after the decimal that are used
 };        
 
@@ -641,6 +679,7 @@ sensorData estimatedAirflow = {
   100,     // Maxumum value used for LEDs or graphing
   999,     // Minimum value before alerting
   -999,    // Maximum value before alerting
+  3,
   0        // Number of values after the decimal that are used
 };         
 
@@ -655,6 +694,7 @@ sensorData injectorPulse = {
   100,         // Maxumum value used for LEDs or graphing
   999,         // Minimum value before alerting
   -999,        // Maximum value before alerting
+  3,
   2            // Number of values after the decimal that are used
 };             
 
@@ -669,6 +709,7 @@ sensorData injectorPulse2 = {
   100,         // Maxumum value used for LEDs or graphing
   999,         // Minimum value before alerting
   -999,        // Maximum value before alerting
+  3,
   2            // Number of values after the decimal that are used
 }; 
 
@@ -684,6 +725,7 @@ sensorData lambda1 = {
   1.3 * 100,  // Maxumum value used for LEDs or graphing
   -5,  // Minimum value before alerting
   5,  // Maximum value before alerting
+  1,
   2           // Number of values after the decimal that are used
 };            
 
@@ -698,6 +740,7 @@ sensorData lambda2 = {
   1.3 * 100,  // Maxumum value used for LEDs or graphing
   -5,  // Minimum value before alerting
   5,  // Maximum value before alerting
+  1,
   2           // Number of values after the decimal that are used
 };            
 
@@ -712,6 +755,7 @@ sensorData fuelPressureLow = {
   50,           // Maxumum value used for LEDs or graphing
   999,         // Minimum value before alerting
   -999,        // Maximum value before alerting
+  3,
   2            // Number of values after the decimal that are used
 };             
 
@@ -726,6 +770,7 @@ sensorData fuelPressureLow_psi = {
   50,           // Maxumum value used for LEDs or graphing
   999,         // Minimum value before alerting
   -999,        // Maximum value before alerting
+  3,
   2            // Number of values after the decimal that are used
 };             
 
@@ -740,6 +785,7 @@ sensorData fuelPressureHigh = {
   250,       // Maxumum value used for LEDs or graphing
   999,     // Minimum value before alerting
   -999,    // Maximum value before alerting
+  3,
   1        // Number of values after the decimal that are used
 };         
 
@@ -754,7 +800,8 @@ sensorData fuelPressureHigh_psi = {
   250,       // Maxumum value used for LEDs or graphing
   999,     // Minimum value before alerting
   -999,    // Maximum value before alerting
-  1        // Number of values after the decimal that are used
+  3,
+  2        // Number of values after the decimal that are used
 };         
 
 
@@ -769,7 +816,8 @@ sensorData vvtIntake1 = {
   100,          // Maxumum value used for LEDs or graphing
   999,        // Minimum value before alerting
   -999,       // Maximum value before alerting
-  2           // Number of values after the decimal that are used
+  3,
+  1           // Number of values after the decimal that are used
 };            
 
 sensorData vvtIntake2 = {
@@ -783,7 +831,8 @@ sensorData vvtIntake2 = {
   100,          // Maxumum value used for LEDs or graphing
   999,        // Minimum value before alerting
   -999,       // Maximum value before alerting
-  2           // Number of values after the decimal that are used
+  3,
+  1           // Number of values after the decimal that are used
 };            
 
 sensorData vvtExhaust1 = {
@@ -797,7 +846,8 @@ sensorData vvtExhaust1 = {
   100,          // Maxumum value used for LEDs or graphing
   999,        // Minimum value before alerting
   -999,       // Maximum value before alerting
-  2           // Number of values after the decimal that are used
+  3,
+  1           // Number of values after the decimal that are used
 };            
 
 sensorData vvtExhaust2 = {
@@ -811,7 +861,8 @@ sensorData vvtExhaust2 = {
   100,          // Maxumum value used for LEDs or graphing
   999,        // Minimum value before alerting
   -999,       // Maximum value before alerting
-  2           // Number of values after the decimal that are used
+  3,
+ 1           // Number of values after the decimal that are used
 };            
 
 // NEW fueling 2
@@ -827,7 +878,8 @@ sensorData fuelConsumed = {
   100,       // Maxumum value used for LEDs or graphing
   999,     // Minimum value before alerting
   -999,    // Maximum value before alerting
-  0        // Number of values after the decimal that are used
+  3,
+  2        // Number of values after the decimal that are used
 };         
 
 sensorData fuelConsumption = {
@@ -841,6 +893,7 @@ sensorData fuelConsumption = {
   100,       // Maxumum value used for LEDs or graphing
   999,     // Minimum value before alerting
   -999,    // Maximum value before alerting
+  3,
   2        // Number of values after the decimal that are used
 };         
 
@@ -855,6 +908,7 @@ sensorData fuelTrim = {
   10,           // Maxumum value used for LEDs or graphing
   999,         // Minimum value before alerting
   -999,        // Maximum value before alerting
+  3,
   2            // Number of values after the decimal that are used
 };             
 
@@ -869,7 +923,8 @@ sensorData ethanol = {
   100,        // Maxumum value used for LEDs or graphing
   999,        // Minimum value before alerting
   -999,       // Maximum value before alerting
-  0           // Number of values after the decimal that are used
+  3,
+  1           // Number of values after the decimal that are used
 };            
 
 sensorData fuelPressDelta_kpa = {
@@ -883,6 +938,7 @@ sensorData fuelPressDelta_kpa = {
   100,        // Maxumum value used for LEDs or graphing
   999,        // Minimum value before alerting
   -999,       // Maximum value before alerting
+  3,
   2           // Number of values after the decimal that are used
 };            
 
@@ -897,5 +953,6 @@ sensorData fuelPressDelta_psi = {
   100,       // Maxumum value used for LEDs or graphing
   999,       // Minimum value before alerting
   -999,      // Maximum value before alerting
+  3,
   2          // Number of values after the decimal that are used
 };           

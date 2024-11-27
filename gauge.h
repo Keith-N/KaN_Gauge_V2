@@ -171,42 +171,42 @@ void updateDisplay() {
     if (ptrData[0]->dataName != "None") {
       //Check if value is outside of alert thresholds, then print the values
       gaugeArc(ptrData[0]->scaledValue, ptrData[0]->minimum, ptrData[0]->maximum, (gaugeposition_x + x_2 + 18), (gaugeposition_y + y_2 + 15), radius2,
-               4, 240, arcColor1, arcSeg1, arcInc1);
+               4, 240, arcColor1, arcSeg1, arcInc1, ptrData[0]->digits, ptrData[0]->decimal);
     }
 
     // Outer
     if (ptrData[1]->dataName != "None") {
       //Check if value is outside of alert thresholds, then print the values
       gaugeArc(ptrData[1]->scaledValue, ptrData[1]->minimum, ptrData[1]->maximum, (gaugeposition_x + x_1), (gaugeposition_y + y_1), radius1,
-               8, 240, arcColor2, arcSeg2, arcInc2);
+               8, 240, arcColor2, arcSeg2, arcInc2, ptrData[1]->digits, ptrData[1]->decimal);
     }
 
     // Center Top Text
     if (ptrData[2]->dataName != "None") {
       //Check if value is outside of alert thresholds, then print the values
       gaugeText(ptrData[2]->scaledValue, ptrData[2]->minimum, ptrData[2]->maximum, (120), (95), 1,
-                ptrData[2]->units, ptrData[2]->dataName, selectedColor[0], selectedColor[1], TRUE, TRUE, 15, ptrData[2]->alert, selectedColor[2]);
+                ptrData[2]->units, ptrData[2]->dataName, selectedColor[0], selectedColor[1], TRUE, TRUE, 15, ptrData[2]->alert, selectedColor[2], ptrData[2]->digits, ptrData[2]->decimal);
     }
 
     // Lower Left
     if (ptrData[3]->dataName != "None") {
       //Check if value is outside of alert thresholds, then print the values
       gaugeText(ptrData[3]->scaledValue, ptrData[3]->minimum, ptrData[3]->maximum, (60), (190), 1,
-                ptrData[3]->units, ptrData[3]->dataName, selectedColor[0], selectedColor[1], TRUE, TRUE, 15, ptrData[3]->alert, selectedColor[2]);
+                ptrData[3]->units, ptrData[3]->dataName, selectedColor[0], selectedColor[1], TRUE, TRUE, 15, ptrData[3]->alert, selectedColor[2], ptrData[3]->digits, ptrData[3]->decimal);
     }
 
     // Lower Text
     if (ptrData[4]->dataName != "None") {
       //Check if value is outside of alert thresholds, then print the values
       gaugeText(ptrData[4]->scaledValue, ptrData[4]->minimum, ptrData[4]->maximum, (120), (160), 1,
-                ptrData[4]->units, ptrData[4]->dataName, selectedColor[0], selectedColor[1], TRUE, TRUE, 15, ptrData[4]->alert, selectedColor[2]);
+                ptrData[4]->units, ptrData[4]->dataName, selectedColor[0], selectedColor[1], TRUE, TRUE, 15, ptrData[4]->alert, selectedColor[2], ptrData[4]->digits, ptrData[4]->decimal);
     }
 
     // Right
     if (ptrData[5]->dataName != "None") {
       //Check if value is outside of alert thresholds, then print the values
       gaugeText(ptrData[5]->scaledValue, ptrData[5]->minimum, ptrData[5]->maximum, (180), (190), 1,
-                ptrData[5]->units, ptrData[5]->dataName, selectedColor[0], selectedColor[1], TRUE, TRUE, 15, ptrData[5]->alert, selectedColor[2]);
+                ptrData[5]->units, ptrData[5]->dataName, selectedColor[0], selectedColor[1], TRUE, TRUE, 15, ptrData[5]->alert, selectedColor[2], ptrData[5]->digits, ptrData[5]->decimal);
     }
   }
 }
@@ -245,28 +245,28 @@ void updateDisplay_LargeText() {
     if (ptrData[1]->dataName != "None") {
       //Check if value is outside of alert thresholds, then print the values
       gaugeArc(ptrData[1]->scaledValue, ptrData[1]->minimum, ptrData[1]->maximum, (gaugeposition_x + x_1), (gaugeposition_y + y_1), radius1,
-               8, 240, arcColor2, arcSeg2, arcInc2);
+               8, 240, arcColor2, arcSeg2, arcInc2, ptrData[1]->digits, ptrData[1]->decimal);
     }
 
     // Center Top Text
     if (ptrData[2]->dataName != "None") {
       //Check if value is outside of alert thresholds, then print the values
       gaugeText(ptrData[2]->scaledValue, ptrData[2]->minimum, ptrData[2]->maximum, (120), (120), 4,
-                ptrData[2]->units, ptrData[2]->dataName, selectedColor[0], selectedColor[1], TRUE, TRUE, 15, ptrData[2]->alert, selectedColor[2]);
+                ptrData[2]->units, ptrData[2]->dataName, selectedColor[0], selectedColor[1], TRUE, TRUE, 15, ptrData[2]->alert, selectedColor[2], ptrData[2]->digits, ptrData[2]->decimal);
     }
 
     // Lower Left
     if (ptrData[3]->dataName != "None") {
       //Check if value is outside of alert thresholds, then print the values
       gaugeText(ptrData[3]->scaledValue, ptrData[3]->minimum, ptrData[3]->maximum, (60), (190), 1,
-                ptrData[3]->units, ptrData[3]->dataName, selectedColor[0], selectedColor[1], TRUE, TRUE, 15, ptrData[3]->alert, selectedColor[2]);
+                ptrData[3]->units, ptrData[3]->dataName, selectedColor[0], selectedColor[1], TRUE, TRUE, 15, ptrData[3]->alert, selectedColor[2], ptrData[3]->digits, ptrData[3]->decimal);
     }
 
     // Right
     if (ptrData[5]->dataName != "None") {
       //Check if value is outside of alert thresholds, then print the values
       gaugeText(ptrData[5]->scaledValue, ptrData[5]->minimum, ptrData[5]->maximum, (180), (190), 1,
-                ptrData[5]->units, ptrData[5]->dataName, selectedColor[0], selectedColor[1], TRUE, TRUE, 15, ptrData[5]->alert, selectedColor[2]);
+                ptrData[5]->units, ptrData[5]->dataName, selectedColor[0], selectedColor[1], TRUE, TRUE, 15, ptrData[5]->alert, selectedColor[2], ptrData[5]->digits, ptrData[5]->decimal);
     }
   }
 }
@@ -307,7 +307,7 @@ void updateDisplay_Large() {
 
       //Check if value is outside of alert thresholds, then print the values
       gaugeText(ptrData[2]->scaledValue, ptrData[2]->minimum, ptrData[2]->maximum, (120), (140), 5,
-                ptrData[2]->units, ptrData[2]->dataName, selectedColor[0], selectedColor[1], TRUE, TRUE, 15, ptrData[2]->alert, selectedColor[2]);
+                ptrData[2]->units, ptrData[2]->dataName, selectedColor[0], selectedColor[1], TRUE, TRUE, 15, ptrData[2]->alert, selectedColor[2], ptrData[2]->digits, ptrData[2]->decimal);
     }
   }
 }
@@ -356,35 +356,35 @@ void updateDisplay_Analog() {
     if (ptrData[7]->dataName != "None") {
       //Check if value is outside of alert thresholds, then print the values
       gaugeText(ptrData[7]->scaledValue, ptrData[7]->minimum, ptrData[7]->maximum, (40), (140), 1,
-                ptrData[7]->units, ptrData[7]->dataName, selectedColor[0], selectedColor[1], TRUE, TRUE, 15, ptrData[7]->alert, selectedColor[2]);
+                ptrData[7]->units, ptrData[7]->dataName, selectedColor[0], selectedColor[1], TRUE, TRUE, 15, ptrData[7]->alert, selectedColor[2], ptrData[7]->digits, ptrData[7]->decimal);
     }
 
     // Right Top
     if (ptrData[8]->dataName != "None") {
       //Check if value is outside of alert thresholds, then print the values
       gaugeText(ptrData[8]->scaledValue, ptrData[8]->minimum, ptrData[8]->maximum, (200), (140), 1,
-                ptrData[8]->units, ptrData[8]->dataName, selectedColor[0], selectedColor[1], TRUE, TRUE, 15, ptrData[8]->alert, selectedColor[2]);
+                ptrData[8]->units, ptrData[8]->dataName, selectedColor[0], selectedColor[1], TRUE, TRUE, 15, ptrData[8]->alert, selectedColor[2], ptrData[8]->digits, ptrData[8]->decimal);
     }
 
     // Center
     if (ptrData[4]->dataName != "None") {
       //Check if value is outside of alert thresholds, then print the values
       gaugeText(ptrData[4]->scaledValue, ptrData[4]->minimum, ptrData[4]->maximum, (120), (160), 1,
-                ptrData[4]->units, ptrData[4]->dataName, selectedColor[0], selectedColor[1], TRUE, TRUE, 15, ptrData[4]->alert, selectedColor[2]);
+                ptrData[4]->units, ptrData[4]->dataName, selectedColor[0], selectedColor[1], TRUE, TRUE, 15, ptrData[4]->alert, selectedColor[2], ptrData[4]->digits, ptrData[4]->decimal);
     }
 
     // Bottom Left
     if (ptrData[3]->dataName != "None") {
       //Check if value is outside of alert thresholds, then print the values
       gaugeText(ptrData[3]->scaledValue, ptrData[3]->minimum, ptrData[3]->maximum, (60), (190), 1,
-                ptrData[3]->units, ptrData[3]->dataName, selectedColor[0], selectedColor[1], TRUE, TRUE, 15, ptrData[3]->alert, selectedColor[2]);
+                ptrData[3]->units, ptrData[3]->dataName, selectedColor[0], selectedColor[1], TRUE, TRUE, 15, ptrData[3]->alert, selectedColor[2], ptrData[3]->digits, ptrData[3]->decimal);
     }
 
     // Bottom Right
     if (ptrData[5]->dataName != "None") {
       //Check if value is outside of alert thresholds, then print the values
       gaugeText(ptrData[5]->scaledValue, ptrData[5]->minimum, ptrData[5]->maximum, (180), (190), 1,
-                ptrData[5]->units, ptrData[5]->dataName, selectedColor[0], selectedColor[1], TRUE, TRUE, 15, ptrData[5]->alert, selectedColor[2]);
+                ptrData[5]->units, ptrData[5]->dataName, selectedColor[0], selectedColor[1], TRUE, TRUE, 15, ptrData[5]->alert, selectedColor[2], ptrData[5]->digits, ptrData[5]->decimal);
     }
   }
 }
@@ -433,21 +433,21 @@ void updateDisplay_Analog_LargeText() {
     if (ptrData[4]->dataName != "None") {
       //Check if value is outside of alert thresholds, then print the values
       gaugeText(ptrData[4]->scaledValue, ptrData[4]->minimum, ptrData[4]->maximum, (130), (150), 3,
-                ptrData[4]->units, ptrData[4]->dataName, selectedColor[0], selectedColor[1], false, false, 15, ptrData[4]->alert, selectedColor[2]);
+                ptrData[4]->units, ptrData[4]->dataName, selectedColor[0], selectedColor[1], false, false, 15, ptrData[4]->alert, selectedColor[2], ptrData[4]->digits, ptrData[4]->decimal);
     }
 
     // Bottom Left
     if (ptrData[3]->dataName != "None") {
       //Check if value is outside of alert thresholds, then print the values
       gaugeText(ptrData[3]->scaledValue, ptrData[3]->minimum, ptrData[3]->maximum, (60), (190), 1,
-                ptrData[3]->units, ptrData[3]->dataName, selectedColor[0], selectedColor[1], TRUE, TRUE, 15, ptrData[3]->alert, selectedColor[2]);
+                ptrData[3]->units, ptrData[3]->dataName, selectedColor[0], selectedColor[1], TRUE, TRUE, 15, ptrData[3]->alert, selectedColor[2], ptrData[3]->digits, ptrData[3]->decimal);
     }
 
     // Bottom Right
     if (ptrData[5]->dataName != "None") {
       //Check if value is outside of alert thresholds, then print the values
       gaugeText(ptrData[5]->scaledValue, ptrData[5]->minimum, ptrData[5]->maximum, (180), (190), 1,
-                ptrData[5]->units, ptrData[5]->dataName, selectedColor[0], selectedColor[1], TRUE, TRUE, 15, ptrData[5]->alert, selectedColor[2]);
+                ptrData[5]->units, ptrData[5]->dataName, selectedColor[0], selectedColor[1], TRUE, TRUE, 15, ptrData[5]->alert, selectedColor[2], ptrData[5]->digits, ptrData[5]->decimal);
     }
   }
 }
