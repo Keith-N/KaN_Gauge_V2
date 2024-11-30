@@ -312,7 +312,7 @@ text-decoration: none;border: none;letter-spacing:1.25px;cursor: pointer;text-tr
 
 <script>
 
-setInterval(function() {
+function getData() {
 	getGaugeConfig();
 	getGaugeType();
 	
@@ -328,8 +328,9 @@ setInterval(function() {
 	getSensor10();
 	
 	
-}, 1000); 
+}; 
 
+getData();
 
 
 <!-- ------------------------------------------------------------------ Functions ------------------------------------------------------------------ -->

@@ -9,7 +9,7 @@
 //==============================================
 //  Define / Config
 //==============================================
-
+ 
 #pragma once
 
 int bootConfig;
@@ -19,7 +19,7 @@ const String buildType = "";
 
 // Software version and build note will displayed as entered
 String softwareVersion = "0.44";
-String buildNote = "TEST 1";
+String buildNote = "TEST 2";
 
 // Hardware configuration should be updated based on populated resistors
 // use "hardwareConfig = checkResistorConfig();" during setup to do so

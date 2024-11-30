@@ -78,12 +78,13 @@ const char updatePage[] PROGMEM = R"=====(
 <!-- ------------------------------------------------------------------ Intervals ------------------------------------------------------------------ -->
 <script>
 
-setInterval(function() {
+function getData() {
   // Call a function repetatively with 2 Second interval
   getVersion();
   getNote();
   getHardware();
-}, 1000); //2000mSeconds update rate
+};
+getData();
 
 
 <!-- ------------------------------------------------------------------ Functions ------------------------------------------------------------------ -->

@@ -55,7 +55,7 @@ text-decoration: none;border: none;letter-spacing:1.25px;cursor: pointer;text-tr
 
 <head>
   
-  <title> LED Configuration </title>
+  <title> Display Configuration </title>
 
 </head>
 <body>
@@ -71,7 +71,8 @@ text-decoration: none;border: none;letter-spacing:1.25px;cursor: pointer;text-tr
 <form action="/setAlertType">
   <p>Select Alert Type</p>
   <p1>Occurs when a displayed value exceeds Alert High/Low</p1>
-  <br> <br>
+  <h4>Alert : <span id = "cAlertType"></span></h4>
+  <br>
   
   <label for="B"></label>
   <select id="B" name="B"> 
@@ -94,11 +95,11 @@ text-decoration: none;border: none;letter-spacing:1.25px;cursor: pointer;text-tr
   
 <form action="/setDisplayRate"> 
 <p> Display Update Rate </p><br>
- 
+ <h4>Rate (ms) : <span id = "cDisplayRate"></span></h4>
   <label for="A"></label>
   <input type="text" id="A" name="A">
   <p1>ms</p1>
-  <br> <br>
+  <br>
   <input type="submit" value ="Set new value" onClick="notify('New value sent')">
   <br>
 </form>
@@ -106,8 +107,13 @@ text-decoration: none;border: none;letter-spacing:1.25px;cursor: pointer;text-tr
    <!-- ------------------------------------------------------------------ Set brightness ------------------------------------------------------------------ --> 
   <form action="/setBrightnessDisplay"> 
   <p>Set Brightness</p><br>
-  <p1>Values from 0 to 100 Brightness based on Analog input </p1> <br> <br>
+  <p1>Values from 0 to 100 Brightness based on Analog input </p1> 
+  <h4>0V / Disconnected : <span id = "cDisplayLow"></span></h4>
+  <h4>12V : <span id = "cDisplayHigh"></span></h4>
   
+  <br> 
+  
+ 
   <p1>Input 0V</p1>
   <label for="A"></label>
   <input type="text" id="A" name="A"><br>
@@ -129,7 +135,8 @@ text-decoration: none;border: none;letter-spacing:1.25px;cursor: pointer;text-tr
 
 <form action="/setArc1"> 
   <p>Inner Arc Configuration</p>
-  <p1>Color</p1>
+  <p1> Color </p1>
+  <h4>Current : <span id = "cInnerArcColor"> </span></h4>
     <label for="A"></label>
     <select id="A" name="A">
     <option value="0">Red</option>
@@ -144,11 +151,13 @@ text-decoration: none;border: none;letter-spacing:1.25px;cursor: pointer;text-tr
   <br>
 
   <p1>Segments Width</p1>
+  <h4>Current : <span id = "cInnerArcWidth"></span> </h4>
   <label for="B"></label>
   <input type="text" id="B" name="B"><br>
   <br>
 
   <p1>Segment Spacing</p1>
+  <h4>Current : <span id = cInnerArcIncrement></span> </h4>
   <label for="C"></label>
   <input type="text" id="C" name="C"><br>
   
@@ -159,7 +168,8 @@ text-decoration: none;border: none;letter-spacing:1.25px;cursor: pointer;text-tr
 
 <form action="/setArc2"> 
   <p>Outer Arc Configuration</p>
-  <p1>Color</p1>
+  <p1>Color </p1>
+  <h4>Current : <span id = "cOuterArcColor"> </span></h4>
     <label for="A"></label>
     <select id="A" name="A">
     <option value="0">Red</option>
@@ -174,11 +184,13 @@ text-decoration: none;border: none;letter-spacing:1.25px;cursor: pointer;text-tr
   <br>
 
   <p1>Segments Width</p1>
+  <h4>Current : <span id = "cOuterArcWidth"></span> </h4>
   <label for="B"></label>
   <input type="text" id="B" name="B"><br>
   <br>
 
   <p1>Segment Spacing</p1>
+  <h4>Current : <span id = "cOuterArcIncrement"></span> </h4>
   <label for="C"></label>
   <input type="text" id="C" name="C"><br>
   
@@ -225,12 +237,164 @@ text-decoration: none;border: none;letter-spacing:1.25px;cursor: pointer;text-tr
 
 
 
+
 <!-- ------------------------------------------------------------------ Back Button ------------------------------------------------------------------ -->
 
 
   <form action="/">
   <input type="submit" value = "Back">
   </form>
- </body>
+  
+  
+  <!-- ------------------------------------------------------------------ Intervals ------------------------------------------------------------------ -->
+
+<script>
+
+function getData() {
+getAlertType();
+getDisplayRate();
+getDisplayLow();
+getDisplayHigh();
+
+getOuterArcWidth();
+getOuterArcIncrement();
+getOuterArcColor();
+
+getInnerArcWidth();
+getInnerArcIncrement();
+getInnerArcColor();
+
+
+}; 
+
+getData();
+  
+  <!-- ------------------------------------------------------------------ Functions ------------------------------------------------------------------ -->
+
+function getAlertType() {
+  var xhttp = new XMLHttpRequest();
+  xhttp.onreadystatechange = function() {
+    if (this.readyState == 4 && this.status == 200) {
+      document.getElementById("cAlertType").innerHTML = this.responseText;
+    }
+  };
+
+  xhttp.open("GET", "alertType", true);
+  xhttp.send();
+}
+
+function getDisplayRate() {
+  var xhttp = new XMLHttpRequest();
+  xhttp.onreadystatechange = function() {
+    if (this.readyState == 4 && this.status == 200) {
+      document.getElementById("cDisplayRate").innerHTML = this.responseText;
+    }
+  };
+
+  xhttp.open("GET", "displayRate", true);
+  xhttp.send();
+}
+  
+function getDisplayLow() {
+  var xhttp = new XMLHttpRequest();
+  xhttp.onreadystatechange = function() {
+    if (this.readyState == 4 && this.status == 200) {
+      document.getElementById("cDisplayLow").innerHTML = this.responseText;
+    }
+  };
+
+  xhttp.open("GET", "displayLow", true);
+  xhttp.send();
+}
+
+function getDisplayHigh() {
+  var xhttp = new XMLHttpRequest();
+  xhttp.onreadystatechange = function() {
+    if (this.readyState == 4 && this.status == 200) {
+      document.getElementById("cDisplayHigh").innerHTML = this.responseText;
+    }
+  };
+
+  xhttp.open("GET", "displayHigh", true);
+  xhttp.send();
+}
+
+
+function getOuterArcWidth() {
+  var xhttp = new XMLHttpRequest();
+  xhttp.onreadystatechange = function() {
+    if (this.readyState == 4 && this.status == 200) {
+      document.getElementById("cOuterArcWidth").innerHTML = this.responseText;
+    }
+  };
+
+  xhttp.open("GET", "outerArcWidth", true);
+  xhttp.send();
+}
+
+
+function getInnerArcWidth() {
+  var xhttp = new XMLHttpRequest();
+  xhttp.onreadystatechange = function() {
+    if (this.readyState == 4 && this.status == 200) {
+      document.getElementById("cInnerArcWidth").innerHTML = this.responseText;
+    }
+  };
+
+  xhttp.open("GET", "innerArcWidth", true);
+  xhttp.send();
+}
+
+function getOuterArcIncrement() {
+  var xhttp = new XMLHttpRequest();
+  xhttp.onreadystatechange = function() {
+    if (this.readyState == 4 && this.status == 200) {
+      document.getElementById("cOuterArcIncrement").innerHTML = this.responseText;
+    }
+  };
+
+  xhttp.open("GET", "outerArcIncrement", true);
+  xhttp.send();
+}
+
+
+function getInnerArcIncrement() {
+  var xhttp = new XMLHttpRequest();
+  xhttp.onreadystatechange = function() {
+    if (this.readyState == 4 && this.status == 200) {
+      document.getElementById("cInnerArcIncrement").innerHTML = this.responseText;
+    }
+  };
+
+  xhttp.open("GET", "innerArcIncrement", true);
+  xhttp.send();
+}
+
+function getInnerArcColor() {
+  var xhttp = new XMLHttpRequest();
+  xhttp.onreadystatechange = function() {
+    if (this.readyState == 4 && this.status == 200) {
+      document.getElementById("cInnerArcColor").innerHTML = this.responseText;
+    }
+  };
+
+  xhttp.open("GET", "innerArcColor", true);
+  xhttp.send();
+}
+
+function getOuterArcColor() {
+  var xhttp = new XMLHttpRequest();
+  xhttp.onreadystatechange = function() {
+    if (this.readyState == 4 && this.status == 200) {
+      document.getElementById("cOuterArcColor").innerHTML = this.responseText;
+    }
+  };
+
+  xhttp.open("GET", "outerArcColor", true);
+  xhttp.send();
+}
+  
+</script>
+</body>
 </html>
 )=====";

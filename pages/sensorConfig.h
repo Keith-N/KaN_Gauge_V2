@@ -286,7 +286,7 @@ text-decoration: none;border: none;letter-spacing:1.25px;cursor: pointer;text-tr
 
 <script>
 
-setInterval(function() {
+function getData() {
 	
 	getGaugeConfig();
 
@@ -352,8 +352,8 @@ setInterval(function() {
 
 	
 	
-}, 1000); 
-
+}; 
+getData();
 
 <!-- ------------------------------------------------------------------ Functions Sensor 1 ------------------------------------------------------------------ -->
 

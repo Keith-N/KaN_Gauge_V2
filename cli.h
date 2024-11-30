@@ -240,7 +240,7 @@ void CLItask()
     }
 
     else if (c == cmdCanOff)
-    {
+    { 
       startCan = !startCan;
 
       saveBootConfig();
@@ -253,9 +253,9 @@ void CLItask()
     {
       Serial.println();
       Serial.print("SW Version : ");
-      Serial.println(build);
-      Serial.print("Build Type : ");
-      Serial.println(buildType);
+      Serial.println(softwareVersion);
+      Serial.print("Build Note : ");
+      Serial.println(buildNote);
       Serial.print("PCB Revision : ");
        Serial.println(hardwareConfig);
       Serial.print("NVS Version : ");

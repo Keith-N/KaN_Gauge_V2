@@ -325,7 +325,7 @@ void showBootLogos(int start)
 {
 
   // First logo held for logoTime_ms
-  int timeBuf = millis();
+  int timeBuf;
   if (start == 0)
   {
     tft.fillScreen(TFT_BLACK);
@@ -337,17 +337,18 @@ void showBootLogos(int start)
     };
   }
 
-  timeBuf = millis();
+  
   if (start == 0 || start == 1)
   {
     tft.fillScreen(TFT_BLACK);
     printBootLogo(bootLogo2);
+    timeBuf = millis();
     while (millis() < (timeBuf + logoTime_ms))
     {
     };
   }
 
-  timeBuf = millis();
+  
   if (start == 0 || start == 1 || start == 2)
   {
 

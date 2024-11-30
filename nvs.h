@@ -311,8 +311,9 @@ char newPW[16] = "update1234";
 char newHOST[16] = "kan";
 
 int gaugeSensor[] = { LAMBDA_1, OIL_PRESS_PSI, LAMBDA_1, COOLANT_TEMP_F, LAMBDA_1, OIL_PRESS_PSI, LAMBDA_1, LAMBDA_1, LAMBDA_1, LAMBDA_1, NO_DATA };
+// Brightness = Display Low | Display High | LED Low | LED High
 int brightness[] = { 80, 10, 80, 10 };
-int logoTime_ms = 800;
+int logoTime_ms = 1000;
 
 int selectedSensor;
 int selectedLimit;
@@ -320,8 +321,10 @@ int selectedType;
 int selectedGauge;
 int selectedLedMode;
 int selectedDisplayRate;
+
 int brightnessInput;
 int brightnessInput2;
+
 int selectedBrightness = 3;
 
 String newMin, newMax, newHigh, newLow;
@@ -334,7 +337,7 @@ int gaugeDisplayType = 0;
 #define LED 3
 
 int config_alertType = NONE;
-
+String alertTypeText[] = { "None", "Icon", "FullScreen", "LED Flash"};
 
 String arcColors[] = { "Red", "Green", "Blue", "Blue to Red", "Green to Red", "Red to Green", "White", "Black", "Custom 1", "Custom 2" };
 int customArcColor[] = { 0, 0 };
@@ -355,14 +358,14 @@ int bootLogo2 = 2;  // FOME
 int bootLogo3 = 0;  // KaN with version
 
 int LEDcolor = 1;  // LED config blue to green to red
+int LEDstyle = 1;
 
-int LEDstyle = 4;
 String ledStyleName[] = { "Series Single Color", "Series Multi-Color", "Single LED" };
 String ledColorName[] = { "None", "Blue -> Green -> Red", "Green -> Red", "Custom", "Alert 1", "Alert 2" };
 
-int LEDred[6][6] = { { 0, 0, 0, 0, 0, 0 }, { 0, 100, 150, 255, 255, 255 }, { 100, 100, 100, 100, 100, 255 }, { 255, 255, 255, 255, 255, 255 }, { 255, 255, 255, 255, 255, 255 }, { 255, 255, 255, 255, 255, 255 } };
-int LEDgreen[6][6] = { { 0, 0, 0, 0, 0, 0 }, { 100, 200, 255, 150, 50, 0 }, { 200, 200, 200, 200, 200, 0 }, { 255, 255, 255, 255, 255, 255 }, { 0, 0, 0, 0, 0, 0 }, { 0, 0, 0, 0, 0, 0 } };
-int LEDblue[6][6] = { { 0, 0, 0, 0, 0, 0 }, { 150, 40, 0, 0, 0, 0 }, { 0, 0, 0, 0, 0, 0 }, { 255, 255, 255, 255, 255, 255 }, { 0, 0, 0, 0, 0, 0 }, { 0, 0, 0, 0, 0, 0 } };
+int LEDred[6][6] =    { { 0, 0, 0, 0, 0, 0 }, { 0, 100, 150, 255, 255, 255 }, { 100, 100, 100, 100, 100, 255 }, { 255, 255, 255, 255, 255, 255 }, { 255, 255, 255, 255, 255, 255 }, { 255, 255, 255, 255, 255, 255 } };
+int LEDgreen[6][6] =  { { 0, 0, 0, 0, 0, 0 }, { 100, 200, 255, 150, 50, 0 },  { 200, 200, 200, 200, 200, 0 },   { 255, 255, 255, 255, 255, 255 }, { 5, 10, 25, 35, 67, 90 },        { 0, 0, 0, 0, 0, 0 } };
+int LEDblue[6][6] =   { { 0, 0, 0, 0, 0, 0 }, { 150, 40, 0, 0, 0, 0 },        { 0, 0, 0, 0, 0, 0 },             { 255, 255, 255, 255, 255, 255 }, { 0, 0, 0, 0, 0, 0 },             { 0, 0, 0, 0, 0, 0 } };
 
 float inputNewValue;
 

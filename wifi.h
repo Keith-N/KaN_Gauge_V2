@@ -34,13 +34,15 @@
 #include "pages/update.h"
 #include "pages/config2.h"
 #include "pages/wifi.h"
-#include "pages/config.h"
 #include "pages/boot.h"
 #include "pages/sensorConfig.h"
 #include "pages/displayConfig.h"
 #include "pages/ledConfig.h"
 
 
+//#define WIFI_STA_MODE
+char ssid_sta[16] = "ssid";
+char password_sta[16] = "pass";
 
 // WiFi OTA
 WebServer server(80);
@@ -392,7 +394,213 @@ void handleData_currentSensor10high() {
   dtostrf(ptrData[9]->alertHigh, 5, 2, sensor10high);
   server.send(200, "text/plane", sensor10high);
 }
+
+
+// =========================================================
+// Send Display related info
+// =========================================================
+
+void handleData_alertType() {
+  server.send(200, "text/plane", alertTypeText[config_alertType]);
+}
+
+void handleData_displayUpdate() {
+  char dispRate[10];
+  sprintf(dispRate, "%d", selectedDisplayRate);
+  server.send(200, "text/plane", dispRate);
+}
+
+void handleData_displayBrightnessHigh() {
+  char dispHigh[10];
+  sprintf(dispHigh, "%d", brightness[0]);
+  server.send(200, "text/plane", dispHigh);
+}
+
+void handleData_displayBrightnessLow() {
+  char dispLow[10];
+  sprintf(dispLow, "%d", brightness[1]);
+  server.send(200, "text/plane", dispLow);
+}
+
+
+// =========================================================
+// Send Arc related info
+// =========================================================
+
+void handleData_inArcColor() {
+  server.send(200, "text/plane", arcColors[arcColor1]);
+}
+
+void handleData_outArcColor() {
+  server.send(200, "text/plane", arcColors[arcColor2]);
+}
+
+void handleData_inArcWidth() {
+  char inarcSegW[10];
+  sprintf(inarcSegW, "%d", arcSeg1);
+  server.send(200, "text/plane", inarcSegW);
+}
+
+void handleData_inArcIncrement() {
+  char inarcSegi[10];
+  sprintf(inarcSegi, "%d", arcInc1);
+  server.send(200, "text/plane", inarcSegi);
+}
+
+
+void handleData_outArcWidth() {
+  char outarcSegW[10];
+  sprintf(outarcSegW, "%d", arcSeg2);
+  server.send(200, "text/plane", outarcSegW);
+}
+
+void handleData_outArcIncrement() {
+  char outarcSegi[10];
+  sprintf(outarcSegi, "%d", arcInc2);
+  server.send(200, "text/plane", outarcSegi);
+}
+
+
+
+// =========================================================
+// Send Text color related info
+// =========================================================
+
+
+// =========================================================
+// Send LED related info
+// =========================================================
+void handleData_ledColor() {
+  server.send(200, "text/plane", ledColorName[LEDcolor]);
+}
+
+void handleData_ledStyle() {
+  server.send(200, "text/plane", ledStyleName[LEDstyle]);
+}
+
+void handleData_ledBrightnessHigh() {
+  char ledHigh[10];
+  sprintf(ledHigh, "%d", brightness[2]);
+  server.send(200, "text/plane", ledHigh);
+}
+
+void handleData_ledBrightnessLow() {
+  char ledLow[10];
+  sprintf(ledLow, "%d", brightness[3]);
+  server.send(200, "text/plane", ledLow);
+}
+
+void handleData_ledCustomColor1_R() {
+  char ledR1[10];
+  sprintf(ledR1, "%d", LEDred[3][0]);
+  server.send(200, "text/plane", ledR1);
+}
+
+void handleData_ledCustomColor2_R() {
+  char ledR2[10];
+  sprintf(ledR2, "%d", LEDred[3][1]);
+  server.send(200, "text/plane", ledR2);
+}
+
+void handleData_ledCustomColor3_R() {
+  char ledR3[10];
+  sprintf(ledR3, "%d", LEDred[3][2]);
+  server.send(200, "text/plane", ledR3);
+}
+
+void handleData_ledCustomColor4_R() {
+  char ledR4[10];
+  sprintf(ledR4, "%d", LEDred[3][3]); 
+  server.send(200, "text/plane", ledR4);
+}
+
+void handleData_ledCustomColor5_R() {
+  char ledR5[10];
+  sprintf(ledR5, "%d", LEDred[3][4]);
+  server.send(200, "text/plane", ledR5);
+}
+
+void handleData_ledCustomColor6_R() {
+  char ledR6[10];
+  sprintf(ledR6, "%d", LEDred[3][5]);
+  server.send(200, "text/plane", ledR6);
+}
+
+void handleData_ledCustomColor1_G() {
+  char ledG1[10];
+  sprintf(ledG1, "%d", LEDgreen[3][0]);
+  server.send(200, "text/plane", ledG1);
+}
+
+void handleData_ledCustomColor2_G() {
+  char ledG2[10];
+  sprintf(ledG2, "%d", LEDgreen[3][1]);
+  server.send(200, "text/plane", ledG2);
+}
+
+void handleData_ledCustomColor3_G() {
+  char ledG3[10];
+  sprintf(ledG3, "%d", LEDgreen[3][2]);
+  server.send(200, "text/plane", ledG3);
+}
+
+void handleData_ledCustomColor4_G() {
+  char ledG4[10];
+  sprintf(ledG4, "%d", LEDgreen[3][3]);
+  server.send(200, "text/plane", ledG4);
+}
+
+void handleData_ledCustomColor5_G() {
+  char ledG5[10];
+  sprintf(ledG5, "%d", LEDgreen[3][4]);
+  server.send(200, "text/plane", ledG5);
+}
+
+void handleData_ledCustomColor6_G() {
+  char ledG6[10];
+  sprintf(ledG6, "%d", LEDgreen[3][5]);
+  server.send(200, "text/plane", ledG6);
+}
+
+void handleData_ledCustomColor1_B() {
+  char ledB1[10];
+  sprintf(ledB1, "%d", LEDblue[3][0]);
+  server.send(200, "text/plane", ledB1);
+}
+
+void handleData_ledCustomColor2_B() {
+  char ledB2[10];
+  sprintf(ledB2, "%d", LEDblue[3][1]);
+  server.send(200, "text/plane", ledB2);
+}
+
+void handleData_ledCustomColor3_B() {
+  char ledB3[10];
+  sprintf(ledB3, "%d", LEDblue[3][2]);
+  server.send(200, "text/plane", ledB3);
+}
+
+void handleData_ledCustomColor4_B() {
+  char ledB4[10];
+  sprintf(ledB4, "%d", LEDblue[3][3]);
+  server.send(200, "text/plane", ledB4);
+}
+
+void handleData_ledCustomColor5_B() {
+  char ledB5[10];
+  sprintf(ledB5, "%d", LEDblue[3][4]);
+  server.send(200, "text/plane", ledB5);
+}
+
+void handleData_ledCustomColor6_B() {
+  char ledB6[10];
+  sprintf(ledB6, "%d", LEDblue[3][5]);
+  server.send(200, "text/plane", ledB6);
+}
+
+
 /*
+
     Setup the WiFi connection and prepare
 */
 
@@ -503,6 +711,44 @@ void otaSetup(void) {
   server.on("/sensor9high", handleData_currentSensor9high);
   server.on("/sensor10high", handleData_currentSensor10high);
 
+  server.on("/alertType", handleData_alertType);
+  server.on("/displayRate", handleData_displayUpdate);
+  server.on("/displayHigh", handleData_displayBrightnessHigh);
+  server.on("/displayLow", handleData_displayBrightnessLow);
+
+  server.on("/innerArcColor", handleData_inArcColor);
+  server.on("/innerArcWidth", handleData_inArcWidth);
+  server.on("/innerArcIncrement", handleData_inArcIncrement);
+
+  server.on("/outerArcColor", handleData_outArcColor);
+  server.on("/outerArcWidth", handleData_outArcWidth);
+  server.on("/outerArcIncrement", handleData_outArcIncrement);
+
+  server.on("/ledColor", handleData_ledColor);
+  server.on("/ledStyle", handleData_ledStyle);
+  server.on("/ledHigh", handleData_ledBrightnessHigh);
+  server.on("/ledLow", handleData_ledBrightnessLow);
+
+
+  server.on("/led1", handleData_ledCustomColor1_R);
+  server.on("/led2", handleData_ledCustomColor1_G);
+  server.on("/led3", handleData_ledCustomColor1_B);
+  server.on("/led4", handleData_ledCustomColor2_R);
+  server.on("/led5", handleData_ledCustomColor2_G);
+  server.on("/led6", handleData_ledCustomColor2_B);
+  server.on("/led7", handleData_ledCustomColor3_R);
+  server.on("/led8", handleData_ledCustomColor3_G);
+  server.on("/led9", handleData_ledCustomColor3_B);
+  server.on("/led10", handleData_ledCustomColor4_R);
+  server.on("/led11", handleData_ledCustomColor4_G);
+  server.on("/led12", handleData_ledCustomColor4_B);
+  server.on("/led13", handleData_ledCustomColor5_R);
+  server.on("/led14", handleData_ledCustomColor5_G);
+  server.on("/led15", handleData_ledCustomColor5_B);
+  server.on("/led16", handleData_ledCustomColor6_R);
+  server.on("/led17", handleData_ledCustomColor6_G);
+  server.on("/led18", handleData_ledCustomColor6_B);
+
 
   server.on("/", HTTP_GET, [] {
     server.send(200, "text/html", startPage);
@@ -520,21 +766,18 @@ void otaSetup(void) {
     server.send(200, "text/html", gaugeConfigPage2);
   });
 
-    server.on("/displayConfiguration", HTTP_GET, [] {
+  server.on("/displayConfiguration", HTTP_GET, [] {
     server.send(200, "text/html", displayConfigPage);
   });
 
   server.on("/ledConfiguration", HTTP_GET, [] {
-     server.send(200, "text/html", ledConfigPage);
+    server.send(200, "text/html", ledConfigPage);
   });
 
   server.on("/sensorConfiguration", HTTP_GET, [] {
     server.send(200, "text/html", sensorConfigPage);
   });
 
-  server.on("/gaugeConfig2", HTTP_GET, [] {
-    server.send(200, "text/html", gaugeConfigPage2);
-  });
 
   server.on("/setLimitConfig", HTTP_GET, [] {
     String a, b, c, d, e;
@@ -586,7 +829,7 @@ void otaSetup(void) {
     config_alertType = (int)(a.toFloat());
     updateUserConfig = true;
     readyToUpdateGaugeConfig = true;
-    server.send(200, "text/html", gaugeConfigPage2);
+    server.send(200, "text/html", displayConfigPage);
   });
 
 
@@ -598,7 +841,8 @@ void otaSetup(void) {
 
     displayRefresh_ms = (int)(a.toFloat());
     readyToUpdateGaugeConfig = true;
-    server.send(200, "text/html", gaugeConfigPage2);
+    selectedDisplayRate = displayRefresh_ms;
+    server.send(200, "text/html", displayConfigPage);
   });
 
 
@@ -655,7 +899,7 @@ void otaSetup(void) {
 
     //saveLedConfig();
 
-    server.send(200, "text/html", gaugeConfigPage2);
+    server.send(200, "text/html", ledConfigPage);
   });
 
   server.on("/setLEDCustom", HTTP_GET, [] {
@@ -666,22 +910,20 @@ void otaSetup(void) {
       int indexInc = ledInd * 3;
 
       if (server.arg(indexInc) != "") {
-        LEDred[3][ledInd] = ((int)(server.arg(indexInc).toInt())) * 255 / 100;
+        LEDred[3][ledInd] = ((int)(server.arg(indexInc).toInt()));
       }
 
       if (server.arg(indexInc + 1) != "") {
-        LEDgreen[3][ledInd] = ((int)(server.arg(indexInc + 1).toInt())) * 255 / 100;
+        LEDgreen[3][ledInd] = ((int)(server.arg(indexInc + 1).toInt()));
       }
 
       if (server.arg(indexInc + 2) != "") {
-        LEDblue[3][ledInd] = ((int)(server.arg(indexInc + 2).toInt())) * 255 / 100;
+        LEDblue[3][ledInd] = ((int)(server.arg(indexInc + 2).toInt()));
       }
     }
 
-    //saveNewLedColor(ledSave, LEDred[3][ledSave], LEDgreen[3][ledSave], LEDblue[3][ledSave]);
     saveNewLedColor();
-
-    server.send(200, "text/html", gaugeConfigPage2);
+    server.send(200, "text/html", ledConfigPage);
   });
 
 
@@ -698,7 +940,7 @@ void otaSetup(void) {
 
     //saveTextConfig();
 
-    server.send(200, "text/html", gaugeConfigPage2);
+    server.send(200, "text/html", displayConfigPage);
   });
 
   server.on("/boot", HTTP_GET, [] {
@@ -793,15 +1035,15 @@ void otaSetup(void) {
     }
 
     readyToUpdateGaugeConfig = true;
-    server.send(200, "text/html", gaugeConfigPage2);
+    server.send(200, "text/html", displayConfigPage);
   });
 
   server.on("/setBrightnessLeds", HTTP_GET, [] {
     String a, b;
     a = server.arg(0);
     b = server.arg(1);
-  
-    selectedBrightness = 1;
+
+    selectedBrightness = 2;
     brightnessInput = (int)(a.toFloat());
     brightnessInput2 = (int)(b.toFloat());
 
@@ -822,15 +1064,15 @@ void otaSetup(void) {
     }
 
     if (a != "") {
-      brightness[selectedBrightness] = brightnessInput;
+      brightness[selectedBrightness + 1] = brightnessInput;
     }
 
     if (b != "") {
-      brightness[selectedBrightness + 1] = brightnessInput2;
+      brightness[selectedBrightness] = brightnessInput2;
     }
 
     readyToUpdateGaugeConfig = true;
-    server.send(200, "text/html", gaugeConfigPage2);
+    server.send(200, "text/html", ledConfigPage);
   });
 
   server.on("/setArc1", HTTP_GET, [] {
@@ -854,7 +1096,7 @@ void otaSetup(void) {
     updateArcConfig = true;
     updatedArc = true;
 
-    server.send(200, "text/html", gaugeConfigPage2);
+    server.send(200, "text/html", displayConfigPage);
   });
 
   server.on("/setArc2", HTTP_GET, [] {
@@ -877,7 +1119,7 @@ void otaSetup(void) {
 
     updatedArc = true;
     updateArcConfig = true;
-    server.send(200, "text/html", gaugeConfigPage2);
+    server.send(200, "text/html", displayConfigPage);
   });
 
   server.on(
