@@ -300,8 +300,6 @@ text-decoration: none;border: none;letter-spacing:1.25px;cursor: pointer;text-tr
 <!-- ------------------------------------------------------------------ Back Button ------------------------------------------------------------------ -->
 
 
-
-
   <form action="/">
   <input type="submit" value = "Back">
   </form>

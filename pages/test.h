@@ -1,11 +1,4 @@
-
-/*
- *
- * Boot Config
- *
- *
- */
-const char bootConfigPage[] PROGMEM = R"=====(
+const char testPage[] PROGMEM = R"=====(
 <!DOCTYPE html>
 <html>
 
@@ -64,73 +57,14 @@ text-decoration: none;border: none;letter-spacing:1.25px;cursor: pointer;text-tr
 
 	
 <head>
-  <title> Boot Configuration </title>
+  <title> Test </title>
 </head>
 
-
-<form action="/bootConfig"> 
-  <p>Boot 1</p>
-  <h4>Current : <span id = "currentBoot1"></span></h4>
-    <label for="A"></label>
-    <select id="A" name="A">
-    <option value="0">KaN</option>
-    <option value="1">BMM</option>
-    <option value="2">FOME</option>
-    <option value="3">Mazda</option>
-
-    </select>
-  <br><br>
-
-  <p>Boot 2</p>
-  <h4>Current : <span id = "currentBoot2"></span></h4>
-    <label for="B"></label>
-    <select id="B" name="B">
-    <option value="0">KaN</option>
-    <option value="1">BMM</option>
-    <option value="2">FOME</option>
-    <option value="3">Mazda</option>
-
-    </select>
-<br><br>
-
-  <p>Boot 3</p>
-  <h4>Current : <span id = "currentBoot3"></span></h4>
-    <label for="C"></label>
-    <select id="C" name="C">
-    <option value="0">KaN</option>
-    <option value="1">BMM</option>
-    <option value="2">FOME</option>
-    <option value="3">Mazda</option>
-
-    </select>
-<br><br>
-
-  <p>Logo Print Level</p>
-  <h4>Current : <span id = "currentBootLevel"></span></h4>
-    <label for="D"></label>
-    <select id="D" name="D">
-    <option value="0">3 Logo</option>
-    <option value="1">2 Logo</option>
-    <option value="2">1 Logo</option>
-    <option value="3">Skip</option>
-    </select>
-<br><br>
-
-
-  <p>Logo Time ms</p>
-  <h4>Current : <span id = "currentBootTime"></span></h4>
-  <label for="E"></label>
-  <input type="text" id="E" name="E"><br>
-  
-  <br>
-  <input type="submit" value ="Set Config" onClick="notify('New config sent')">
-  <br>
-
-</form>
 
 
 <!-- ------------------------------------------------------------------ Back Button ------------------------------------------------------------------ -->
     <form action='/'>
+	<h4>Test: <span id="displayTest"></span></h4>
     </button>
     <input type='submit' value = 'Back'>
     </form>
@@ -140,11 +74,7 @@ text-decoration: none;border: none;letter-spacing:1.25px;cursor: pointer;text-tr
 <script>
 
 function getData() {
-getBoot1();
-getBoot2();
-getBoot3();
-getBootTime();
-getBootLevel();	
+getTest();
 };
 getData();
 
@@ -162,84 +92,6 @@ function getTest() {
   xhttp.open("GET", "testValue", true);
   xhttp.send();
 }
-
-
-
-
-
-
-function getBoot1() {
-  var xhttp = new XMLHttpRequest();
-  xhttp.onreadystatechange = function() {
-    if (this.readyState == 4 && this.status == 200) {
-      document.getElementById("currentBoot1").innerHTML = this.responseText;
-    }
-  };
-
-  xhttp.open("GET", "boot1", true);
-  xhttp.send();
-}
-
-
-function getBoot2() {
-  var xhttp = new XMLHttpRequest();
-  xhttp.onreadystatechange = function() {
-    if (this.readyState == 4 && this.status == 200) {
-      document.getElementById("currentBoot2").innerHTML = this.responseText;
-    }
-  };
-
-  xhttp.open("GET", "boot2", true);
-  xhttp.send();
-}
-
-
-function getBoot3() {
-  var xhttp = new XMLHttpRequest();
-  xhttp.onreadystatechange = function() {
-    if (this.readyState == 4 && this.status == 200) {
-      document.getElementById("currentBoot3").innerHTML = this.responseText;
-    }
-  };
-
-  xhttp.open("GET", "boot3", true);
-  xhttp.send();
-}
-
-
-
-function getBootLevel() {
-  var xhttp = new XMLHttpRequest();
-  xhttp.onreadystatechange = function() {
-    if (this.readyState == 4 && this.status == 200) {
-      document.getElementById("currentBootLevel").innerHTML = this.responseText;
-    }
-  };
-
-  xhttp.open("GET", "bootLevel", true);
-  xhttp.send();
-}
-
-
-
-
-function getBootTime() {
-  var xhttp = new XMLHttpRequest();
-  xhttp.onreadystatechange = function() {
-    if (this.readyState == 4 && this.status == 200) {
-      document.getElementById("currentBootTime").innerHTML = this.responseText;
-    }
-  };
-
-  xhttp.open("GET", "bootTime", true);
-  xhttp.send();
-}
-
-
-
-
-
-
 
 
 

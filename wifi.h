@@ -38,6 +38,7 @@
 #include "pages/sensorConfig.h"
 #include "pages/displayConfig.h"
 #include "pages/ledConfig.h"
+#include "pages/test.h"
 
 
 //#define WIFI_STA_MODE
@@ -111,7 +112,9 @@ void handleOTA() {
   server.send(200, "text/html", updatePage);
 }
 
-
+void handleDataTest(){
+  server.send(200, "text/plane", "TEST" );
+}
 
 void handleData_currentConfig() {
   // Convert value to a string
@@ -478,6 +481,28 @@ void handleData_ledStyle() {
   server.send(200, "text/plane", ledStyleName[LEDstyle]);
 }
 
+void handleData_boot1(){
+  server.send(200, "text/plane", bootLogoNames[bootLogo1]);
+}
+
+void handleData_boot2(){
+  server.send(200, "text/plane", bootLogoNames[bootLogo2]);
+}
+
+void handleData_boot3(){
+  server.send(200, "text/plane", bootLogoNames[bootLogo3]);
+}
+
+void handleData_bootLevel() {
+  server.send(200, "text/plane", bootLogoLevel[quickstart]);
+}
+
+void handleData_bootTime() {
+  char bootTime[10];
+  sprintf(bootTime, "%d", logoTime_ms);
+  server.send(200, "text/plane", bootTime);
+}
+
 void handleData_ledBrightnessHigh() {
   char ledHigh[10];
   sprintf(ledHigh, "%d", brightness[2]);
@@ -749,6 +774,17 @@ void otaSetup(void) {
   server.on("/led17", handleData_ledCustomColor6_G);
   server.on("/led18", handleData_ledCustomColor6_B);
 
+  server.on("/boot1", handleData_boot1);
+  server.on("/boot2", handleData_boot2);
+  server.on("/boot3", handleData_boot3);
+  server.on("/bootTime", handleData_bootTime);
+  server.on("/bootLevel", handleData_bootLevel);
+  server.on("/testValue", handleDataTest);
+
+
+  server.on("/test", HTTP_GET, [] {
+    server.send(200, "text/html", testPage);
+  });
 
   server.on("/", HTTP_GET, [] {
     server.send(200, "text/html", startPage);
@@ -778,6 +814,9 @@ void otaSetup(void) {
     server.send(200, "text/html", sensorConfigPage);
   });
 
+    server.on("/boot", HTTP_GET, [] {
+    server.send(200, "text/html", bootConfigPage);
+  });
 
   server.on("/setLimitConfig", HTTP_GET, [] {
     String a, b, c, d, e;
@@ -943,25 +982,26 @@ void otaSetup(void) {
     server.send(200, "text/html", displayConfigPage);
   });
 
-  server.on("/boot", HTTP_GET, [] {
-    String a, b, c, d, e, f;
+  server.on("/bootConfig", HTTP_GET, [] {
+    String a, b, c, d, e;
     a = server.arg(0);
     b = server.arg(1);
     c = server.arg(2);
     d = server.arg(3);
     e = server.arg(4);
-    f = server.arg(5);
 
     bootLogo1 = (int)(a.toInt());
     bootLogo2 = (int)(b.toInt());
     bootLogo3 = (int)(c.toInt());
 
-    quickstart = (int)(e.toInt());
-    logoTime_ms = (int)(f.toInt());
+    quickstart = (int)(d.toInt());
+    logoTime_ms = (int)(e.toInt());
 
     saveBootConfig();
     server.send(200, "text/html", bootConfigPage);
   });
+
+
 
   server.on("/setBrightness", HTTP_GET, [] {
     String a, b, c;

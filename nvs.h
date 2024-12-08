@@ -355,7 +355,9 @@ String colorName[] = { "Value", "Units", "Alert", "Needle", "Background" };
 
 int bootLogo1 = 1;  // BMM
 int bootLogo2 = 2;  // FOME
-int bootLogo3 = 0;  // KaN with version
+int bootLogo3 = 0;  // KaN
+String bootLogoLevel[] = {"3 Logo", "2 Logo", "1 Logo", "Skip"};
+String bootLogoNames[] = { "KaN", "BMM", "FOME", "MAZDA", "Other"};
 
 int LEDcolor = 1;  // LED config blue to green to red
 int LEDstyle = 1;
