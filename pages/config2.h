@@ -114,6 +114,7 @@ text-decoration: none;border: none;letter-spacing:1.25px;cursor: pointer;text-tr
     <option value="2">1x Arc with large numbers</option>
     <option value="3">1x Meter with large numbers</option>
     <option value="4">1x Large numbers</option>
+	<option value="5">4x Digital</option>
     </select>
   <br>
   <br>

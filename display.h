@@ -945,6 +945,96 @@ void gaugeArc(float value, float min, float max, int x, int y, int r, int arcWid
   }
 }
 
+void gaugeArcInvert(float value, float min, float max, int x, int y, int r, int arcWidth, int totalAngle, byte scheme, byte numSegments, byte numIncrements, int digits, int decimals)
+{
+
+  int color = TFT_BLUE;
+
+  // Get center of arc
+  x += r;
+  y += r;
+
+  // Ring width
+  int w = r / arcWidth;
+
+  // half of arc total angle (300 deg)
+  int angle = totalAngle / 2;
+
+  // Get the angle based on the current value, limited to max/min angle based on max/min value
+  int v = map((value * 100), (min * 100), (max * 100), -1 * angle, angle);
+
+  // Draw color blocks for given number of increments
+  for (int i = -angle + numIncrements / 2; i < angle - numIncrements / 2; i += numIncrements)
+  {
+
+    // Calculate pair of coordinates for segment start
+    float sx = cos((i - 90) * 0.0174532925);
+    float sy = -sin((i - 90) * 0.0174532925);
+    uint16_t x0 = sx * (r - w) + x;
+    uint16_t y0 = sy * (r - w) + y;
+    uint16_t x1 = sx * r + x;
+    uint16_t y1 = sy * r + y;
+
+    // Calculate pair of coordinates for segment end
+    float sx2 = cos((i + numSegments - 90) * 0.0174532925);
+    float sy2 = -sin((i + numSegments - 90) * 0.0174532925);
+    int x2 = sx2 * (r - w) + x;
+    int y2 = sy2 * (r - w) + y;
+    int x3 = sx2 * r + x;
+    int y3 = sy2 * r + y;
+
+    if (i < v)
+    { // Fill in coloured segments with 2 triangles
+      switch (scheme)
+      {
+      case 0:
+        color = TFT_RED;
+        break; // Fixed color
+      case 1:
+        color = TFT_GREEN;
+        break; // Fixed color
+      case 2:
+        color = TFT_BLUE;
+        break; // Fixed color
+      case 3:
+        color = rainbow(map(i, -angle, angle, 0, 127));
+        break; // Full spectrum blue to red
+      case 4:
+        color = rainbow(map(i, -angle, angle, 70, 127));
+        break; // Green to red (high temperature etc)
+      case 5:
+        color = rainbow(map(i, -angle, angle, 127, 63));
+        break; // Red to green (low battery etc)
+      case 6:
+        color = TFT_WHITE;
+        break;
+      case 7:
+        color = TFT_BLACK;
+        break;
+      case 8:
+        color = customArcColor[0];
+        break;
+      case 9:
+        color = customArcColor[1];
+        break;
+
+      default:
+        color = TFT_BLUE;
+        break; // Fixed color
+      }
+
+      tft.fillTriangle(x0, y0, x1, y1, x2, y2, color);
+      tft.fillTriangle(x1, y1, x2, y2, x3, y3, color);
+    }
+
+    else // Fill in blank segments
+    {
+      tft.fillTriangle(x0, y0, x1, y1, x2, y2, TFT_GREY);
+      tft.fillTriangle(x1, y1, x2, y2, x3, y3, TFT_GREY);
+    }
+  }
+}
+
 void gaugeText(float value, float min, float max, int x, int y, int fontSize, const char *units, const char *name, int color, int color2, bool printUnits, bool printname, int unitOffset, bool alert, int alertColor, int digit, int decimals)
 {
 
@@ -953,6 +1043,14 @@ void gaugeText(float value, float min, float max, int x, int y, int fontSize, co
   // Convert value to a string
   char buf[10];
   byte len = 5;
+
+  if (value >= 10 && decimals > 1){
+    decimals = 1;
+  }
+
+    if (value >= 100 && decimals > 0){
+    decimals = 0;
+  }
 
   dtostrf(value, digit, decimals, buf);
 
@@ -1002,6 +1100,11 @@ void gaugeText(float value, float min, float max, int x, int y, int fontSize, co
     tft.drawString(buf, x + 15, y - 20, 8);
     break;
 
+  case 6:
+    tft.setTextPadding(125);
+    tft.drawString(buf, x + 15, y - 20, 6);
+    break;
+
   default:
     tft.setTextPadding(8 * 3);
     tft.drawString(buf, x, y, 4);
@@ -1039,6 +1142,11 @@ void gaugeText(float value, float min, float max, int x, int y, int fontSize, co
       tft.drawString(units, x + 180, y + unitOffset + 32, 4);
       break;
 
+    case 6:
+      tft.drawString(units, x + 40, y + 9, 2);
+      break;
+
+
     default:
       tft.drawString(units, x, y + unitOffset, 2);
       break;
@@ -1070,6 +1178,10 @@ void gaugeText(float value, float min, float max, int x, int y, int fontSize, co
 
     case 5:
       tft.drawString(name, x - 42, y + unitOffset + 32, 4);
+      break;
+
+    case 6:
+      tft.drawString(name, x- 12, y + 9, 2);
       break;
 
     default:

@@ -392,14 +392,14 @@ bool startCan = true;
 int displayRefresh_ms = 100;
 
 
-String gaugeStyleNames[] = { "2x Arc with 4x Digital", "1x Meter with 5x Digital", "1x Arc with large numbers", "1x Meter with large numbers", "Large numbers" };
+String gaugeStyleNames[] = { "2x Arc with 4x Digital", "1x Meter with 5x Digital", "1x Arc with large numbers", "1x Meter with large numbers", "Large numbers", "4x Digital" };
 String dataLocation[] = { "Inside Arc", "Outer Arc", "Center", "Bottom Left", "Center Bottom", "Bottom Right", "LEDs", "Top Left", "Top Right", "Meter", "" };
 
 
 // USER CONFIGURATION
 const int config_max = 3;
 int config_selectedConfig[1];
-int config_gaugeStyle[3] = { 4, 3, 2 };
+int config_gaugeStyle[3] = { 4, 5, 2 };
 int config_sensorData[3][10] = { { LAMBDA_1, OIL_PRESS_PSI, LAMBDA_1, COOLANT_TEMP_F, LAMBDA_1, OIL_PRESS_PSI, LAMBDA_1, LAMBDA_1, LAMBDA_1, LAMBDA_1 }, { OIL_PRESS_PSI, OIL_PRESS_PSI, OIL_PRESS_PSI, LAMBDA_1, OIL_PRESS_PSI, MANIFOLD_PRESS_PSI, OIL_PRESS_PSI, OIL_PRESS_PSI, OIL_PRESS_PSI, OIL_PRESS_PSI }, { MANIFOLD_PRESS_PSI, MANIFOLD_PRESS_PSI, MANIFOLD_PRESS_PSI, COOLANT_TEMP_F, MANIFOLD_PRESS_PSI, INTAKE_TEMP_F, MANIFOLD_PRESS_PSI, MANIFOLD_PRESS_PSI, MANIFOLD_PRESS_PSI, MANIFOLD_PRESS_PSI } };
 
 int config_ledStyle[3] = { 0, 0, 0 };

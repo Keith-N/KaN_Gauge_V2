@@ -211,6 +211,76 @@ void updateDisplay() {
   }
 }
 
+
+void updateDisplay4x() {
+  int radius1 = 116;
+  int radius2 = 80;
+  int x_1 = 15;
+  int y_1 = 17;
+
+  int x_2 = x_1 + (radius1 - radius2) / 2;
+  int y_2 = y_1 + (radius1 - radius2) / 2;
+
+
+  showAlert = false;
+
+  int aCheck[] = { 0, 1, 2, 3, 4, 5 };
+  for (int aCheckInc = 0; aCheckInc < 6; aCheckInc++) {
+    ptrData[aCheck[aCheckInc]]->alert = sensorAlertCheck(ptrData[aCheck[aCheckInc]]->alertLow, ptrData[aCheck[aCheckInc]]->alertHigh, ptrData[aCheck[aCheckInc]]->scaledValue);
+
+    if (ptrData[aCheck[aCheckInc]]->alert == true) {
+      //showAlert = true;
+    }
+  }
+
+  if (showAlert == true && fullscreenAlert == true) {
+  } else {
+    
+
+    // Outer
+    if (ptrData[1]->dataName != "None") {
+      //Check if value is outside of alert thresholds, then print the values
+      gaugeArc(ptrData[1]->scaledValue, ptrData[1]->minimum, ptrData[1]->maximum, (gaugeposition_x + x_1), (gaugeposition_y + y_1), radius1,
+               30, 140, arcColor2, arcSeg2, arcInc2, ptrData[1]->digits, ptrData[1]->decimal);
+    }
+
+      // Inner
+    if (ptrData[0]->dataName != "None") {
+      //Check if value is outside of alert thresholds, then print the values
+      gaugeArcInvert(ptrData[0]->scaledValue, ptrData[0]->minimum, ptrData[0]->maximum, (gaugeposition_x + x_1), (gaugeposition_y + y_1), radius1,
+               30, 140, arcColor1, arcSeg1, arcInc1, ptrData[0]->digits, ptrData[0]->decimal);
+    }
+ 
+    // Center Top Text
+    if (ptrData[2]->dataName != "None") {
+      //Check if value is outside of alert thresholds, then print the values
+      gaugeText(ptrData[2]->scaledValue, ptrData[2]->minimum, ptrData[2]->maximum, (105), (72), 6,
+                ptrData[2]->units, ptrData[2]->dataName, selectedColor[0], selectedColor[1], TRUE, TRUE, 15, ptrData[2]->alert, selectedColor[2], ptrData[2]->digits, ptrData[2]->decimal);
+    }
+
+    //  Left
+    if (ptrData[3]->dataName != "None") {
+      //Check if value is outside of alert thresholds, then print the values
+      gaugeText(ptrData[3]->scaledValue, ptrData[3]->minimum, ptrData[3]->maximum, (48), (140), 6,
+                ptrData[3]->units, ptrData[3]->dataName, selectedColor[0], selectedColor[1], TRUE, TRUE, 15, ptrData[3]->alert, selectedColor[2], ptrData[3]->digits, ptrData[3]->decimal);
+    }
+
+    // Lower Text
+    if (ptrData[4]->dataName != "None") { 
+      //Check if value is outside of alert thresholds, then print the values
+      gaugeText(ptrData[4]->scaledValue, ptrData[4]->minimum, ptrData[4]->maximum, (105), (208), 6,
+                ptrData[4]->units, ptrData[4]->dataName, selectedColor[0], selectedColor[1], TRUE, TRUE, 15, ptrData[4]->alert, selectedColor[2], ptrData[4]->digits, ptrData[4]->decimal);
+    }
+
+    // Right
+    if (ptrData[5]->dataName != "None") { 
+      //Check if value is outside of alert thresholds, then print the values
+      gaugeText(ptrData[5]->scaledValue, ptrData[5]->minimum, ptrData[5]->maximum, (172), (140), 6,
+                ptrData[5]->units, ptrData[5]->dataName, selectedColor[0], selectedColor[1], TRUE, TRUE, 15, ptrData[5]->alert, selectedColor[2], ptrData[5]->digits, ptrData[5]->decimal);
+    }
+  }
+}
+
 /*
 Updates the display based on the selected configurations
 This is similar to the updateDisplay function with an increased size for the center digits
@@ -525,6 +595,10 @@ void updateDisplayTask(void *pvParameters) {
           updateDisplay_Large();
           break;
 
+        case 5:
+          updateDisplay4x();
+          break;
+
         default:
           updateDisplay();
           break;
@@ -556,8 +630,10 @@ void updateDisplayTask(void *pvParameters) {
         }
       } else {
 
+        if (config_alertType != 0 && config_alertType != 3){
         // Clean up Exclaimation if printed and no Alert exsists
-        drawAlert(120, 210, 50, 0);
+        drawAlert(120, 210, 50, 0);}
+
       }
 
 
