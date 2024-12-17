@@ -33,6 +33,9 @@ int lastAlert_ms = 0;
 int alertTime_ms = 250;
 int alertTime2_ms = 250;
 
+int printX;
+int printY;
+
 #define ALERT_TEXT_COLOR 0
 #define ALERT_EXC 1
 #define ALERT_FF 2
@@ -235,7 +238,7 @@ void updateDisplay4x() {
 
   if (showAlert == true && fullscreenAlert == true) {
   } else {
-    
+
 
     // Outer
     if (ptrData[1]->dataName != "None") {
@@ -244,38 +247,70 @@ void updateDisplay4x() {
                30, 140, arcColor2, arcSeg2, arcInc2, ptrData[1]->digits, ptrData[1]->decimal);
     }
 
-      // Inner
+    // Inner
     if (ptrData[0]->dataName != "None") {
       //Check if value is outside of alert thresholds, then print the values
       gaugeArcInvert(ptrData[0]->scaledValue, ptrData[0]->minimum, ptrData[0]->maximum, (gaugeposition_x + x_1), (gaugeposition_y + y_1), radius1,
-               30, 140, arcColor1, arcSeg1, arcInc1, ptrData[0]->digits, ptrData[0]->decimal);
+                     30, 140, arcColor1, arcSeg1, arcInc1, ptrData[0]->digits, ptrData[0]->decimal);
     }
- 
+
     // Center Top Text
     if (ptrData[2]->dataName != "None") {
+      if (ptrData[3]->dataName == "None" && ptrData[5]->dataName == "None") {
+        printX = 105;
+        printY = 90;
+      }
+      else{
+        printX = 105;
+        printY = 72;
+      }
       //Check if value is outside of alert thresholds, then print the values
-      gaugeText(ptrData[2]->scaledValue, ptrData[2]->minimum, ptrData[2]->maximum, (105), (72), 6,
+      gaugeText(ptrData[2]->scaledValue, ptrData[2]->minimum, ptrData[2]->maximum, (printX), (printY), 6,
                 ptrData[2]->units, ptrData[2]->dataName, selectedColor[0], selectedColor[1], TRUE, TRUE, 15, ptrData[2]->alert, selectedColor[2], ptrData[2]->digits, ptrData[2]->decimal);
     }
 
     //  Left
     if (ptrData[3]->dataName != "None") {
       //Check if value is outside of alert thresholds, then print the values
-      gaugeText(ptrData[3]->scaledValue, ptrData[3]->minimum, ptrData[3]->maximum, (48), (140), 6,
+      if (ptrData[5]->dataName == "None") {
+        printX = 105;
+        printY = 140;
+      } else {
+        printX = 48;
+        printY = 140;
+      }
+
+      gaugeText(ptrData[3]->scaledValue, ptrData[3]->minimum, ptrData[3]->maximum, (printX), (printY), 6,
                 ptrData[3]->units, ptrData[3]->dataName, selectedColor[0], selectedColor[1], TRUE, TRUE, 15, ptrData[3]->alert, selectedColor[2], ptrData[3]->digits, ptrData[3]->decimal);
     }
 
     // Lower Text
-    if (ptrData[4]->dataName != "None") { 
+    if (ptrData[4]->dataName != "None") {
+      if (ptrData[3]->dataName == "None" && ptrData[5]->dataName == "None") {
+        printX = 105;
+        printY = 180;
+      }
+      else{
+        printX = 105;
+        printY = 208;
+      }
+
       //Check if value is outside of alert thresholds, then print the values
-      gaugeText(ptrData[4]->scaledValue, ptrData[4]->minimum, ptrData[4]->maximum, (105), (208), 6,
+      gaugeText(ptrData[4]->scaledValue, ptrData[4]->minimum, ptrData[4]->maximum, (printX), (printY), 6,
                 ptrData[4]->units, ptrData[4]->dataName, selectedColor[0], selectedColor[1], TRUE, TRUE, 15, ptrData[4]->alert, selectedColor[2], ptrData[4]->digits, ptrData[4]->decimal);
     }
 
     // Right
-    if (ptrData[5]->dataName != "None") { 
+    if (ptrData[5]->dataName != "None") {
+      if (ptrData[3]->dataName == "None") {
+        printX = 105;
+        printY = 140;
+      } else {
+        printX = 172;
+        printY = 140;
+      }
       //Check if value is outside of alert thresholds, then print the values
-      gaugeText(ptrData[5]->scaledValue, ptrData[5]->minimum, ptrData[5]->maximum, (172), (140), 6,
+      gaugeText(ptrData[5]->scaledValue, ptrData[5]->minimum, ptrData[5]->maximum, (printX), (printY), 6,
                 ptrData[5]->units, ptrData[5]->dataName, selectedColor[0], selectedColor[1], TRUE, TRUE, 15, ptrData[5]->alert, selectedColor[2], ptrData[5]->digits, ptrData[5]->decimal);
     }
   }
@@ -630,10 +665,10 @@ void updateDisplayTask(void *pvParameters) {
         }
       } else {
 
-        if (config_alertType != 0 && config_alertType != 3){
-        // Clean up Exclaimation if printed and no Alert exsists
-        drawAlert(120, 210, 50, 0);}
-
+        if (config_alertType != 0 && config_alertType != 3) {
+          // Clean up Exclaimation if printed and no Alert exsists
+          drawAlert(120, 210, 50, 0);
+        }
       }
 
 

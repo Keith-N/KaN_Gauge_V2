@@ -157,16 +157,16 @@ text-decoration: none;border: none;letter-spacing:1.25px;cursor: pointer;text-tr
   <p>Select Gauge Sensors FOME</p>  
   <label for="B"></label>
   <select id="B" name="B"> 
-    <option value="0">Arc Inside</option>
-    <option value="1">Arc Outside</option>
+    <option value="0">Arc Inside / Bottom</option>
+    <option value="1">Arc Outside / Top</option>
     <option value="9">Analog Meter</option>
     <option value="6">LEDs</option>
     <option value="2">Top Center</option>
     <option value="7">Top Left</option>
     <option value="8">Top Right</option>
     <option value="4">Bottom Center </option>
-    <option value="3">Bottom Left</option>
-    <option value="5">Bottom Right</option>
+    <option value="3">Bottom Left / Left</option>
+    <option value="5">Bottom Right / Right</option>
     </select>
   <br>
   
