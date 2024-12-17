@@ -35,6 +35,7 @@ int alertTime2_ms = 250;
 
 int printX;
 int printY;
+int useTextSize;
 
 #define ALERT_TEXT_COLOR 0
 #define ALERT_EXC 1
@@ -256,16 +257,23 @@ void updateDisplay4x() {
 
     // Center Top Text
     if (ptrData[2]->dataName != "None") {
-      if (ptrData[3]->dataName == "None" && ptrData[5]->dataName == "None") {
+
+      if (ptrData[3]->dataName == "None" && ptrData[5]->dataName == "None" && ptrData[4]->dataName == "None") {
+        printX = 120;
+        printY = 140;
+        useTextSize = 5;
+      } else if (ptrData[3]->dataName == "None" && ptrData[5]->dataName == "None") {
         printX = 105;
         printY = 90;
-      }
-      else{
+        useTextSize = 6;
+      } else {
         printX = 105;
         printY = 72;
+        useTextSize = 6;
       }
+
       //Check if value is outside of alert thresholds, then print the values
-      gaugeText(ptrData[2]->scaledValue, ptrData[2]->minimum, ptrData[2]->maximum, (printX), (printY), 6,
+      gaugeText(ptrData[2]->scaledValue, ptrData[2]->minimum, ptrData[2]->maximum, (printX), (printY), useTextSize,
                 ptrData[2]->units, ptrData[2]->dataName, selectedColor[0], selectedColor[1], TRUE, TRUE, 15, ptrData[2]->alert, selectedColor[2], ptrData[2]->digits, ptrData[2]->decimal);
     }
 
@@ -286,17 +294,23 @@ void updateDisplay4x() {
 
     // Lower Text
     if (ptrData[4]->dataName != "None") {
-      if (ptrData[3]->dataName == "None" && ptrData[5]->dataName == "None") {
+
+      if (ptrData[3]->dataName == "None" && ptrData[5]->dataName == "None" && ptrData[2]->dataName == "None") {
+        printX = 120;
+        printY = 140;
+        useTextSize = 5;
+      } else if (ptrData[3]->dataName == "None" && ptrData[5]->dataName == "None") {
         printX = 105;
         printY = 180;
-      }
-      else{
+        useTextSize = 6;
+      } else {
         printX = 105;
         printY = 208;
+        useTextSize = 6;
       }
 
       //Check if value is outside of alert thresholds, then print the values
-      gaugeText(ptrData[4]->scaledValue, ptrData[4]->minimum, ptrData[4]->maximum, (printX), (printY), 6,
+      gaugeText(ptrData[4]->scaledValue, ptrData[4]->minimum, ptrData[4]->maximum, (printX), (printY), useTextSize,
                 ptrData[4]->units, ptrData[4]->dataName, selectedColor[0], selectedColor[1], TRUE, TRUE, 15, ptrData[4]->alert, selectedColor[2], ptrData[4]->digits, ptrData[4]->decimal);
     }
 
