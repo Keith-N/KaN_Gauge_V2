@@ -61,6 +61,8 @@
 #define OIL_TEMP_F 48
 #define FUEL_TEMP 49
 #define FUEL_TEMP_F 50
+#define FUEL_MPG_SHORT 51
+#define FUEL_MPG_LONG 52
 
 #define STOICH_RATIO 14.7f
 
@@ -888,7 +890,7 @@ sensorData fuelConsumption = {
   "g/s",   // Units shown for data
   0.005,   // Used to scale the recieved value
   0,       // The offset applied to the recieved value
-  0,       // Stored value for the sensor data, after scale and offset
+  5,       // Stored value for the sensor data, after scale and offset
   0,       // Minimum value used for LEDs or graphing
   100,       // Maxumum value used for LEDs or graphing
   999,     // Minimum value before alerting
@@ -955,4 +957,34 @@ sensorData fuelPressDelta_psi = {
   -999,      // Maximum value before alerting
   3,
   2          // Number of values after the decimal that are used
-};           
+};
+
+sensorData mpgShort = {
+  "MPG",
+  "MPG",  // Name shown for data
+  "",      // Units shown for data
+  0,       // Used to scale the recieved value
+  0,       // The offset applied to the recieved value
+  0,       // Stored value for the sensor data, after scale and offset
+  0,       // Minimum value used for LEDs or graphing
+  50,     // Maxumum value used for LEDs or graphing
+  -10000,  // Minimum value before alerting
+  10000,    // Maximum value before alerting
+  2,
+  2        // Number of values after the decimal that are used
+};
+
+sensorData mpgLong = {
+  "MPG",
+  "MPG",  // Name shown for data
+  "avg",      // Units shown for data
+  0,       // Used to scale the recieved value
+  0,       // The offset applied to the recieved value
+  0,       // Stored value for the sensor data, after scale and offset
+  0,       // Minimum value used for LEDs or graphing
+  50,     // Maxumum value used for LEDs or graphing
+  -10000,  // Minimum value before alerting
+  10000,    // Maximum value before alerting
+  2,
+  2        // Number of values after the decimal that are used
+};

@@ -27,6 +27,11 @@ int warningLimit = 1;
 bool INC = true;
 bool ALERT = false;
 
+int mpgCount = 1;
+int mpgTimer = 500;
+int lastMpgTime = 0;
+int mpgTimeDelay = 60000;
+
 // ========================================================== Functions =========================================================================
 
 void incrementTestData()
@@ -61,6 +66,7 @@ void incrementTestData()
 //    Serial.print("Incremented Test data : ");
 //    Serial.println(testData.scaledValue);
 #endif
+
   }
 }
 
@@ -91,6 +97,32 @@ bool sensorAlertCheck(float min, float max, float val)
   }
 
   return false;
+}
+
+void getMPG(){
+
+  // Consumption in g/s 
+  // 1Gal = 2754 g
+  // g/s -> Gal / Hr
+  // MPH / (Gal / Hr) -> MPG
+
+  if (millis()< mpgTimeDelay){
+    return;
+  }
+
+  if (mpgCount < 1)
+  { 
+    mpgCount = 1;
+  }
+
+  if (millis() - lastMpgTime > mpgTimer)
+  {
+  mpgShort.scaledValue = vss_mph.scaledValue / (fuelConsumption.scaledValue * 3600 / 2754); 
+  mpgLong.scaledValue = (mpgLong.scaledValue * (mpgCount-1)/mpgCount) + (mpgShort.scaledValue/mpgCount);
+  mpgCount++;
+  lastMpgTime = millis();
+  }
+
 }
 
 void SAVE_CAN_DATA(twai_message_t CANmsg)

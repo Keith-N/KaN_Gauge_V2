@@ -127,9 +127,12 @@ Includes wifi, CLI, and incrementing test data
 
 void inputTask(void *pvParameters) {
   for (;;) {
+
     if (wifiEnabled == true) {
       ota();
     }
+
+    getMPG();
 
 #ifdef CLI
     CLItask();
@@ -140,6 +143,7 @@ void inputTask(void *pvParameters) {
 #ifdef DEMO
     incrementTestData();
 #endif
+
     buttonPressD1 = nextConfigCheck(buttonPressD1);
   }
 }

@@ -285,6 +285,13 @@ sensorData *selectSensor(int dataSelection) {
       return &fuelTemperature_f;
       break;
 
+    case FUEL_MPG_SHORT:
+      return &mpgShort;
+      break;
+
+    case FUEL_MPG_LONG:
+      return &mpgLong;
+      break;
 
     default:
       return &afr;

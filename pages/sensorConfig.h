@@ -141,6 +141,8 @@ text-decoration: none;border: none;letter-spacing:1.25px;cursor: pointer;text-tr
     <option value="48">Oil Temp F</option>
     <option value="49">Fuel Temp</option>
     <option value="50">Fuel Temp F</option>
+	<option value="51">Instant MPG</option>
+	<option value="52">Average Trip MPG</option>
     </select>
   <br> <br>
   
