@@ -13,15 +13,15 @@
 #pragma once
 
 int bootConfig;
-const String build = "0.48";
+const String build = "0.49";
 const int nvs = 4;
-const String buildType = "MPG 1";
+const String buildType = "";
 
 // Software version and build note will displayed as entered
-String softwareVersion = "0.48";
+String softwareVersion = "0.49";
 String buildNote = "";
 
 // Hardware configuration should be updated based on populated resistors
 // use "hardwareConfig = checkResistorConfig();" during setup to do so
-String hardwareConfig = "MPG 1";
+String hardwareConfig = "";
 

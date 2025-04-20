@@ -219,7 +219,7 @@ text-decoration: none;border: none;letter-spacing:1.25px;cursor: pointer;text-tr
     <option value="2047">Cyan</option>
     <option value="31">Blue</option>
     <option value="65504">Yellow</option>
-    <option value="64928">Orange</option>
+    <option value="60512">Orange</option>
     <option value="63488">Red</option>
     <option value="65049">Pink</option>
     <option value="2016">Green</option>
