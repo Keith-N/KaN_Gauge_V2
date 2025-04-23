@@ -321,6 +321,19 @@ void printBootLogo(int bootLogoSel)
   }
 }
 
+void defaultsDisplay(){
+    tft.fillScreen(TFT_BLACK);
+    tft.drawCentreString("Button held on start!", 120, 100, 2);
+    tft.drawCentreString("Hold for 10sec to reset to defaults", 120, 120, 2);
+}
+
+void releaseDefaultDisplay(){
+
+    tft.fillScreen(TFT_BLACK);
+    tft.drawCentreString("Release button to reset defaults!", 120, 120, 2);
+
+}
+
 void showBootLogos(int start)
 {
 

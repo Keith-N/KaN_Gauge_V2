@@ -230,6 +230,40 @@ void checkWifiConfig() {
   }
 }
 
+void resetDefaults(){
+
+      Serial.println();
+      Serial.println("Resetting config... ");
+      setToDefaults = true;
+      checkNvsVer();
+      Serial.println("Restarting... ");
+      ESP.restart();
+}
+
+void checkButtonStartup(){
+
+int startTimer_ms = millis();
+
+      if (digitalRead(USER_INPUT_D2) == 0){
+      defaultsDisplay();
+      }
+
+      while (digitalRead(USER_INPUT_D2) == 0){
+        Serial.println("Button Held on startup!");
+
+       if ((startTimer_ms + 10000) < millis())
+       {
+        Serial.println("reset...");
+        if (setToDefaults == false){
+          releaseDefaultDisplay();
+        }
+        setToDefaults = true;
+
+       }
+
+      }
+}
+
 //==============================================
 //  Setup
 //==============================================
@@ -240,9 +274,17 @@ void setup() {
 
   Serial.begin(115200);
   setupPinMode();
-  attachInterrupt(USER_INPUT_D2, inputButtonD1_ISR, FALLING);
 
- hardwareConfig = checkResistorConfig();
+
+#ifdef DEBUG_SERIAL
+  Serial.println("Initializing Display ...");
+#endif
+
+  displayInit();
+  setDisplayBrightness(dispBrightness);
+  checkButtonStartup();
+  
+  hardwareConfig = checkResistorConfig();
 
 #ifdef DEBUG_SERIAL
   Serial.println("Setup ...");
@@ -253,13 +295,6 @@ void setup() {
   Serial.print("NVS : ");
   Serial.println(nvs);
 #endif
-
-#ifdef DEBUG_SERIAL
-  Serial.println("Initializing Display ...");
-#endif
-
-  displayInit();
-  setDisplayBrightness(dispBrightness);
 
 #ifdef DEBUG_SERIAL
   Serial.println("Restoring saved configuration ...");
@@ -291,6 +326,7 @@ void setup() {
   // Show boot logos
   showBootLogos(quickstart);
 
+  
   if (startWifi == true) {
 
     checkWifiConfig();
@@ -330,6 +366,8 @@ void setup() {
   setupCLI();
 #endif
 
+
+  attachInterrupt(USER_INPUT_D2, inputButtonD1_ISR, FALLING);
   setupInputTask();
 
 

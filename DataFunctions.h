@@ -277,6 +277,7 @@ void SAVE_CAN_DATA(twai_message_t CANmsg) {
     case (1516):
       // Vss 1
       vss.scaledValue = (((float)word(CANmsg.data[0], CANmsg.data[1])) / 10);
+      vss_mph.scaledValue = vss.scaledValue * vss_mph.scaleMultiplier;
       // tc_rtd
       // Launch time
       break;
