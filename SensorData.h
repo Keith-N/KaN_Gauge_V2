@@ -197,7 +197,7 @@ sensorData injectorDuty = {
   "Injector Dutycycle",
   "Inj",  // Name shown for data
   "%",    // Units shown for data
-  0.5,    // Used to scale the recieved value
+  0.5 ,    // Used to scale the recieved value
   0,      // The offset applied to the recieved value
   0,      // Stored value for the sensor data, after scale and offset
   0,      // Minimum value used for LEDs or graphing

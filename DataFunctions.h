@@ -141,8 +141,9 @@ void SAVE_CAN_DATA(twai_message_t CANmsg) {
 
     case (513):
       rpm.scaledValue = ((((int)word(CANmsg.data[1], CANmsg.data[0])) * (rpm.scaleMultiplier)) + rpm.offset);
-      ignitionTiming.scaledValue = ((((float)word(CANmsg.data[3], CANmsg.data[2])) * (ignitionTiming.scaleMultiplier)) + ignitionTiming.offset);
-      injectorDuty.scaledValue = ((((float)word(CANmsg.data[5], CANmsg.data[4])) * (injectorDuty.scaleMultiplier)) + injectorDuty.offset);
+      ignitionTiming.scaledValue = ((((short)word(CANmsg.data[3], CANmsg.data[2])) * (ignitionTiming.scaleMultiplier)) + ignitionTiming.offset);
+      injectorDuty.scaledValue = ((((float)(CANmsg.data[4])) * (injectorDuty.scaleMultiplier)) + injectorDuty.offset);
+
       vss.scaledValue = ((((float)(CANmsg.data[6])) * (vss.scaleMultiplier)) + vss.offset);
       vss_mph.scaledValue = ((((float)(CANmsg.data[6])) * (vss_mph.scaleMultiplier)) + vss_mph.offset);
       ethanol.scaledValue = ((((float)(CANmsg.data[7])) * (ethanol.scaleMultiplier)) + ethanol.offset);
@@ -276,7 +277,7 @@ void SAVE_CAN_DATA(twai_message_t CANmsg) {
 
     case (1516):
       // Vss 1
-      vss.scaledValue = (((float)word(CANmsg.data[0], CANmsg.data[1])) / 10);
+      vss.scaledValue = ((((float)word(CANmsg.data[0], CANmsg.data[1])) * 3.6) / 10);
       vss_mph.scaledValue = vss.scaledValue * vss_mph.scaleMultiplier;
       // tc_rtd
       // Launch time
