@@ -294,6 +294,22 @@ text-decoration: none;border: none;letter-spacing:1.25px;cursor: pointer;text-tr
   <br>
 </form>
 
+<!-- ---------------------------------------------------------------- Set Gauge Base ID ------------------------------------------------------------------ -->
+
+
+<form action="/setbaseID">
+  <p>Set CAN broadcast base ID</p>
+  <h4>Current FOME base ID: <span id = "baseIDFOME"></span></h4>
+  <h4>MS base ID is + 1000</h4>
+  <p1>Set base ID</p1>
+  <label for="A"></label>
+  <input type="text" id="A" name="A">
+  <br>
+  <br>
+  <input type="submit" value = "Set new configuration" onClick="notify('New Configuration Sent')">
+  <br>
+</form> 
+
 <!-- ------------------------------------------------------------------ Configure sensor limits ------------------------------------------------------------------ -->
 
   <form action="/sensorConfiguration">
@@ -327,6 +343,7 @@ function getData() {
 	getSensor8();
 	getSensor9();
 	getSensor10();
+	getBaseID();
 	
 	
 }; 
@@ -358,6 +375,18 @@ function getGaugeType() {
   };
 
   xhttp.open("GET", "gaugeType", true);
+  xhttp.send();
+}
+
+function getBaseID() {
+  var xhttp = new XMLHttpRequest();
+  xhttp.onreadystatechange = function() {
+    if (this.readyState == 4 && this.status == 200) {
+      document.getElementById("baseIDFOME").innerHTML = this.responseText;
+    }
+  };
+
+  xhttp.open("GET", "baseID", true);
   xhttp.send();
 }
 

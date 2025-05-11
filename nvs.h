@@ -343,6 +343,10 @@ int gaugeDisplayType = 0;
 #define FF 2
 #define LED 3
 
+int canBaseID_FOME = 512;
+int canBaseID_MS = 1512;
+int newBaseID = 512;
+
 int config_alertType = NONE;
 String alertTypeText[] = { "None", "Icon", "FullScreen", "LED Flash"};
 
@@ -459,6 +463,7 @@ void saveUserConfig() {
   preferences.putBytes("cf_ledColors", (byte *)(&config_ledColors), sizeof(config_ledColors));
   preferences.putBytes("cf_uiColors", (byte *)(&config_uiColors), sizeof(config_uiColors));
   preferences.putBytes("cf_alertType", (byte *)(&config_alertType), sizeof(config_alertType));
+  preferences.putBytes("cf_baseID", (byte *)(&canBaseID_FOME), sizeof(canBaseID_FOME));
   preferences.end();
 }
 
@@ -471,6 +476,7 @@ void restoreUserConfig() {
   preferences.getBytes("cf_ledColors", (&config_ledColors), sizeof(config_ledColors));
   preferences.getBytes("cf_uiColors", (&config_uiColors), sizeof(config_uiColors));
   preferences.getBytes("cf_alertType", (&config_alertType), sizeof(config_alertType));
+  preferences.getBytes("cf_baseID", (&canBaseID_FOME), sizeof(canBaseID_FOME));
   preferences.end();
 }
 

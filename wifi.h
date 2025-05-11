@@ -112,9 +112,10 @@ void handleOTA() {
   server.send(200, "text/html", updatePage);
 }
 
-void handleDataTest(){
-  server.send(200, "text/plane", "TEST" );
+void handleDataTest() {
+  server.send(200, "text/plane", "TEST");
 }
+
 
 void handleData_currentConfig() {
   // Convert value to a string
@@ -481,15 +482,15 @@ void handleData_ledStyle() {
   server.send(200, "text/plane", ledStyleName[LEDstyle]);
 }
 
-void handleData_boot1(){
+void handleData_boot1() {
   server.send(200, "text/plane", bootLogoNames[bootLogo1]);
 }
 
-void handleData_boot2(){
+void handleData_boot2() {
   server.send(200, "text/plane", bootLogoNames[bootLogo2]);
 }
 
-void handleData_boot3(){
+void handleData_boot3() {
   server.send(200, "text/plane", bootLogoNames[bootLogo3]);
 }
 
@@ -535,7 +536,7 @@ void handleData_ledCustomColor3_R() {
 
 void handleData_ledCustomColor4_R() {
   char ledR4[10];
-  sprintf(ledR4, "%d", LEDred[3][3]); 
+  sprintf(ledR4, "%d", LEDred[3][3]);
   server.send(200, "text/plane", ledR4);
 }
 
@@ -623,6 +624,12 @@ void handleData_ledCustomColor6_B() {
   server.send(200, "text/plane", ledB6);
 }
 
+void handleData_BaseID() {
+    char baseIDdisp[10];
+    sprintf(baseIDdisp, "%d", canBaseID_FOME);
+    server.send(200, "text/plane", baseIDdisp);
+}
+
 
 /*
 
@@ -674,12 +681,15 @@ void otaSetup(void) {
     ESP.restart();
   });
 
+
   server.on("/version", handleVersion);
   server.on("/note", handleNote);
   server.on("/hardware", handleHardware);
 
   server.on("/gaugeConfig", handleData_currentConfig);
   server.on("/gaugeType", handleData_currentType);
+
+  server.on("/baseID", handleData_BaseID);
 
   server.on("/sensor1", handleData_currentSensor1);
   server.on("/sensor2", handleData_currentSensor2);
@@ -754,7 +764,6 @@ void otaSetup(void) {
   server.on("/ledHigh", handleData_ledBrightnessHigh);
   server.on("/ledLow", handleData_ledBrightnessLow);
 
-
   server.on("/led1", handleData_ledCustomColor1_R);
   server.on("/led2", handleData_ledCustomColor1_G);
   server.on("/led3", handleData_ledCustomColor1_B);
@@ -781,6 +790,17 @@ void otaSetup(void) {
   server.on("/bootLevel", handleData_bootLevel);
   server.on("/testValue", handleDataTest);
 
+
+  server.on("/setbaseID", HTTP_GET, [] {
+    String a;
+    a = server.arg(0);
+    newBaseID = (int)(a.toInt());
+    canBaseID_FOME = newBaseID;
+    updateUserConfig = true;
+    readyToUpdateGaugeConfig = true;
+    server.send(200, "text/html", gaugeConfigPage2);
+
+  });
 
   server.on("/test", HTTP_GET, [] {
     server.send(200, "text/html", testPage);
@@ -814,7 +834,7 @@ void otaSetup(void) {
     server.send(200, "text/html", sensorConfigPage);
   });
 
-    server.on("/boot", HTTP_GET, [] {
+  server.on("/boot", HTTP_GET, [] {
     server.send(200, "text/html", bootConfigPage);
   });
 
@@ -834,7 +854,7 @@ void otaSetup(void) {
 
     readyToUpdateLimits = true;
 
-    server.send(200, "text/html", gaugeConfigPage2);
+    server.send(200, "text/html", sensorConfigPage);
   });
 
   server.on("/setConfig", HTTP_GET, [] {
@@ -870,8 +890,6 @@ void otaSetup(void) {
     readyToUpdateGaugeConfig = true;
     server.send(200, "text/html", displayConfigPage);
   });
-
-
 
 
   server.on("/setDisplayRate", HTTP_GET, [] {
