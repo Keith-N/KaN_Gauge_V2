@@ -19,6 +19,8 @@
 #include "led.h"
 #include "display.h"
 
+#include "pid.h"
+
 #include <Preferences.h>
 #include <nvs_flash.h>
 
@@ -348,7 +350,7 @@ int canBaseID_MS = 1512;
 int newBaseID = 512;
 
 int config_alertType = NONE;
-String alertTypeText[] = { "None", "Icon", "FullScreen", "LED Flash"};
+String alertTypeText[] = { "None", "Icon", "FullScreen", "LED Flash" };
 
 String arcColors[] = { "Red", "Green", "Blue", "Blue to Red", "Green to Red", "Red to Green", "White", "Black", "Custom 1", "Custom 2" };
 int customArcColor[] = { 0, 0 };
@@ -367,8 +369,8 @@ String colorName[] = { "Value", "Units", "Alert", "Needle", "Background" };
 int bootLogo1 = 1;  // BMM
 int bootLogo2 = 2;  // FOME
 int bootLogo3 = 0;  // KaN
-String bootLogoLevel[] = {"3 Logo", "2 Logo", "1 Logo", "Skip"};
-String bootLogoNames[] = { "KaN", "BMM", "FOME", "MAZDA", "Other"};
+String bootLogoLevel[] = { "3 Logo", "2 Logo", "1 Logo", "Skip" };
+String bootLogoNames[] = { "KaN", "BMM", "FOME", "MAZDA", "Other" };
 
 int LEDcolor = 1;  // LED config blue to green to red
 int LEDstyle = 1;
@@ -376,9 +378,9 @@ int LEDstyle = 1;
 String ledStyleName[] = { "Series Single Color", "Series Multi-Color", "Single LED" };
 String ledColorName[] = { "None", "Blue -> Green -> Red", "Green -> Red", "Custom", "Alert 1", "Alert 2" };
 
-int LEDred[6][6] =    { { 0, 0, 0, 0, 0, 0 }, { 0, 100, 150, 255, 255, 255 }, { 100, 100, 100, 100, 100, 255 }, { 255, 255, 255, 255, 255, 255 }, { 255, 255, 255, 255, 255, 255 }, { 255, 255, 255, 255, 255, 255 } };
-int LEDgreen[6][6] =  { { 0, 0, 0, 0, 0, 0 }, { 100, 200, 255, 150, 50, 0 },  { 200, 200, 200, 200, 200, 0 },   { 255, 255, 255, 255, 255, 255 }, { 5, 10, 25, 35, 67, 90 },        { 0, 0, 0, 0, 0, 0 } };
-int LEDblue[6][6] =   { { 0, 0, 0, 0, 0, 0 }, { 150, 40, 0, 0, 0, 0 },        { 0, 0, 0, 0, 0, 0 },             { 255, 255, 255, 255, 255, 255 }, { 0, 0, 0, 0, 0, 0 },             { 0, 0, 0, 0, 0, 0 } };
+int LEDred[6][6] = { { 0, 0, 0, 0, 0, 0 }, { 0, 100, 150, 255, 255, 255 }, { 100, 100, 100, 100, 100, 255 }, { 255, 255, 255, 255, 255, 255 }, { 255, 255, 255, 255, 255, 255 }, { 255, 255, 255, 255, 255, 255 } };
+int LEDgreen[6][6] = { { 0, 0, 0, 0, 0, 0 }, { 100, 200, 255, 150, 50, 0 }, { 200, 200, 200, 200, 200, 0 }, { 255, 255, 255, 255, 255, 255 }, { 5, 10, 25, 35, 67, 90 }, { 0, 0, 0, 0, 0, 0 } };
+int LEDblue[6][6] = { { 0, 0, 0, 0, 0, 0 }, { 150, 40, 0, 0, 0, 0 }, { 0, 0, 0, 0, 0, 0 }, { 255, 255, 255, 255, 255, 255 }, { 0, 0, 0, 0, 0, 0 }, { 0, 0, 0, 0, 0, 0 } };
 
 float inputNewValue;
 
@@ -396,12 +398,14 @@ int quickstart = 0;
 bool setToDefaults = false;
 bool updateGaugeType = false;
 bool updateUserConfig = false;
+bool dataRequestOBD = false;
 
 bool startWifi = true;
 bool startCan = true;
 
 int displayRefresh_ms = 100;
 
+int selectedPIDs[] = { ENGINE_COOLANT_TEMP, ENGINE_OIL_TEMP, INTAKE_AIR_TEMP, INTAKE_MANIFOLD_ABS_PRESSURE, OXYGEN_SENSOR_1_B, ABS_BAROMETRIC_PRESSURE, ENGINE_RPM };
 
 String gaugeStyleNames[] = { "2x Arc with 4x Digital", "1x Meter with 5x Digital", "1x Arc with large numbers", "1x Meter with large numbers", "Large numbers", "4x Digital" };
 String dataLocation[] = { "Inside Arc", "Outer Arc", "Center", "Bottom Left", "Center Bottom", "Bottom Right", "LEDs", "Top Left", "Top Right", "Meter", "" };

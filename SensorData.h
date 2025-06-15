@@ -988,3 +988,18 @@ sensorData mpgLong = {
   2,
   2        // Number of values after the decimal that are used
 };
+
+sensorData baroPressure = {
+  "Baro kPa",
+  "Baro",       // Name shown for data
+  "kPa",       // Units shown for data
+  (0.033333),  // Used to scale the recieved value
+  0,           // The offset applied to the recieved value
+  0,           // Stored value for the sensor data, after scale and offset
+  0,           // Minimum value used for LEDs or graphing
+  250,         // Maxumum value used for LEDs or graphing
+  -999,         // Minimum value before alerting
+  999,        // Maximum value before alerting
+  3,
+  2            // Number of values after the decimal that are used
+}; 
