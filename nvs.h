@@ -361,7 +361,9 @@ int arcSeg2 = 3;
 int arcInc1 = 6;
 int arcInc2 = 3;
 
-int selectedColor[] = { 65535, 63488, 63488, 63488, 0 };
+int bg_color = 0;
+
+int selectedColor[] = { 63488, 63488, 63488, 63488, 0 };
 String colorName[] = { "Value", "Units", "Alert", "Needle", "Background" };
 
 int bootLogo1 = 1;  // BMM

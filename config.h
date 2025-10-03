@@ -13,12 +13,12 @@
 #pragma once
 
 int bootConfig;
-const String build = "0.52";
+const String build = "0.53";
 const int nvs = 5;
 const String buildType = "";
 
 // Software version and build note will displayed as entered
-String softwareVersion = "0.52";
+String softwareVersion = build;
 String buildNote = "";
 
 // Hardware configuration should be updated based on populated resistors
