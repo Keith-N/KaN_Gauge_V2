@@ -346,6 +346,7 @@ int gaugeDisplayType = 0;
 int canBaseID_FOME = 512;
 int canBaseID_MS = 1512;
 int newBaseID = 512;
+int canBaseID_LINK = 1000;
 
 int config_alertType = NONE;
 String alertTypeText[] = { "None", "Icon", "FullScreen", "LED Flash"};

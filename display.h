@@ -371,6 +371,7 @@ void showBootLogos(int start)
 
     tft.setTextColor(TFT_WHITE);
     tft.drawCentreString(build, 120, 160, 2);
+    tft.drawCentreString(buildType, 120, 180, 2);
 
     if (nvsReset == true)
     {
