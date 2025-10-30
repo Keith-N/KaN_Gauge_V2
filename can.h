@@ -72,17 +72,17 @@ void canReceive() {
   if (twai_receive(&CANMessage, 0) == ESP_OK) {
 
     if (printCan == true) {
-      Serial.print("0x");
+      Serial.print("ID 0x");
       // id = CANMessage.identifier;
       Serial.print(CANMessage.identifier, HEX);
-      Serial.print("\t");
+      Serial.print(" ,EXT \t");
       Serial.print(CANMessage.extd);
-      Serial.print("\t");
+      Serial.print("  ,RTR \t");
       Serial.print(CANMessage.rtr);
-      Serial.print("\t");
+      Serial.print(" , Data \t");
       Serial.print(CANMessage.data_length_code);
       for (int i = 0; i < CANMessage.data_length_code; i++) {
-        Serial.print("\t0x");
+        Serial.print("\t 0x");
         if (CANMessage.data[i] <= 0x0F) {
           Serial.print(0);
         }

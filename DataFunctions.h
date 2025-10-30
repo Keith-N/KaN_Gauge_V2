@@ -276,51 +276,53 @@ void SAVE_CAN_DATA(twai_message_t CANmsg) {
     // Launch time
   }
 
+
   // LINK
-if (CANmsg.identifier == (canBaseID_LINK + 0)) {
-    // Handle ID 0
-    rpm.scaledValue = ((int)word(CANmsg.data[2], CANmsg.data[3]));
-    manifoldPressure.scaledValue = ((float)word(CANmsg.data[4], CANmsg.data[5]));
 
-} else if (CANmsg.identifier == (canBaseID_LINK + 1)) {
-    // Handle ID 1
-    throttle1.scaledValue = (((short)word(CANmsg.data[4], CANmsg.data[5])) / 10);
-    injectorDuty.scaledValue = (((float)(CANmsg.data[4])) /10);
+  if (CANmsg.identifier == canBaseID_LINK) {
 
-} else if (CANmsg.identifier == (canBaseID_LINK + 2)) {
-    // Handle ID 2
+    if (CANmsg.data[2] == 0) {
+      // Handle ID 0
+      rpm.scaledValue = ((int)word(CANmsg.data[2], CANmsg.data[3]));
+      manifoldPressure.scaledValue = ((float)word(CANmsg.data[4], CANmsg.data[5]));
 
-} else if (CANmsg.identifier == (canBaseID_LINK + 3)) {
-    // Handle ID 3
-    intakeTemperature.scaledValue = ((float)word(CANmsg.data[2], CANmsg.data[3]))-50;
-    intakeTemperature_f.scaledValue = (intakeTemperature.scaledValue * 1.8) + 32;
-    batteryVoltage.scaledValue = (((float)word(CANmsg.data[4], CANmsg.data[5])) / 100);
+    } else if (CANmsg.data[2] == 1) {
+      // Handle ID 1
+      throttle1.scaledValue = (((short)word(CANmsg.data[4], CANmsg.data[5])) / 10);
+      injectorDuty.scaledValue = (((float)(CANmsg.data[4])) / 10);
+
+    } else if (CANmsg.data[2] == 2) {
+      // Handle ID 2
+
+    } else if (CANmsg.data[2] == 3) {
+      // Handle ID 3
+      intakeTemperature.scaledValue = ((float)word(CANmsg.data[2], CANmsg.data[3])) - 50;
+      intakeTemperature_f.scaledValue = (intakeTemperature.scaledValue * 1.8) + 32;
+      batteryVoltage.scaledValue = (((float)word(CANmsg.data[4], CANmsg.data[5])) / 100);
 
 
-} else if (CANmsg.identifier == (canBaseID_LINK + 4)) {
-    // Handle ID 4
+    } else if (CANmsg.data[2] == 4) {
+      // Handle ID 4
 
-} else if (CANmsg.identifier == (canBaseID_LINK + 5)) {
-    // Handle ID 5
+    } else if (CANmsg.data[2] == 5) {
+      // Handle ID 5
 
-} else if (CANmsg.identifier == (canBaseID_LINK + 6)) {
-    // Handle ID 6
-    lambda1.scaledValue = (((float)word(CANmsg.data[4], CANmsg.data[5]))/1000);
-    lambda2.scaledValue = (((float)word(CANmsg.data[6], CANmsg.data[7]))/1000);
+    } else if (CANmsg.data[2] == 6) {
+      // Handle ID 6
+      lambda1.scaledValue = (((float)word(CANmsg.data[4], CANmsg.data[5])) / 1000);
+      lambda2.scaledValue = (((float)word(CANmsg.data[6], CANmsg.data[7])) / 1000);
 
-} else if (CANmsg.identifier == (canBaseID_LINK + 7)) {
-    // Handle ID 7
+    } else if (CANmsg.data[2] == 7) {
+      // Handle ID 7
 
-} else if (CANmsg.identifier == (canBaseID_LINK + 8)) {
-    // Handle ID 8
-    oilPressure.scaledValue = ((float)word(CANmsg.data[4], CANmsg.data[5]));
-    oilTemperature.scaledValue = ((float)word(CANmsg.data[2], CANmsg.data[3]));
-    oilTemperature_f.scaledValue = (oilTemperature.scaledValue *1.8) + 32 ;
+    } else if (CANmsg.data[2] == 8) {
+      // Handle ID 8
+      oilPressure.scaledValue = ((float)word(CANmsg.data[4], CANmsg.data[5]));
+      oilTemperature.scaledValue = ((float)word(CANmsg.data[2], CANmsg.data[3]));
+      oilTemperature_f.scaledValue = (oilTemperature.scaledValue * 1.8) + 32;
 
-} else if (CANmsg.identifier == (canBaseID_LINK + 9)) {
-    // Handle ID 9
-
+    } else if (CANmsg.data[2] == 9) {
+      // Handle ID 9
+    }
+  }
 }
-
-}
-
