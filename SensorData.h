@@ -64,6 +64,9 @@
 #define FUEL_MPG_SHORT 51
 #define FUEL_MPG_LONG 52
 
+#define BARO_PRESSURE 53
+
+
 #define STOICH_RATIO 14.7f
 
 
