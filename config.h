@@ -13,9 +13,9 @@
 #pragma once
 
 int bootConfig;
-const String build = "0.54";
+const String build = "0.55";
 const int nvs = 5;
-const String buildType = "Link Test";
+const String buildType = "";
 
 // Software version and build note will displayed as entered
 String softwareVersion = build;

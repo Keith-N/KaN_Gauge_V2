@@ -235,6 +235,7 @@ text-decoration: none;border: none;letter-spacing:1.25px;cursor: pointer;text-tr
 <!-- ---------------------------------------------------------------- Set Gauge Sensors MS ------------------------------------------------------------------ -->
 <form action="/setGaugeConfig">
 <p>Select Gauge Sensors MS</p>
+<p>Base ID 1512</p>
   <label for="B"></label>
   <select id="B" name="B"> 
     <option value="0">Arc Inside</option>
@@ -287,6 +288,70 @@ text-decoration: none;border: none;letter-spacing:1.25px;cursor: pointer;text-tr
     <option value="44">Boost Psi</option>
 
 
+    </select>
+
+  <br>
+  <input type="submit" value = "Set new configuration" onClick="notify('New Configuration Sent')">
+  <br>
+</form>
+
+
+<!-- ---------------------------------------------------------------- Set Gauge Sensors Link ------------------------------------------------------------------ -->
+<form action="/setGaugeConfig">
+<p>Select Gauge Sensors Link</p>
+<p>Use ID 1000 and Generic Dash</p>
+  <label for="B"></label>
+  <select id="B" name="B"> 
+    <option value="0">Arc Inside</option>
+    <option value="1">Arc Outside</option>
+    <option value="9">Analog Meter</option>
+    <option value="6">LEDs</option>
+    <option value="2">Top Center</option>
+    <option value="7">Top Left</option>
+    <option value="8">Top Right</option>
+    <option value="4">Bottom Center </option>
+    <option value="3">Bottom Left</option>
+    <option value="5">Bottom Right</option>
+    </select>
+  <br>
+  
+  <label for="C"></label>
+  <select id="C" name="C"> 
+    <option value="0">AFR</option>
+    <option value="1">RPM</option>
+	
+    <option value="4">MAP kpa</option>
+    <option value="5">MAP psi</option>
+
+    <option value="6">Coolant Temp C</option>
+    <option value="7">Coolant Temp F</option>
+
+    <option value="8">Intake Temp C</option>
+    <option value="9">Intake Temp F</option>
+	
+	<option value="47">Oil Temp</option>
+    <option value="48">Oil Temp F</option>
+
+    <option value="11">Ignition Timing</option>
+
+    <option value="12">Injector Duty</option>
+    <option value="13">Injector Pulse</option>
+
+    <option value="14">TPS</option>
+    <option value="25">Battery Voltage</option>
+	<option value="18">Est Air Flow</option>
+	
+    <option value="26">Fuel Ethanol</option>
+
+    <option value="41">No Data</option>
+    <option value="42">Test Data</option>
+
+    <option value="43">Boost kPa</option>
+    <option value="44">Boost Psi</option>
+	
+    <option value="10">Accelerator</option>
+    <option value="40">Detected Gear</option>
+	
     </select>
 
   <br>
