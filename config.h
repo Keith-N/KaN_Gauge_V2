@@ -13,7 +13,7 @@
 #pragma once
 
 int bootConfig;
-const String build = "0.55";
+const String build = "0.56";
 const int nvs = 5;
 const String buildType = "";
 
@@ -25,3 +25,4 @@ String buildNote = buildType;
 // use "hardwareConfig = checkResistorConfig();" during setup to do so
 String hardwareConfig = "";
 
+  
