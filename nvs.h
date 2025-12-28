@@ -1165,8 +1165,8 @@ void saveSensorAlerts() {
   preferences.putInt("mapPSILOW", manifoldPressure_psi.alertLow);
   preferences.putInt("mapPSIHI", manifoldPressure_psi.alertHigh);
 
-  preferences.putInt("oilKPALOW", oilPressure_psi.alertLow);
-  preferences.putInt("oilKPAHI", oilPressure_psi.alertHigh);
+  preferences.putInt("oilPSILOW", oilPressure_psi.alertLow);
+  preferences.putInt("oilPSIHI", oilPressure_psi.alertHigh);
 
   // preferences.putInt("vvtLOW", vvtPosition.alertLow);
   // preferences.putInt("vvtHI", vvtPosition.alertHigh);
