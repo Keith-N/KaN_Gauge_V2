@@ -145,6 +145,7 @@ void displayAlert_noIcon() {
 /*
 Updates the display based on the selected configurations
 This includes two arcs across the top as well as 4 sets of digits
+"2x Arc with 4x Digital"
 */
 
 void updateDisplay() {
@@ -214,6 +215,13 @@ void updateDisplay() {
     }
   }
 }
+
+
+/*
+
+"4x Digital"
+
+*/
 
 
 void updateDisplay4x() {
@@ -334,6 +342,7 @@ void updateDisplay4x() {
 Updates the display based on the selected configurations
 This is similar to the updateDisplay function with an increased size for the center digits
 Includes one Arc and three sets of digits
+
 */
 
 void updateDisplay_LargeText() {

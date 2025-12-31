@@ -1093,22 +1093,22 @@ void gaugeText(float value, float min, float max, int x, int y, int fontSize, co
   {
 
   case 0:
-    tft.setTextPadding(3 * 14);
+    tft.setTextPadding(80);
     tft.drawString(buf, x, y, 2);
     break;
 
   case 1:
-    tft.setTextPadding(8 * 3);
+    tft.setTextPadding(80);
     tft.drawString(buf, x, y, 4);
     break;
 
   case 3:
-    tft.setTextPadding(25 * 5);
+    tft.setTextPadding(124);
     tft.drawString(buf, x - 5, y - 10, 6);
     break;
 
   case 4:
-    tft.setTextPadding(25 * 5);
+    tft.setTextPadding(125);
     tft.drawString(buf, x, y - 10, 6);
     break;
 
@@ -1123,7 +1123,7 @@ void gaugeText(float value, float min, float max, int x, int y, int fontSize, co
     break;
 
   default:
-    tft.setTextPadding(8 * 3);
+    tft.setTextPadding(500);
     tft.drawString(buf, x, y, 4);
     break;
   }
