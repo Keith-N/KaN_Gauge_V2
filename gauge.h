@@ -603,6 +603,7 @@ void updateDisplayTask(void *pvParameters) {
     if ((millis() - lastDisplayUpdate_ms) > displayRefresh_ms) {
       getBrightness();
       setDisplayBrightness(dispBrightness);
+
       fullscreenAlert = checkFullscreenAlert[config_alertType];
 
       lastDisplayUpdate_ms = millis();
@@ -688,8 +689,8 @@ void updateDisplayTask(void *pvParameters) {
         }
       } else {
 
-        if (config_alertType != 0 && config_alertType != 3) {
-          // Clean up Exclaimation if printed and no Alert exsists
+        if (config_alertType != 0 && config_alertType != 3 && gaugeDisplayType != 5) {
+          // Clean up Exclaimation if printed and no Alert exsists (Don't use on 4x digital)
           drawAlert(120, 210, 50, 0);
         }
       }
