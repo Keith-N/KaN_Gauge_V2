@@ -46,8 +46,8 @@ Command cmdUserConfig;
 Command cmdIncUserConfig;
 Command cmdSetUserConfig;
 
-bool canEnabled = false;
-bool printCan = false;
+bool canEnabled = true;
+bool printCan = true;
 
 void setupCLI()
 {

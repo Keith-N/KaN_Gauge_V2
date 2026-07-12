@@ -51,6 +51,7 @@ int brightnessThresholdHigh = 1500;
 #define RED2GREEN 5
 #define TFT_GREY 0x2104 // Dark grey 16 bit color
 
+
 #define boot3
 
 #define BUFF_SIZE 64        // To speed up rendering we use a 64 pixel buffer
@@ -109,7 +110,7 @@ void displayInit()
 
   tft.begin();
   tft.setRotation(0);
-  tft.fillScreen(TFT_BLACK);
+  tft.fillScreen(selectedColor[4]);
   tft.setTextFont(2);
 }
 
@@ -142,7 +143,7 @@ void setupAnalogMeter(int pX, int pY, const char *name, const char *unit, float 
   char indicator4[4];
   dtostrf(tempVal + minVal, 1, 1, indicator4);
 
-  AnMeter.analogMeter(pX, pY, minVal, maxVal, unit, indicator0, indicator1, indicator2, indicator3, indicator4, selectedColor[4], TFT_WHITE, TFT_WHITE, TFT_RED, TFT_YELLOW, TFT_BLUE, TFT_GREEN); // Draw analogue meter at 0, 0
+  AnMeter.analogMeter(pX, pY, minVal, maxVal, unit, indicator0, indicator1, indicator2, indicator3, indicator4, selectedColor[4], selectedColor[0], selectedColor[0], TFT_RED, TFT_YELLOW, TFT_BLUE, TFT_GREEN); // Draw analogue meter at 0, 0
   // AnMeter.analogMeter(pX, pY, maxVal, unit, indicator0, indicator1, indicator2, indicator3, indicator4);
 }
 
@@ -196,7 +197,7 @@ void drawAlert(int x, int y, int side, bool draw)
   }
   else if (!draw)
   {
-    tft.fillRect(x - alertWidth / 2, y - alertHeight / 2, alertWidth, alertHeight, TFT_BLACK);
+    tft.fillRect(x - alertWidth / 2, y - alertHeight / 2, alertWidth, alertHeight, selectedColor[4]);
     range_error = 0;
   }
 }
@@ -370,6 +371,7 @@ void showBootLogos(int start)
 
     tft.setTextColor(TFT_WHITE);
     tft.drawCentreString(build, 120, 160, 2);
+    tft.drawCentreString(buildType, 120, 180, 2);
 
     if (nvsReset == true)
     {
@@ -455,6 +457,8 @@ int ringMeter(float value, float vmin, float vmax, int x, int y, int r, const ch
       case 6:
         color = TFT_BLACK;
         break;
+      case 7:
+        color = TFT_WHITE;
       default:
         color = TFT_BLUE;
         break; // Fixed color
@@ -485,10 +489,10 @@ int ringMeter(float value, float vmin, float vmax, int x, int y, int r, const ch
   //   drawAlert(x, y + 90, 50, 0);
   // }
 
-  tft.setTextColor(TFT_WHITE, TFT_BLACK);
+  tft.setTextColor(TFT_WHITE, selectedColor[4]);
 
   // Uncomment next line to set the text color to the last segment value!
-  tft.setTextColor(color, TFT_BLACK);
+  tft.setTextColor(color, selectedColor[4]);
   tft.setTextDatum(MC_DATUM);
   // Print value, if the meter is large then use big font 8, othewise use 4
   if (r > 84)
@@ -504,7 +508,7 @@ int ringMeter(float value, float vmin, float vmax, int x, int y, int r, const ch
   tft.setTextSize(1);
   tft.setTextPadding(0);
   // Print units, if the meter is large then use big font 4, othewise use 2
-  tft.setTextColor(TFT_WHITE, TFT_BLACK);
+  tft.setTextColor(TFT_WHITE, selectedColor[4]);
   if (r > 84)
     tft.drawString(units, x, y + 60, 4); // Units display
   else
@@ -606,10 +610,10 @@ int ringMeterNoText(float value, float vmin, float vmax, int x, int y, int r, co
   //   drawAlert(x, y + 90, 50, 0);
   // }
 
-  tft.setTextColor(TFT_WHITE, TFT_BLACK);
+  tft.setTextColor(TFT_WHITE, selectedColor[4]);
 
   // // Uncomment next line to set the text color to the last segment value!
-  // tft.setTextColor(color, TFT_BLACK);
+  // tft.setTextColor(color, selectedColor[4]);
   // tft.setTextDatum(MC_DATUM);
   // // Print value, if the meter is large then use big font 8, othewise use 4
   // if (r > 84) {
@@ -622,7 +626,7 @@ int ringMeterNoText(float value, float vmin, float vmax, int x, int y, int r, co
   // tft.setTextSize(1);
   // tft.setTextPadding(0);
   // // Print units, if the meter is large then use big font 4, othewise use 2
-  // tft.setTextColor(TFT_WHITE, TFT_BLACK);
+  // tft.setTextColor(TFT_WHITE, selectedColor[4]);
   // if (r > 84) tft.drawString(units, x, y + 60, 4);  // Units display
   // else tft.drawString(units, x, y + 15, 2);         // Units display
 
@@ -722,10 +726,10 @@ int ringMeter1(float value, float vmin, float vmax, int x, int y, int r, const c
   //   drawAlert(x, y + 90, 50, 0);
   // }
 
-  tft.setTextColor(TFT_WHITE, TFT_BLACK);
+  tft.setTextColor(TFT_WHITE, selectedColor[4]);
 
   // Uncomment next line to set the text color to the last segment value!
-  tft.setTextColor(color, TFT_BLACK);
+  tft.setTextColor(color, selectedColor[4]);
   tft.setTextDatum(MC_DATUM);
 
   // Print value, if the meter is large then use big font 8, othewise use 4
@@ -744,7 +748,7 @@ int ringMeter1(float value, float vmin, float vmax, int x, int y, int r, const c
   tft.setTextPadding(0);
   // Print units, if the meter is large then use big font 4, othewise use 2
 
-  tft.setTextColor(TFT_WHITE, TFT_BLACK);
+  tft.setTextColor(TFT_WHITE, selectedColor[4]);
   if (r > 84)
     tft.drawString(units, x, y + 60, 4); // Units display
   else
@@ -846,10 +850,10 @@ int ringMeter2(float value, float vmin, float vmax, int x, int y, int r, const c
   //   drawAlert(x, y + 90, 50, 0);
   // }
 
-  tft.setTextColor(TFT_WHITE, TFT_BLACK);
+  tft.setTextColor(TFT_WHITE, selectedColor[4]);
 
   // Uncomment next line to set the text color to the last segment value!
-  tft.setTextColor(color, TFT_BLACK);
+  tft.setTextColor(color, selectedColor[4]);
   tft.setTextDatum(MC_DATUM);
 
   // Print value, if the meter is large then use big font 8, othewise use 4
@@ -861,7 +865,7 @@ int ringMeter2(float value, float vmin, float vmax, int x, int y, int r, const c
   tft.setTextPadding(0);
   // Print units, if the meter is large then use big font 4, othewise use 2
 
-  tft.setTextColor(TFT_WHITE, TFT_BLACK);
+  tft.setTextColor(TFT_WHITE, selectedColor[4]);
   tft.drawString(units, x, y + 110, 4); // Units display
 
   // Calculate and return right hand side x coordinate
@@ -1073,38 +1077,38 @@ void gaugeText(float value, float min, float max, int x, int y, int fontSize, co
   buf[len + 1] = 0;
 
   tft.setTextSize(1);
-  tft.setTextColor(color, TFT_BLACK);
+  tft.setTextColor(color, selectedColor[4]);
 
   if (alert == true)
   {
 
-    tft.setTextColor(alertColor, TFT_BLACK);
+    tft.setTextColor(alertColor, selectedColor[4]);
   }
 
   // Uncomment next line to set the text color to the last segment value!
-  // tft.setTextColor(color, TFT_BLACK);
+  // tft.setTextColor(color, selectedColor[4]);
   tft.setTextDatum(MC_DATUM);
 
   switch (fontSize)
   {
 
   case 0:
-    tft.setTextPadding(3 * 14);
+    tft.setTextPadding(80);
     tft.drawString(buf, x, y, 2);
     break;
 
   case 1:
-    tft.setTextPadding(8 * 3);
+    tft.setTextPadding(80);
     tft.drawString(buf, x, y, 4);
     break;
 
   case 3:
-    tft.setTextPadding(25 * 5);
+    tft.setTextPadding(124);
     tft.drawString(buf, x - 5, y - 10, 6);
     break;
 
   case 4:
-    tft.setTextPadding(25 * 5);
+    tft.setTextPadding(125);
     tft.drawString(buf, x, y - 10, 6);
     break;
 
@@ -1119,7 +1123,7 @@ void gaugeText(float value, float min, float max, int x, int y, int fontSize, co
     break;
 
   default:
-    tft.setTextPadding(8 * 3);
+    tft.setTextPadding(500);
     tft.drawString(buf, x, y, 4);
     break;
   }
@@ -1130,7 +1134,7 @@ void gaugeText(float value, float min, float max, int x, int y, int fontSize, co
   if (printUnits == true)
   {
 
-    tft.setTextColor(color2, TFT_BLACK);
+    tft.setTextColor(color2, selectedColor[4]);
 
     switch (fontSize)
     {
@@ -1172,7 +1176,7 @@ void gaugeText(float value, float min, float max, int x, int y, int fontSize, co
     switch (fontSize)
     {
 
-      tft.setTextColor(color2, TFT_BLACK);
+      tft.setTextColor(color2, selectedColor[4]);
     case 0:
       tft.drawString(name, x, y - unitOffset - 5, 2);
       break;
@@ -1219,16 +1223,16 @@ void gaugeText2(float value, float min, float max, int x, int y, int fontSize, c
   buf[len + 1] = 0;
 
   tft.setTextSize(1);
-  tft.setTextColor(TFT_WHITE, TFT_BLACK);
+  tft.setTextColor(TFT_WHITE, selectedColor[4]);
 
   if (alert == true)
   {
 
-    tft.setTextColor(TFT_RED, TFT_BLACK);
+    tft.setTextColor(TFT_RED, selectedColor[4]);
   }
 
   // Uncomment next line to set the text color to the last segment value!
-  // tft.setTextColor(color, TFT_BLACK);
+  // tft.setTextColor(color, selectedColor[4]);
   tft.setTextDatum(MC_DATUM);
 
   // if (fontSize > 0)
@@ -1248,7 +1252,7 @@ void gaugeText2(float value, float min, float max, int x, int y, int fontSize, c
 
   if (printUnits == true)
   {
-    tft.setTextColor(color2, TFT_BLACK);
+    tft.setTextColor(color2, selectedColor[4]);
     if (fontSize > 0)
       tft.drawString(units, x, y + unitOffset * 2, 4); // Units display
     else

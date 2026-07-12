@@ -211,6 +211,7 @@ text-decoration: none;border: none;letter-spacing:1.25px;cursor: pointer;text-tr
     <option value="1">Unit Text</option>
     <option value="2">Alert Digits</option>
     <option value="3">Meter Needle</option>
+	<option value="4"> Background </option>
     </select>
 
     <label for="B"></label>

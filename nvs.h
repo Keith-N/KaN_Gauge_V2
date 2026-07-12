@@ -348,6 +348,7 @@ int gaugeDisplayType = 0;
 int canBaseID_FOME = 512;
 int canBaseID_MS = 1512;
 int newBaseID = 512;
+int canBaseID_LINK = 1000;
 
 int config_alertType = NONE;
 String alertTypeText[] = { "None", "Icon", "FullScreen", "LED Flash" };
@@ -363,7 +364,9 @@ int arcSeg2 = 3;
 int arcInc1 = 6;
 int arcInc2 = 3;
 
-int selectedColor[] = { 65535, 63488, 63488, 63488, 0 };
+int bg_color = 0;
+
+int selectedColor[] = { 63488, 63488, 63488, 63488, 0 };
 String colorName[] = { "Value", "Units", "Alert", "Needle", "Background" };
 
 int bootLogo1 = 1;  // BMM
@@ -665,8 +668,8 @@ void restoreSensorMinMax() {
   manifoldPressure_psi.minimum = preferences.getInt("mapPSIMIN", manifoldPressure_psi.minimum);
   manifoldPressure_psi.maximum = preferences.getInt("mapPSIMAX", manifoldPressure_psi.maximum);
 
-  oilPressure_psi.minimum = preferences.getInt("oilKPAMIN", oilPressure_psi.minimum);
-  oilPressure_psi.maximum = preferences.getInt("oilKPAMAX", oilPressure_psi.maximum);
+  oilPressure_psi.minimum = preferences.getInt("oilPSIMIN", oilPressure_psi.minimum);
+  oilPressure_psi.maximum = preferences.getInt("oilPSIMAX", oilPressure_psi.maximum);
 
   vvtPosition.minimum = preferences.getInt("vvtMIN", vvtPosition.minimum);
   vvtPosition.maximum = preferences.getInt("vvtMAX", vvtPosition.maximum);
@@ -825,8 +828,8 @@ void restoreSensorAlerts() {
   manifoldPressure_psi.alertLow = preferences.getInt("mapPSILOW", manifoldPressure_psi.alertLow);
   manifoldPressure_psi.alertHigh = preferences.getInt("mapPSIHI", manifoldPressure_psi.alertHigh);
 
-  oilPressure_psi.alertLow = preferences.getInt("oilKPALOW", oilPressure_psi.alertLow);
-  oilPressure_psi.alertHigh = preferences.getInt("oilKPAHI", oilPressure_psi.alertHigh);
+  oilPressure_psi.alertLow = preferences.getInt("oilPSILOW", oilPressure_psi.alertLow);
+  oilPressure_psi.alertHigh = preferences.getInt("oilPSIHI", oilPressure_psi.alertHigh);
 
   vvtPosition.alertLow = preferences.getInt("vvtLOW", vvtPosition.alertLow);
   vvtPosition.alertHigh = preferences.getInt("vvtHI", vvtPosition.alertHigh);
@@ -996,8 +999,8 @@ void saveSensorMinMax() {
   preferences.putInt("mapPSIMIN", manifoldPressure_psi.minimum);
   preferences.putInt("mapPSIMAX", manifoldPressure_psi.maximum);
 
-  preferences.putInt("oilKPAMIN", oilPressure_psi.minimum);
-  preferences.putInt("oilKPAMAX", oilPressure_psi.maximum);
+  preferences.putInt("oilPSIMIN", oilPressure_psi.minimum);
+  preferences.putInt("oilPSIMAX", oilPressure_psi.maximum);
 
   preferences.putInt("vvtMIN", vvtPosition.minimum);
   preferences.putInt("vvtMAX", vvtPosition.maximum);
@@ -1166,8 +1169,8 @@ void saveSensorAlerts() {
   preferences.putInt("mapPSILOW", manifoldPressure_psi.alertLow);
   preferences.putInt("mapPSIHI", manifoldPressure_psi.alertHigh);
 
-  preferences.putInt("oilKPALOW", oilPressure_psi.alertLow);
-  preferences.putInt("oilKPAHI", oilPressure_psi.alertHigh);
+  preferences.putInt("oilPSILOW", oilPressure_psi.alertLow);
+  preferences.putInt("oilPSIHI", oilPressure_psi.alertHigh);
 
   // preferences.putInt("vvtLOW", vvtPosition.alertLow);
   // preferences.putInt("vvtHI", vvtPosition.alertHigh);

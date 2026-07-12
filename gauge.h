@@ -81,7 +81,7 @@ void displayFullscreenAlert_ff() {
     if (alertActive == true) {
 
       tft.fillScreen(TFT_RED);
-      tft.setTextColor(TFT_BLACK);
+      tft.setTextColor(selectedColor[4]);
       tft.setTextPadding(25 * 5);
       tft.setTextSize(4);
       tft.drawString("Warning!!!", 120, 120);
@@ -94,7 +94,7 @@ void displayFullscreenAlert_ff() {
     else if (alertActive == false) {
 
       tft.fillScreen(TFT_ORANGE);
-      tft.setTextColor(TFT_BLACK);
+      tft.setTextColor(selectedColor[4]);
       tft.setTextPadding(25 * 5);
       tft.setTextSize(4);
       tft.drawString("Warning!!!", 120, 120);
@@ -145,6 +145,7 @@ void displayAlert_noIcon() {
 /*
 Updates the display based on the selected configurations
 This includes two arcs across the top as well as 4 sets of digits
+"2x Arc with 4x Digital"
 */
 
 void updateDisplay() {
@@ -214,6 +215,13 @@ void updateDisplay() {
     }
   }
 }
+
+
+/*
+
+"4x Digital"
+
+*/
 
 
 void updateDisplay4x() {
@@ -334,6 +342,7 @@ void updateDisplay4x() {
 Updates the display based on the selected configurations
 This is similar to the updateDisplay function with an increased size for the center digits
 Includes one Arc and three sets of digits
+
 */
 
 void updateDisplay_LargeText() {
@@ -446,9 +455,9 @@ void updateDisplay_Analog() {
   int y_2 = y_1 + (radius1 - radius2) / 2;
 
   if (analogMeterSetup == false) {
-    //tft.fillScreen(TFT_BLACK);
+    //tft.fillScreen(selectedColor[4]);
     setupAnalogMeter(0, 10, ptrData[9]->dataName, ptrData[9]->units, ptrData[9]->minimum, ptrData[9]->maximum);
-    tft.setTextColor(selectedColor[1], TFT_BLACK);
+    tft.setTextColor(selectedColor[1], selectedColor[4]);
     tft.drawString(ptrData[9]->dataName, 20, 95, 2);
     tft.drawString(ptrData[9]->units, 205, 95, 2);
     analogMeterSetup = true;
@@ -456,7 +465,7 @@ void updateDisplay_Analog() {
 
   // Meter Needle
 
-  AnMeter.updateNeedle(ptrData[9]->scaledValue, 0, selectedColor[3], TFT_BLACK, selectedColor[0]);
+  AnMeter.updateNeedle(ptrData[9]->scaledValue, 0, selectedColor[3], selectedColor[4], selectedColor[0]);
   //Check if value is outside of alert thresholds, then print the values
 
   showAlert = false;
@@ -524,9 +533,9 @@ void updateDisplay_Analog_LargeText() {
   int y_2 = y_1 + (radius1 - radius2) / 2;
 
   if (analogMeterSetup == false) {
-    //tft.fillScreen(TFT_BLACK);
+    //tft.fillScreen(selectedColor[4]);
     setupAnalogMeter(0, 10, ptrData[9]->dataName, ptrData[9]->units, ptrData[9]->minimum, ptrData[9]->maximum);
-    tft.setTextColor(selectedColor[1], TFT_BLACK);
+    tft.setTextColor(selectedColor[1], selectedColor[4]);
     tft.drawString(ptrData[9]->dataName, 20, 95, 2);
     tft.drawString(ptrData[9]->units, 205, 95, 2);
 
@@ -534,7 +543,7 @@ void updateDisplay_Analog_LargeText() {
   }
 
   // Meter Needle
-  AnMeter.updateNeedle(ptrData[9]->scaledValue, 0, selectedColor[3], TFT_BLACK, selectedColor[0]);
+  AnMeter.updateNeedle(ptrData[9]->scaledValue, 0, selectedColor[3], selectedColor[4], selectedColor[0]);
   //Check if value is outside of alert thresholds, then print the values
   showAlert = false;
   int aCheck[] = { 3, 4, 5 };
@@ -585,7 +594,7 @@ void updateDisplayTask(void *pvParameters) {
   Serial.println(xPortGetCoreID());
 #endif
 
-  tft.fillScreen(TFT_BLACK);
+  tft.fillScreen(selectedColor[4]);
   int lastDisplayUpdate_ms = 0;
 
   for (;;) {
@@ -594,6 +603,7 @@ void updateDisplayTask(void *pvParameters) {
     if ((millis() - lastDisplayUpdate_ms) > displayRefresh_ms) {
       getBrightness();
       setDisplayBrightness(dispBrightness);
+
       fullscreenAlert = checkFullscreenAlert[config_alertType];
 
       lastDisplayUpdate_ms = millis();
@@ -611,7 +621,7 @@ void updateDisplayTask(void *pvParameters) {
 
       // When updating config reset the display to remove old text
       if (resetDisplay == true || updatedArc == true) {
-        tft.fillScreen(TFT_BLACK);
+        tft.fillScreen(selectedColor[4]);
         resetDisplay = false;
         updatedArc = false;
         analogMeterSetup = false;
@@ -679,8 +689,8 @@ void updateDisplayTask(void *pvParameters) {
         }
       } else {
 
-        if (config_alertType != 0 && config_alertType != 3) {
-          // Clean up Exclaimation if printed and no Alert exsists
+        if (config_alertType != 0 && config_alertType != 3 && gaugeDisplayType != 5) {
+          // Clean up Exclaimation if printed and no Alert exsists (Don't use on 4x digital)
           drawAlert(120, 210, 50, 0);
         }
       }
